@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.ui.login;
+package com.app.alphasucess.ui.tabui.login;
 
 /**
  * Class exposing authenticated user details to the UI.

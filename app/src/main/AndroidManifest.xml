@@ -12,10 +12,10 @@
         <activity
             android:name=".ui.HomeActivity"
             android:label="@string/title_activity_home"></activity>
-        <activity android:name=".ui.ui.signup.SignUpActivity" />
+        <activity android:name=".ui.tabui.signup.SignUpActivity" />
         <activity android:name=".ui.ForgotPasswordActivity" />
         <activity
-            android:name=".ui.ui.login.LoginActivity"
+            android:name=".ui.tabui.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".SplashActivity"

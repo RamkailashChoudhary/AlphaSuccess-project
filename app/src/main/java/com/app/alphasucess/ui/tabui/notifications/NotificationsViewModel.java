@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.ui.notifications;
+package com.app.alphasucess.ui.tabui.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

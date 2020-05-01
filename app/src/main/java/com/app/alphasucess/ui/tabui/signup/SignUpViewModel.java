@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.ui.signup;
+package com.app.alphasucess.ui.tabui.signup;
 
 import androidx.lifecycle.ViewModel;
 

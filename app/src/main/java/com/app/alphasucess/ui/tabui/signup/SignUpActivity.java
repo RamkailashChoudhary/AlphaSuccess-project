@@ -1,7 +1,6 @@
-package com.app.alphasucess.ui.ui.signup;
+package com.app.alphasucess.ui.tabui.signup;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 

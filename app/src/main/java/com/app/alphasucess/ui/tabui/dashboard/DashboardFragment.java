@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.ui.notifications;
+package com.app.alphasucess.ui.tabui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,18 +14,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+public class DashboardFragment extends Fragment {
 
-public class NotificationsFragment extends Fragment {
-
-    private NotificationsViewModel notificationsViewModel;
+    private DashboardViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        dashboardViewModel =
+                ViewModelProviders.of(this).get(DashboardViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        final TextView textView = root.findViewById(R.id.text_dashboard);
+        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

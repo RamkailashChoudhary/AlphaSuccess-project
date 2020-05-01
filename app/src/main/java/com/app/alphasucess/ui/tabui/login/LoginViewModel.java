@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.ui.login;
+package com.app.alphasucess.ui.tabui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

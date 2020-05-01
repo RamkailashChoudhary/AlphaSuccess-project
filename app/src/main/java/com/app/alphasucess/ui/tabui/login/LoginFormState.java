@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.ui.login;
+package com.app.alphasucess.ui.tabui.login;
 
 import androidx.annotation.Nullable;
 

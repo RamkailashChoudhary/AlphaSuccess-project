@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.ui.login;
+package com.app.alphasucess.ui.tabui.login;
 
 import android.app.Activity;
 
@@ -13,8 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -24,7 +22,7 @@ import android.widget.Toast;
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.ForgotPasswordActivity;
 import com.app.alphasucess.ui.HomeActivity;
-import com.app.alphasucess.ui.ui.signup.SignUpActivity;
+import com.app.alphasucess.ui.tabui.signup.SignUpActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
