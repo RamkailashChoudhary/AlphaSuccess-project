@@ -14,6 +14,8 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Live Class</string>
+    <string name="title_notifications">e-books</string>
+    <string name="title_test">Test</string>
+    <string name="title_download">Downloads</string>
 </resources>
