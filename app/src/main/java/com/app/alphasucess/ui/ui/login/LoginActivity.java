@@ -12,13 +12,18 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.ForgotPasswordActivity;
+import com.app.alphasucess.ui.HomeActivity;
 import com.app.alphasucess.ui.ui.signup.SignUpActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -57,64 +62,47 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                finish();
+        loginViewModel.getLoginResult().observe(this, loginResult -> {
+            if (loginResult == null) {
+                return;
             }
+            loadingProgressBar.setVisibility(View.GONE);
+            if (loginResult.getError() != null) {
+                showLoginFailed(loginResult.getError());
+            }
+            if (loginResult.getSuccess() != null) {
+                updateUiWithUser(loginResult.getSuccess());
+            }
+            setResult(Activity.RESULT_OK);
+
+            //Complete and destroy login activity once successful
+            finish();
         });
 
-
- /*       usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
+        passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                loginViewModel.login(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
             }
-        });*/
-
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-               /* loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());*/
-            }
+            return false;
         });
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent forgotPassword = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(forgotPassword);
-            }
+        loginButton.setOnClickListener(v -> {
+            loadingProgressBar.setVisibility(View.VISIBLE);
+           /* loginViewModel.login(usernameEditText.getText().toString(),
+                    passwordEditText.getText().toString());*/
+            Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(forgotPassword1);
         });
 
-        signUpTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent forgotPassword = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(forgotPassword);
-            }
+        forgotPassword.setOnClickListener(view -> {
+            Intent forgotPassword12 = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(forgotPassword12);
+        });
+
+        signUpTxt.setOnClickListener(view -> {
+            Intent forgotPassword13 = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(forgotPassword13);
         });
     }
 

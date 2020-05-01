@@ -44,6 +44,7 @@
                 android:id="@+id/password"
                 android:drawablePadding="5dp"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:textColorHint="#ffffff"
                 android:drawableLeft="@drawable/password"
                 android:layout_height="wrap_content"/>
@@ -66,7 +67,7 @@
             android:layout_marginTop="20dp"
             android:textColor="#ffffff"
             android:background="@drawable/sign_up_bar"
-            android:enabled="false"
+            android:enabled="true"
             android:text="SIGN IN"/>
     </LinearLayout>
 
