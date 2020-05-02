@@ -35,19 +35,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutAppearanceLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextInputLayoutAppearanceLogin"
             android:layout_marginTop="10dp">
+
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
                 android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/password"
                 android:drawablePadding="5dp"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:textColorHint="#ffffff"
-                android:drawableLeft="@drawable/password"
-                android:layout_height="wrap_content"/>
+                android:textColorHint="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -83,19 +84,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.120000005" />
 
-     <ProgressBar
-         android:id="@+id/loading"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_gravity="center"
-         android:layout_marginStart="32dp"
-         android:layout_marginTop="64dp"
-         android:layout_marginEnd="32dp"
-         android:layout_marginBottom="64dp"
-         android:visibility="gone"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintVertical_bias="0.3" />
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
     <LinearLayout
         android:layout_width="match_parent"
