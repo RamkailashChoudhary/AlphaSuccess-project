@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_Test"
-        android:name="com.app.alphasucess.ui.tabui.download.DownloadFragment"
+        android:name="com.app.alphasucess.ui.tabui.test.TestFragment"
         android:label="@string/title_test"
         tools:layout="@layout/fragment_download" />
 

@@ -10,7 +10,7 @@ public class EBookViewModel extends ViewModel {
 
     public EBookViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("E-book page view");
     }
 
     public LiveData<String> getText() {

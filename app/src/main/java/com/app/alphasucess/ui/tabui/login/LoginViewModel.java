@@ -9,7 +9,7 @@ import android.util.Patterns;
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.data.LoginRepository;
 import com.app.alphasucess.ui.data.Result;
-import com.app.alphasucess.ui.data.model.LoggedInUser;
+import com.app.alphasucess.ui.data.model.LoggedInUserData;
 
 public class LoginViewModel extends ViewModel {
 
@@ -31,10 +31,10 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+        Result<LoggedInUserData> result = loginRepository.login(username, password);
 
         if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+            LoggedInUserData data = ((Result.Success<LoggedInUserData>) result).getData();
             loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));

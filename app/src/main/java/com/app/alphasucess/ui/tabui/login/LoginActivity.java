@@ -87,8 +87,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> {
             loadingProgressBar.setVisibility(View.VISIBLE);
-           /* loginViewModel.login(usernameEditText.getText().toString(),
-                    passwordEditText.getText().toString());*/
+            loginViewModel.login(usernameEditText.getText().toString(),
+                    passwordEditText.getText().toString());
             Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(forgotPassword1);
         });
