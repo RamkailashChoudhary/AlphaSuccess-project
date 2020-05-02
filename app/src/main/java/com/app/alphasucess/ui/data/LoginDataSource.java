@@ -17,31 +17,26 @@ public class LoginDataSource {
 
     public Result<LoggedInUserData> login(String username, String password) {
 
-        try {
-            // TODO: handle loggedInUser authentication
             LoggedInUserData fakeUser =
                     new LoggedInUserData(
                             java.util.UUID.randomUUID().toString(),
                             "Jane Doe");
             RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-            restServiceLayer.loginService().enqueue(new Callback<Object>() {
+            restServiceLayer.loginService(username,password,"grant_type").enqueue(new Callback<Object>() {
                 @Override
                 public void onResponse(Call<Object> call, Response<Object> response) {
 
+                    return new Result.Success<>(call);
                 }
 
                 @Override
                 public void onFailure(Call<Object> call, Throwable t) {
-
+                    return new Result.Error(new IOException("Error logging in", t.getMessage()));
                 }
             });
-            return new Result.Success<>(fakeUser);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
-        }
     }
 
     public void logout() {
-        // TODO: revoke authentication
+
     }
 }
