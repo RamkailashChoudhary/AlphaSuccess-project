@@ -26,14 +26,15 @@ public class LoginDataSource {
                 @Override
                 public void onResponse(Call<Object> call, Response<Object> response) {
 
-                    return new Result.Success<>(call);
+                   // return new Result.Success<>(call);
                 }
 
                 @Override
                 public void onFailure(Call<Object> call, Throwable t) {
-                    return new Result.Error(new IOException("Error logging in", t.getMessage()));
+                  //  return new Result.Error(new IOException("Error logging in", t.getMessage()));
                 }
             });
+            return null;
     }
 
     public void logout() {
