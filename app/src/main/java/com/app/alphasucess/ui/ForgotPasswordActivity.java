@@ -1,10 +1,8 @@
 package com.app.alphasucess.ui;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.app.alphasucess.BaseActivity;
 import com.app.alphasucess.R;
@@ -15,7 +13,10 @@ public class ForgotPasswordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-        final Button backBtnView = findViewById(R.id.backBtnView);
+        final ImageView backBtnView = findViewById(R.id.backBtnView);
+
+        TextView header=findViewById(R.id.middleTitle);
+        header.setText("Forgot Password");
         backBtnView.setOnClickListener(view -> {
             onBackPressed();
         });
