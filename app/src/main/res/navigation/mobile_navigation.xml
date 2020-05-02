@@ -18,10 +18,16 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_eBook"
         android:name="com.app.alphasucess.ui.tabui.ebook.EBookFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_Test"
+        android:name="com.app.alphasucess.ui.tabui.download.DownloadFragment"
+        android:label="@string/title_test"
+        tools:layout="@layout/fragment_download" />
 
     <fragment
         android:id="@+id/navigation_Download"

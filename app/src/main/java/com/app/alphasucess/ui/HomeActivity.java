@@ -39,8 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
-         appBarConfiguration = new AppBarConfiguration.Builder(
-                 R.id.nav_gallery, R.id.nav_slideshow,R.id.navigation_home, R.id.navigation_dashboard,R.id.navigation_eBook, R.id.navigation_notifications,R.id.navigation_Test)
+         appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_home, R.id.navigation_dashboard,R.id.navigation_eBook, R.id.navigation_Test,R.id.navigation_Download)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -57,29 +56,19 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-     /*   Fragment fragment = null;
-        Class fragmentClass;
+
         switch(menuItem.getItemId()) {
-            case R.id.navigation_home:
-                fragmentClass = HomeFragment.class;
+            case R.id.navigation_Profile:
+            case R.id.nav_Orders:
+            case R.id.nav_Invitefrds:
+            case R.id.nav_Contactus:
+            case R.id.nav_Aboutus:
+            case R.id.nav_Privacypolicy:
+            case R.id.nav_termsServices:
+            case R.id.nav_refunds:
+            case R.id.nav_logout:
                 break;
-            case R.id.nav_gallery:
-                fragmentClass = DownloadFragment.class;
-                break;
-            default:
-                fragmentClass = DownloadFragment.class;
         }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();*/
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
         drawer.closeDrawers();
