@@ -12,6 +12,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -20,6 +23,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.app.alphasucess.R;
+import com.app.alphasucess.service.NetworkServiceLayer;
+import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.ForgotPasswordActivity;
 import com.app.alphasucess.ui.HomeActivity;
 import com.app.alphasucess.ui.tabui.signup.SignUpActivity;
@@ -44,19 +49,16 @@ public class LoginActivity extends AppCompatActivity {
         final TextView forgotPassword = findViewById(R.id.forgotPassword);
         final TextView signUpTxt = findViewById(R.id.signupBtn);
 
-        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
-            @Override
-            public void onChanged(@Nullable LoginFormState loginFormState) {
-                if (loginFormState == null) {
-                    return;
-                }
-                loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getUsernameError() != null) {
-                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
-                }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
-                }
+        loginViewModel.getLoginFormState().observe(this, loginFormState -> {
+            if (loginFormState == null) {
+                return;
+            }
+            loginButton.setEnabled(loginFormState.isDataValid());
+            if (loginFormState.getUsernameError() != null) {
+                usernameEditText.setError(getString(loginFormState.getUsernameError()));
+            }
+            if (loginFormState.getPasswordError() != null) {
+                passwordEditText.setError(getString(loginFormState.getPasswordError()));
             }
         });
 
@@ -87,11 +89,13 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> {
             loadingProgressBar.setVisibility(View.VISIBLE);
-            loginViewModel.login(usernameEditText.getText().toString(),
+            loginApiService(usernameEditText.getText().toString(),
                     passwordEditText.getText().toString());
-            Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(forgotPassword1);
+         /*   loginViewModel.login(usernameEditText.getText().toString(),
+                    passwordEditText.getText().toString());*/
         });
+
+
 
         forgotPassword.setOnClickListener(view -> {
             Intent forgotPassword12 = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
@@ -120,5 +124,24 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void loginApiService(String username,String password){
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        restServiceLayer.loginService(username,password,"grant_type").enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+                Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(forgotPassword1);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+               Toast.makeText(LoginActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
