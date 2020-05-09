@@ -41,15 +41,15 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         super(v);
         v.setOnClickListener(this);
         textView = (TextView) v.findViewById(R.id.titleTxt);
-        imageView = (ImageView) v.findViewById(R.id.ebookImg);
+        imageView = (ImageView) v.findViewById(R.id.downloadImg);
     }
 
     public void setData(DownloadData item) {
         this.item = item;
         // textView.setText("AAAA");
 
-      /*  Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
-                .into(imageView);*/
+        Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
+                .into(imageView);
         //imageView.setImageResource(R.drawable.ic_launcher_background);
     }
 
