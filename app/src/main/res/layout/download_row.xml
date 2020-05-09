@@ -4,7 +4,7 @@
     android:id="@+id/card"
     app:cardElevation="1dp"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
+    android:layout_height="320dp"
     android:layout_margin="1dp">
 
     <LinearLayout
@@ -14,8 +14,8 @@
 
         <!-- Media -->
         <ImageView
-            android:layout_width="185dp"
-            android:layout_height="190dp"
+            android:layout_width="180dp"
+            android:layout_height="220dp"
             android:id="@+id/downloadImg"
             app:srcCompat="@drawable/logo"
             android:layout_gravity="center"
@@ -25,11 +25,12 @@
 
         <TextView
             android:id="@+id/titleTxt"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
             android:textColor="#000000"
             android:lines="2"
+            android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
             android:text="A this is the Button view of the lines and view is not present the view daa"
             />
