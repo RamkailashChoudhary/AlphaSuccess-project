@@ -46,7 +46,7 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
             this.item = item;
             textView.setText("AAAA");
 
-            Picasso.with(mContext).load("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTvYa_bNispXYutpFAm0KilTrMmlOky8HN0_Ws_Ni4QOWz3e-fO&usqp=CAU")
+            Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
                     .into(imageView);
             //imageView.setImageResource(R.drawable.ic_launcher_background);
         }
