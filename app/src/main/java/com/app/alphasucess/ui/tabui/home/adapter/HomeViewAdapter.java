@@ -1,6 +1,7 @@
-package com.app.alphasucess.ui.tabui.adapter;
+package com.app.alphasucess.ui.tabui.home.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +10,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.alphasucess.R;
-import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
-import com.app.alphasucess.ui.tabui.download.adapter.DownloadDataAdapter;
+import com.app.alphasucess.ui.tabui.adapter.ExamAdapter;
+import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
-import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
+public class HomeViewAdapter extends RecyclerView.Adapter<HomeViewAdapter.ViewHolder> {
 
-    private ArrayList<ExamData> mValues;
+    private ArrayList<HomeData> mValues;
     private Context mContext;
     private String fileName;
+    private final int INDIAN_EXAM_VIEW = 0;
+    private final int RECOMMEND_VIEW = 1;
+    private final int LIVE_CLASSES_VIEW = 2;
 
-    public ExamAdapter(Context context, ArrayList<ExamData> values) {
+    public HomeViewAdapter(Context context, ArrayList<HomeData> values) {
         mValues = values;
         mContext = context;
 //        fileName = path;
@@ -36,17 +39,17 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         private TextView textView;
         private ImageView imageView;
         private RelativeLayout relativeLayout;
-        private ExamData item;
+        private HomeData item;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
             textView = (TextView) v.findViewById(R.id.examName);
             imageView = (ImageView) v.findViewById(R.id.bannerImg);
-           // imageView = (CircleImageView) v.findViewById(R.id.examImg);
+            // imageView = (CircleImageView) v.findViewById(R.id.examImg);
         }
 
-        public void setData(ExamData item) {
+        public void setData(HomeData item) {
             this.item = item;
             // textView.setText("AAAA");
 
@@ -62,15 +65,28 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     }
 
     @Override
-    public ExamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.live_classes_view, parent, false);
-//        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
-        return new ExamAdapter.ViewHolder(view);
+    public int getItemViewType(int position) {
+        if (TextUtils.isEmpty(mValues.get(position).getViewType())) {
+            return INDIAN_EXAM_VIEW;
+        } else {
+            return RECOMMEND_VIEW;
+        }
     }
 
     @Override
-    public void onBindViewHolder(ExamAdapter.ViewHolder viewHolder, int position) {
+    public HomeViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        
+        View view = LayoutInflater.from(mContext).inflate(R.layout.live_classes_view, parent, false);
+//        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
+        return new HomeViewAdapter.ViewHolder(view);
+    }
 
+    @Override
+    public void onBindViewHolder(HomeViewAdapter.ViewHolder viewHolder, int position) {
+
+        switch (getItemViewType(position)){
+
+        }
         viewHolder.setData(mValues.get(position));
     }
 
@@ -79,5 +95,4 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         return mValues.size();
     }
 }
-
 
