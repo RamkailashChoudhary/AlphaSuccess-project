@@ -24,8 +24,6 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
     public EbookRecyclerViewAdapter(Context context, ArrayList<EbookData> values) {
         mValues = values;
         mContext = context;
-//        fileName = path;
-//        mListener=itemListener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -44,8 +42,6 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
 
         public void setData(EbookData item) {
             this.item = item;
-           // textView.setText("AAAA");
-
             Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
                     .into(imageView);
             //imageView.setImageResource(R.drawable.ic_launcher_background);
@@ -60,7 +56,6 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.ebookrow, parent, false);
-//        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
         return new ViewHolder(view);
     }
 
