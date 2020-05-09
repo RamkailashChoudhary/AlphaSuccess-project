@@ -4,7 +4,7 @@
     android:id="@+id/card"
     app:cardElevation="1dp"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
+    android:layout_height="320dp"
     android:layout_margin="8dp">
 
         <LinearLayout
@@ -32,9 +32,12 @@
                 <!-- Title, secondary and supporting text -->
                 <TextView
                     android:id="@+id/titleTxt"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="title"
+                    android:text="A this is the Button view of the lines and view is not present the view daa"
+                    android:lines="2"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     />
 
@@ -42,33 +45,40 @@
 
             <!-- Buttons -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:weightSum="3"
+                android:weightSum="2"
                 android:orientation="horizontal">
-               <!-- <com.google.android.material.button.MaterialButton
+
+               <RelativeLayout
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="wrap_content">
+                   <com.google.android.material.button.MaterialButton
+                       android:layout_width="wrap_content"
+                       android:layout_height="35dp"
+                       android:layout_centerVertical="true"
+                       android:layout_marginLeft="10dp"
+                       android:text="Buy"
+                       android:textColor="#ffffff"
+                       />
+               </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_weight="1dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="action_1"
-                    style="?attr/borderlessButtonStyle"
-                    />
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1dp"
-                    android:layout_height="wrap_content"
-                    android:text="action_2"
-                    style="?attr/borderlessButtonStyle"
-                    />
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="0dp"
-                    android:layout_weight="1dp"
-                    android:layout_height="wrap_content"
-                    android:text="action_2"
-                    style="?attr/borderlessButtonStyle"
-                    />-->
+                       android:layout_width="wrap_content"
+                       android:layout_height="35dp"
+                    android:textColor="#ffffff"
+                       android:text="PlayList"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                       style="?attr/borderlessButtonStyle"/>
+                </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
 </androidx.cardview.widget.CardView>
