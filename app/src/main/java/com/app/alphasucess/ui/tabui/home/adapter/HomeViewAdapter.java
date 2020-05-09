@@ -66,7 +66,7 @@ public class HomeViewAdapter extends RecyclerView.Adapter<HomeViewAdapter.ViewHo
 
     @Override
     public int getItemViewType(int position) {
-        if (TextUtils.isEmpty(mValues.get(position).getViewType())) {
+        if (TextUtils.isEmpty(mValues.get(position).getViewType()) && mValues.get(position).getViewType().equalsIgnoreCase("")) {
             return INDIAN_EXAM_VIEW;
         } else {
             return RECOMMEND_VIEW;
@@ -75,9 +75,8 @@ public class HomeViewAdapter extends RecyclerView.Adapter<HomeViewAdapter.ViewHo
 
     @Override
     public HomeViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        
+
         View view = LayoutInflater.from(mContext).inflate(R.layout.live_classes_view, parent, false);
-//        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
         return new HomeViewAdapter.ViewHolder(view);
     }
 
