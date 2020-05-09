@@ -44,7 +44,7 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
 
         public void setData(EbookData item) {
             this.item = item;
-            textView.setText("AAAA");
+           // textView.setText("AAAA");
 
             Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
                     .into(imageView);
