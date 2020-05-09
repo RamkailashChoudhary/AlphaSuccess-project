@@ -33,6 +33,7 @@ import com.google.android.material.textfield.TextInputEditText;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    ProgressBar loadingProgressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         final TextInputEditText usernameEditText = findViewById(R.id.username);
         final TextInputEditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        loadingProgressBar = findViewById(R.id.loading);
         final TextView forgotPassword = findViewById(R.id.forgotPassword);
         final TextView signUpTxt = findViewById(R.id.signupBtn);
 
@@ -133,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
 
+                loadingProgressBar.setVisibility(View.VISIBLE);
                 Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(forgotPassword1);
                 finish();
@@ -140,6 +142,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
+
+                loadingProgressBar.setVisibility(View.GONE);
                Toast.makeText(LoginActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
