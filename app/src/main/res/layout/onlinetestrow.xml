@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    app:cardElevation="1dp"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Test A"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/OnlinetextView1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="|"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Test B"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/OnlinetextView2"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="|"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Test C"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/OnlinetextView3"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="|"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:layout_gravity="center_vertical"
+        android:layout_height="55dp">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="25 Min"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="50"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="25 Min"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+               android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="top"
+                android:text="Data"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="wrap_content"
+            android:text="Play Test"
+            android:layout_marginLeft="10dp"
+            android:layout_height="35dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="See Result"
+            android:layout_height="35dp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.tabui.ebook.adapters;
+package com.app.alphasucess.ui.tabui.test.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,19 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
+import com.app.alphasucess.ui.tabui.ebook.adapters.EbookRecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecyclerViewAdapter.ViewHolder> {
+public class OnlineTestAdapter extends RecyclerView.Adapter<OnlineTestAdapter.ViewHolder> {
 
-    private ArrayList<EbookData> mValues;
+    private ArrayList<TestData> mValues;
     private Context mContext;
     private String fileName;
 
-    public EbookRecyclerViewAdapter(Context context, ArrayList<EbookData> values) {
+    public OnlineTestAdapter(Context context, ArrayList<TestData> values) {
         mValues = values;
         mContext = context;
 //        fileName = path;
@@ -30,25 +34,20 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView textView;
-        private ImageView imageView;
-        private RelativeLayout relativeLayout;
-        private EbookData item;
+        private TextView OnlinetextView1,OnlinetextView2,OnlinetextView3;
+        private TestData item;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
-            textView = (TextView) v.findViewById(R.id.titleTxt);
-            imageView = (ImageView) v.findViewById(R.id.ebookImg);
+            OnlinetextView1 = (TextView) v.findViewById(R.id.OnlinetextView1);
+            OnlinetextView2 = (TextView) v.findViewById(R.id.OnlinetextView2);
+            OnlinetextView3 = (TextView) v.findViewById(R.id.OnlinetextView3);
         }
 
-        public void setData(EbookData item) {
+        public void setData(TestData item) {
             this.item = item;
-            textView.setText("AAAA");
-
-            Picasso.with(mContext).load("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTvYa_bNispXYutpFAm0KilTrMmlOky8HN0_Ws_Ni4QOWz3e-fO&usqp=CAU")
-                    .into(imageView);
-            //imageView.setImageResource(R.drawable.ic_launcher_background);
+            OnlinetextView1.setText("AAAA");
         }
 
         @Override
@@ -58,14 +57,14 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.ebookrow, parent, false);
+    public OnlineTestAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.onlinetestrow, parent, false);
 //        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
-        return new ViewHolder(view);
+        return new OnlineTestAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(OnlineTestAdapter.ViewHolder viewHolder, int position) {
 
         viewHolder.setData(mValues.get(position));
     }
