@@ -12,5 +12,6 @@ public interface RestServiceLayer
     @FormUrlEncoded
     Call<Object> loginService(@Field("UserName")String uName,@Field("Password")String password,@Field("grant_type")String grant_type);
 
-
+   /* @POST("/AboutUs")
+    aboutUsData();*/
 }

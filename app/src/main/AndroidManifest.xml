@@ -20,6 +20,10 @@
         <activity
             android:name=".ui.tabui.login.LoginActivity"
             android:label="@string/title_activity_login" />
+
+        <activity
+            android:name=".ui.WebBaseActivity"
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

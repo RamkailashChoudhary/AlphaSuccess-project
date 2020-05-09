@@ -1,5 +1,6 @@
 package com.app.alphasucess.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import com.app.alphasucess.R;
@@ -45,14 +46,33 @@ public class HomeActivity extends AppCompatActivity {
 
     public void selectDrawerItem(MenuItem menuItem) {
 
+        Intent resourceView = new Intent(this,WebBaseActivity.class);;
+
         switch(menuItem.getItemId()) {
+
             case R.id.navigation_Profile:
             case R.id.nav_Orders:
             case R.id.nav_Invitefrds:
             case R.id.nav_Contactus:
+
+                resourceView.putExtra("View-Name","Contact Us");
+                startActivity(resourceView);
+                break;
             case R.id.nav_Aboutus:
+
+                resourceView.putExtra("View-Name","About Us");
+                startActivity(resourceView);
+                break;
             case R.id.nav_Privacypolicy:
+
+                resourceView.putExtra("View-Name","Privacy Policy");
+                startActivity(resourceView);
+                break;
             case R.id.nav_termsServices:
+
+                resourceView.putExtra("View-Name","Terms & Conditions");
+                startActivity(resourceView);
+                break;
             case R.id.nav_refunds:
             case R.id.nav_logout:
                 break;

@@ -11,4 +11,5 @@ public class HomeData {
     public void setViewType(String viewType) {
         this.viewType = viewType;
     }
+
 }
