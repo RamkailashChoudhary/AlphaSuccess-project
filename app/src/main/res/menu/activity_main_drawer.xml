@@ -6,39 +6,44 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navigation_Profile"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/name_blue"
             android:title="My Profile" />
         <item
             android:id="@+id/nav_Orders"
-            android:icon="@drawable/name"
+            android:icon="@drawable/cart_blue"
             android:title="My Order" />
+
+        <item
+            android:id="@+id/nav_mycourses"
+            android:icon="@drawable/my_courses"
+            android:title="My Course" />
         <item
             android:id="@+id/nav_Invitefrds"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/invite_friends"
             android:title="Invite Friends" />
         <item
             android:id="@+id/nav_Contactus"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/contact_us"
             android:title="Cotact Us" />
         <item
             android:id="@+id/nav_Aboutus"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/about_us"
             android:title="About Us" />
         <item
             android:id="@+id/nav_Privacypolicy"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/privacy_policy"
             android:title="Privacy Policy" />
         <item
             android:id="@+id/nav_termsServices"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/terms_of_service"
             android:title="Terms Of Services" />
         <item
             android:id="@+id/nav_refunds"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/refund_cancellation"
             android:title="Refund And Cancellation" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/logout"
             android:title="Logout" />
     </group>
 </menu>
