@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkServiceLayer {
 
-    static String API_BASE_URL = "http://demo1.stsm.co.in/";
+    static String API_BASE_URL = "http://demo1.stsm.co.in/api/App/";
 
     public static Object newInstance(Class className) {
 

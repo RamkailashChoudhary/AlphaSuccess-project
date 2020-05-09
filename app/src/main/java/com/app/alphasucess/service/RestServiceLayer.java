@@ -8,9 +8,17 @@ import retrofit2.http.POST;
 
 public interface RestServiceLayer
 {
-    @POST("/login")
+    @POST("/oauth/login")
     @FormUrlEncoded
     Call<Object> loginService(@Field("UserName")String uName,@Field("Password")String password,@Field("grant_type")String grant_type);
+
+    @POST("/oauth/ForgotPassword")
+    @FormUrlEncoded
+    Call<Object> forgotPassword(@Field("Phone")String uName);
+
+    @POST("/oauth/UserRegister")
+    @FormUrlEncoded
+    Call<Object> signUpApi(@Field("Email")String uEmail,@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("Address") String uAddress,@Field("isReffered") boolean isRefer);
 
    /* @POST("/AboutUs")
     aboutUsData();*/

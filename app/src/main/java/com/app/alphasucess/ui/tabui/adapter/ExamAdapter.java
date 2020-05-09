@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
@@ -34,7 +35,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView textView;
-        private ImageView imageView;
+        private CircleImageView imageView;
         private RelativeLayout relativeLayout;
         private ExamData item;
 
@@ -42,7 +43,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
             super(v);
             v.setOnClickListener(this);
             textView = (TextView) v.findViewById(R.id.examName);
-            imageView = (ImageView) v.findViewById(R.id.bannerImg);
+            imageView = (CircleImageView) v.findViewById(R.id.examImg);
            // imageView = (CircleImageView) v.findViewById(R.id.examImg);
         }
 
@@ -63,7 +64,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
     @Override
     public ExamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.live_classes_view, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.top_view_row, parent, false);
 //        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
         return new ExamAdapter.ViewHolder(view);
     }
