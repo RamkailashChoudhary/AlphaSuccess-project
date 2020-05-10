@@ -37,6 +37,7 @@ public class WebBaseActivity extends BaseActivity {
 //        myWebView.loadDataWithBaseURL(null, htmlString, "text/html", "utf-8", null);
         final ImageView backBtnView = findViewById(R.id.backBtnView);
 
+
         initLoadResourceData();
         TextView header=findViewById(R.id.middleTitle);
         header.setText(bundle.getString("View-Name"));
