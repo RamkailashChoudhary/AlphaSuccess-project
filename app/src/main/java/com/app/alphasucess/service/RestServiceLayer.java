@@ -1,5 +1,6 @@
 package com.app.alphasucess.service;
 
+import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -15,7 +16,7 @@ public interface RestServiceLayer
 {
     @POST("/api/App/oauth/login")
     @FormUrlEncoded
-    Call<Object> loginService(@Field("UserName")String uName,@Field("Password")String password,@Field("grant_type")String grant_type);
+    Call<LoginResponse> loginService(@Field("UserName")String uName, @Field("Password")String password, @Field("grant_type")String grant_type);
 
     @POST("/api/App/oauth/ForgotPassword")
     @FormUrlEncoded
