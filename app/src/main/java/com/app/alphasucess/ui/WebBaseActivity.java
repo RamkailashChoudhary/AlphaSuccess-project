@@ -31,6 +31,7 @@ public class WebBaseActivity extends BaseActivity {
         setContentView(R.layout.static_view);
 
         Bundle bundle = getIntent().getExtras();
+
         webviewData = findViewById(R.id.webViewData);
         webviewData.getSettings().setJavaScriptEnabled(true);
 
