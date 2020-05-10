@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +45,7 @@ public class SignUpFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SignUpViewModel.class);
         // TODO: Use the ViewModel
+        stateListData();
     }
 
     private void signupApiService(String Email,String Name,String Password,String Phone,String StateID,String Address,boolean isReffered){
@@ -63,6 +66,22 @@ public class SignUpFragment extends Fragment {
 
 //                loadingProgressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(),""+t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void stateListData(){
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        restServiceLayer.stateListData().enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+                Log.d("StateList","List Data :"+response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
             }
         });
     }

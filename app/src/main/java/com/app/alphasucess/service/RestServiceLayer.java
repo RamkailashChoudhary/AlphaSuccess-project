@@ -1,10 +1,15 @@
 package com.app.alphasucess.service;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 public interface RestServiceLayer
 {
@@ -20,6 +25,9 @@ public interface RestServiceLayer
     @FormUrlEncoded
     Call<Object> signUpApi(@Field("Email")String uEmail,@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("Address") String uAddress,@Field("isReffered") boolean isRefer);
 
-   /* @POST("/AboutUs")
-    aboutUsData();*/
+    @POST("api/App/StatesList")
+    Call<Object> stateListData();
+
+    @POST
+    Call<JsonObject> resourceData(@Url String url);
 }
