@@ -89,8 +89,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginButton.setOnClickListener(v -> {
-            loadingProgressBar.setVisibility(View.VISIBLE);
-           loginApiService(usernameEditText.getText().toString(),passwordEditText.getText().toString());
+
+            if (usernameEditText.getText().toString().trim().length()>0 && usernameEditText.getText().toString().trim().length()>0) {
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                loginApiService(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
+            }else
+              Toast.makeText(LoginActivity.this,"Please Enter Credentials",Toast.LENGTH_LONG).show();
+
         });
 
         forgotPassword.setOnClickListener(view -> {
@@ -125,21 +131,22 @@ public class LoginActivity extends AppCompatActivity {
     private void loginApiService(String username,String password){
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.loginService(username,password,"password").enqueue(new Callback<Object>() {
+        restServiceLayer.loginService(username,password,"password").enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(forgotPassword1);
-                finish();
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.body().getReplyCode()!=null && response.body().getReplyCode().equalsIgnoreCase("1") ){
+                    loadingProgressBar.setVisibility(View.VISIBLE);
+                    Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(forgotPassword1);
+                    finish();}
+                else  Toast.makeText(LoginActivity.this,"Invalid "+response.body().getMessage(),Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
 
                 loadingProgressBar.setVisibility(View.GONE);
-               Toast.makeText(LoginActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }

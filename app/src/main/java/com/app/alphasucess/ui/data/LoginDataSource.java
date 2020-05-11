@@ -3,6 +3,7 @@ package com.app.alphasucess.ui.data;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.LoggedInUserData;
+import com.app.alphasucess.ui.tabui.login.LoginResponse;
 
 import java.io.IOException;
 
@@ -22,15 +23,15 @@ public class LoginDataSource {
                             java.util.UUID.randomUUID().toString(),
                             "Jane Doe");
             RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-            restServiceLayer.loginService(username,password,"grant_type").enqueue(new Callback<Object>() {
+            restServiceLayer.loginService(username,password,"grant_type").enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<Object> call, Response<Object> response) {
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                    // return new Result.Success<>(call);
                 }
 
                 @Override
-                public void onFailure(Call<Object> call, Throwable t) {
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
                   //  return new Result.Error(new IOException("Error logging in", t.getMessage()));
                 }
             });
