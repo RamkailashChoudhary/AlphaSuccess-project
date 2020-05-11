@@ -90,14 +90,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton.setOnClickListener(v -> {
             loadingProgressBar.setVisibility(View.VISIBLE);
-           loginApiService(usernameEditText.getText().toString(),
-                    passwordEditText.getText().toString());
-        /*    loginApiService("9461844979",
-                    "yash");
-        */
+           loginApiService(usernameEditText.getText().toString(),passwordEditText.getText().toString());
         });
-
-
 
         forgotPassword.setOnClickListener(view -> {
             Intent forgotPassword12 = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
@@ -134,7 +128,6 @@ public class LoginActivity extends AppCompatActivity {
         restServiceLayer.loginService(username,password,"password").enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-
 
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
