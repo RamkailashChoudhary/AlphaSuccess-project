@@ -4,8 +4,8 @@
     android:id="@+id/card"
     app:cardElevation="1dp"
     android:layout_width="match_parent"
-    android:layout_height="280dp"
-    android:layout_margin="8dp">
+    android:layout_height="290dp"
+    android:layout_margin="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,13 +44,13 @@
                <RelativeLayout
                    android:layout_width="0dp"
                    android:layout_weight="1"
-                   android:layout_height="wrap_content">
+                   android:layout_height="match_parent">
                    <com.google.android.material.button.MaterialButton
-                       android:layout_width="65dp"
+                       android:layout_width="wrap_content"
                        android:layout_height="35dp"
                        android:layout_centerVertical="true"
-                       android:layout_marginLeft="10dp"
                        android:text="Buy"
+                       android:textSize="12sp"
                        android:gravity="center"
                        android:textColor="#ffffff"
                        style="@style/MaterialButtonComponent"
@@ -59,16 +59,17 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
                     <com.google.android.material.button.MaterialButton
-                       android:layout_width="65dp"
+                       android:layout_width="wrap_content"
                        android:layout_height="35dp"
-                    android:textColor="#ffffff"
+                        android:textColor="#ffffff"
                         android:gravity="center"
+                        android:textSize="12sp"
                         android:text="PlayList"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
+
                     android:layout_alignParentRight="true"
                     style="@style/MaterialButtonComponent" />
                 </RelativeLayout>
