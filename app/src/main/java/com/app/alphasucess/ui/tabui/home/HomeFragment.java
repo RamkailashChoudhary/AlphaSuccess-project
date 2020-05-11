@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initHomeExamView(RecyclerView recyclerView){
+
         ArrayList<ExamData> examDataList = new ArrayList<>();
         examDataList.add(new ExamData());
         examDataList.add(new ExamData());

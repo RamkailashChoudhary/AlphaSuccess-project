@@ -20,11 +20,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class VerifyOtpActivity extends BaseActivity {
+
     ProgressBar loadingProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+
+        setContentView(R.layout.activity_otp_verification);
         final ImageView backBtnView = findViewById(R.id.backBtnView);
         final EditText usernameEditText = findViewById(R.id.editText);
         TextView header=findViewById(R.id.middleTitle);

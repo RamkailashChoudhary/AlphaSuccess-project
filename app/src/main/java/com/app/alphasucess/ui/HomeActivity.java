@@ -3,6 +3,9 @@ package com.app.alphasucess.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import com.app.alphasucess.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -28,6 +31,9 @@ public class HomeActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
+        View headerView = navigationView.getHeaderView(0);
+        TextView headerTxt = headerView.findViewById(R.id.logedInuserName);
+        headerTxt.setText("Name:  Ram kailash");
          appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_home, R.id.navigation_dashboard,R.id.navigation_eBook, R.id.navigation_Test,R.id.navigation_Download)
                 .setDrawerLayout(drawer)
                 .build();
