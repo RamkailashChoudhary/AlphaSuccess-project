@@ -1,5 +1,6 @@
 package com.app.alphasucess.service;
 
+import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.google.gson.JsonObject;
 
@@ -21,6 +22,10 @@ public interface RestServiceLayer
     @POST("/api/App/oauth/ForgotPassword")
     @FormUrlEncoded
     Call<Object> forgotPassword(@Field("Phone")String uName);
+
+    @POST("/api/App/oauth/VerifyPhone")
+    @FormUrlEncoded
+    Call<VerifyOTP> verifyOtp(@Field("Phone")String uPhone, @Field("OTP")String uOTP);
 
     @POST("/api/App/oauth/UserRegister")
     @FormUrlEncoded

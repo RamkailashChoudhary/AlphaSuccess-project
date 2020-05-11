@@ -20,6 +20,9 @@
         <activity
             android:name=".ui.tabui.login.LoginActivity"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name=".ui.VerifyOtpActivity"
+            android:label="@string/title_activity_otp" />
 
         <activity
             android:name=".ui.WebBaseActivity"
