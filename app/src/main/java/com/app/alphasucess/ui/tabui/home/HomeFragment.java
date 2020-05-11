@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.tabui.adapter.ExamAdapter;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
+import com.app.alphasucess.ui.tabui.test.adapters.QuestionCountAdapter;
 
 import java.util.ArrayList;
 
@@ -58,5 +59,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         ExamAdapter examAdapter = new ExamAdapter(getActivity(),examDataList);
         recyclerView.setAdapter(examAdapter);
+
     }
 }

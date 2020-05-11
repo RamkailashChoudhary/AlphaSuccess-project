@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
+import com.app.alphasucess.ui.tabui.test.OnlineTestActivity;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
