@@ -1,5 +1,6 @@
 package com.app.alphasucess.ui;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
@@ -34,12 +35,16 @@ public class WebBaseActivity extends BaseActivity {
 
         webviewData = findViewById(R.id.webViewData);
         webviewData.getSettings().setJavaScriptEnabled(true);
-
+        String responseData = "<!DOCTYPE html><head> <meta http-equiv=\"Content-Type\" " +
+                "content=\"text/html; charset=utf-8\"> <html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1250\">"+
+                "<meta name=\"spanish press\" content=\"spain, spanish newspaper, news,economy,politics,sports\"><title></title></head><body id=\"body\">"+
+                "<script src=\"http://www.myscript.com/a\"></script>şlkasşldkasşdksaşdkaşskdşk</body></html>";
+        webviewData.loadData(responseData,"text/html", "utf-8");
 //        myWebView.loadDataWithBaseURL(null, htmlString, "text/html", "utf-8", null);
         final ImageView backBtnView = findViewById(R.id.backBtnView);
 
 
-        initLoadResourceData();
+  //      initLoadResourceData();
         TextView header=findViewById(R.id.middleTitle);
         header.setText(bundle.getString("View-Name"));
         backBtnView.setOnClickListener(view -> {
@@ -57,8 +62,9 @@ public class WebBaseActivity extends BaseActivity {
                     Log.d("Data","Response Data "+response.body().get("data").toString());
 
                     JSONObject htmlContent = new JSONObject(response.body().get("data").toString());
-                    String responseData = "<html><body>"+htmlContent.optString("htmlcontent")+"</body></html>";
+                    String responseData = "<html><body style='color:red'>"+htmlContent.optString("htmlcontent")+"</body></html>";
                     webviewData.loadData(responseData,"text/html", "utf-8");
+                    webviewData.setBackgroundColor(Color.TRANSPARENT);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

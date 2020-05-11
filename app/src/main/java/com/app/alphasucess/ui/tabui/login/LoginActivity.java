@@ -16,6 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -134,12 +135,16 @@ public class LoginActivity extends AppCompatActivity {
         restServiceLayer.loginService(username,password,"password").enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.body().getReplyCode()!=null && response.body().getReplyCode().equalsIgnoreCase("1") ){
+
+               // Log.d("LoginActivity","Response Data "+response.body().getReplycode());
+                if (response.body().getReplycode()!=null && response.body().getReplycode().equalsIgnoreCase("1") ){
                     loadingProgressBar.setVisibility(View.VISIBLE);
                     Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(forgotPassword1);
-                    finish();}
-                else  Toast.makeText(LoginActivity.this,"Invalid "+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                else
+                    Toast.makeText(LoginActivity.this,"Invalid "+response.body().getMessage(),Toast.LENGTH_LONG).show();
             }
 
             @Override

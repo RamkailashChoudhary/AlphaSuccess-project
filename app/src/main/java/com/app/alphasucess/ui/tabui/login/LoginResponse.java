@@ -3,11 +3,27 @@ package com.app.alphasucess.ui.tabui.login;
 public class LoginResponse {
     private String access_token;
     private String id;
-    private String Name;
+    private String name;
     private String expires_in;
     private String token_type;
-    private String ReplyCode;
+    private String replycode;
     private String message;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getReplycode() {
+        return replycode;
+    }
+
+    public void setReplycode(String replycode) {
+        this.replycode = replycode;
+    }
 
     public String getAccess_token() {
         return access_token;
@@ -25,14 +41,6 @@ public class LoginResponse {
         this.id = id;
     }
 
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
     public String getExpires_in() {
         return expires_in;
     }
@@ -47,14 +55,6 @@ public class LoginResponse {
 
     public void setToken_type(String token_type) {
         this.token_type = token_type;
-    }
-
-    public String getReplyCode() {
-        return ReplyCode;
-    }
-
-    public void setReplyCode(String replyCode) {
-        ReplyCode = replyCode;
     }
 
     public String getMessage() {
