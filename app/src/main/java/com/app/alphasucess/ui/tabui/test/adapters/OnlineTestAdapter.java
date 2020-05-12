@@ -2,6 +2,7 @@ package com.app.alphasucess.ui.tabui.test.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookRecyclerViewAdapter;
+import com.app.alphasucess.ui.tabui.test.OnlineTestActivity;
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -36,13 +40,17 @@ public class OnlineTestAdapter extends RecyclerView.Adapter<OnlineTestAdapter.Vi
 
         private TextView OnlinetextView1,OnlinetextView2,OnlinetextView3;
         private TestData item;
+        private MaterialButton playTestBtn,seeBtn;
 
         public ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
+            playTestBtn = (MaterialButton) v.findViewById(R.id.playTextButton);
+            seeBtn = (MaterialButton) v.findViewById(R.id.seeResultBtn);
             OnlinetextView1 = (TextView) v.findViewById(R.id.OnlinetextView1);
             OnlinetextView2 = (TextView) v.findViewById(R.id.OnlinetextView2);
             OnlinetextView3 = (TextView) v.findViewById(R.id.OnlinetextView3);
+            playTestBtn.setOnClickListener(this);
         }
 
         public void setData(TestData item) {
@@ -53,13 +61,15 @@ public class OnlineTestAdapter extends RecyclerView.Adapter<OnlineTestAdapter.Vi
         @Override
         public void onClick(View view) {
 
+           Toast.makeText(view.getContext(),"Content of the ",Toast.LENGTH_LONG).show();
+            Intent playTestView = new Intent(view.getContext(), OnlineTestActivity.class);
+            view.getContext().startActivity(playTestView);
         }
     }
 
     @Override
     public OnlineTestAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.onlinetestrow, parent, false);
-//        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
         return new OnlineTestAdapter.ViewHolder(view);
     }
 
