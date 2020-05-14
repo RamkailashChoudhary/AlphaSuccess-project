@@ -12,6 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.app.alphasucess.R;
@@ -19,7 +23,12 @@ import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.ForgotPasswordActivity;
 import com.app.alphasucess.ui.HomeActivity;
+import com.app.alphasucess.ui.VerifyOtpActivity;
+import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +37,8 @@ import retrofit2.Response;
 public class SignUpFragment extends Fragment {
 
     private SignUpViewModel mViewModel;
-
+    private ArrayList<String> states;
+    AutoCompleteTextView editTextFilledExposedDropdown;
     public static SignUpFragment newInstance() {
         return new SignUpFragment();
     }
@@ -37,7 +47,34 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.sign_up_fragment, container, false);
+        View view=inflater.inflate(R.layout.sign_up_fragment, container, false);
+
+        TextInputEditText txt_name=view.findViewById(R.id.txt_name);
+        TextInputEditText txt_email=view.findViewById(R.id.txt_email);
+        TextInputEditText txt_mobile=view.findViewById(R.id.txt_mobile_number);
+        TextInputEditText txt_address=view.findViewById(R.id.txtx_address);
+        TextInputEditText txt_password=view.findViewById(R.id.txt_password);
+        TextInputEditText txt_conf_password=view.findViewById(R.id.txt_confirm_password);
+        TextInputEditText txt_refer=view.findViewById(R.id.txt_refer);
+        Button btn_signup=view.findViewById(R.id.btn_signup);
+
+btn_signup.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if (txt_name.getText().toString().length()>0 &&txt_email.getText().toString().length()>0
+                &&txt_mobile.getText().toString().length()>0 &&txt_address.getText().toString().length()>0
+                &&txt_password.getText().toString().length()>0 &&txt_conf_password.getText().toString().length()>0 ){
+            signupApiService(txt_email.getText().toString(),txt_name.getText().toString(),txt_password.getText().toString(),txt_mobile.getText().toString(),"2",
+                    txt_address.getText().toString(),false);
+
+        }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
+    }
+});
+         editTextFilledExposedDropdown =
+                view.findViewById(R.id.drop_state);
+
+
+        return view;
     }
 
     @Override
@@ -46,6 +83,7 @@ public class SignUpFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SignUpViewModel.class);
         // TODO: Use the ViewModel
         stateListData();
+
     }
 
     private void signupApiService(String Email,String Name,String Password,String Phone,String StateID,String Address,boolean isReffered){
@@ -56,7 +94,8 @@ public class SignUpFragment extends Fragment {
             public void onResponse(Call<Object> call, Response<Object> response) {
 
 //                loadingProgressBar.setVisibility(View.VISIBLE);
-                Intent forgotPassword1 = new Intent(getActivity(), HomeActivity.class);
+                Intent forgotPassword1 = new Intent(getActivity(), VerifyOtpActivity.class);
+                forgotPassword1.putExtra("phoneNumber",Phone);
                 startActivity(forgotPassword1);
                 getActivity().finish();
             }
@@ -73,14 +112,35 @@ public class SignUpFragment extends Fragment {
     private void stateListData(){
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.stateListData().enqueue(new Callback<Object>() {
+        restServiceLayer.stateListData().enqueue(new Callback<StateResponse>() {
             @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
+            public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
                 Log.d("StateList","List Data :"+response.body().toString());
+                states=new ArrayList<>();
+                ArrayAdapter<String> adapter =
+                        new ArrayAdapter<>(
+                                getActivity(),
+                                R.layout.dropdown_menu_popup_item,
+                                states);
+                for (int i=0;i<response.body().getData().size();i++){
+                    states.add(response.body().getData().get(i).getName());
+                }
+                editTextFilledExposedDropdown.setAdapter(adapter);
+                editTextFilledExposedDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(getActivity(),states.get(position),Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
+            public void onFailure(Call<StateResponse> call, Throwable t) {
 
             }
         });
