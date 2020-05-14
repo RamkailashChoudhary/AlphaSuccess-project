@@ -16,7 +16,7 @@
             android:label="@string/title_activity_home"></activity>
         <activity android:name=".ui.tabui.signup.SignUpActivity"
             android:windowSoftInputMode="adjustResize"  />
-        
+
         <activity android:name=".ui.ForgotPasswordActivity" />
         <activity
             android:name=".ui.tabui.login.LoginActivity"
