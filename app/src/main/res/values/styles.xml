@@ -53,4 +53,33 @@
         <item name="windowNoTitle">false</item>
     </style>
 
+    <style name="AppTheme.ExposedDropdownMenu"
+        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <!-- color of box ONLY, not dropdown -->
+        <item name="boxBackgroundColor">@color/white</item>
+        <!-- the box outline color depending on state
+             (default, enabled, hovered, focused, but NOT error) -->
+        <!-- the box outline color just for errors -->
+        <!-- enable 8dp space below the box for error message -->
+        <item name="errorEnabled">true</item>
+        <!-- the hint INSIDE the box, before focusing the TextInputEditText -->
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <!-- the hint ON TOP of the box, when the TextInputEditText is focused -->
+        <!-- Gain access to additional styling for the child AutoCompleteTextView,
+             which includes this spinner's dropdown/popup menu -->
+    </style>
+
+    <!-- customization of the material theme for use as
+         an overlay for the ExposedDropdownMenu style  -->
+
+    <!-- style the AutoCompleteTextView of our material spinner -->
+    <style name="AppTheme.ExposedDropdownMenu.AutoCompleteStyle">
+        <!-- restore padding to sanity -->
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+
 </resources>

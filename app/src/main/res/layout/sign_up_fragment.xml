@@ -65,8 +65,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_marginTop="7dp"
+                style="@style/AppTheme.ExposedDropdownMenu"
                 android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/drop_state"
                     android:layout_width="match_parent"
                     android:hint="Select State"
                     android:textColorHint="#000000"
