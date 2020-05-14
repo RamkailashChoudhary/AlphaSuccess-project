@@ -88,7 +88,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent loginPage = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(loginPage);
-              //  playerVire();
+             //   playerVire();
                 finish();
             }
         },2000);

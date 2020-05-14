@@ -33,6 +33,7 @@ public class MyApplication extends Application {
     private static final String DOWNLOAD_ACTION_FILE = "actions";
     private static final String DOWNLOAD_TRACKER_ACTION_FILE = "tracked_actions";
     private static final String DOWNLOAD_CONTENT_DIRECTORY = "downloads";
+    public static String AUTH_TOKEN = "";
 
     protected String userAgent;
 

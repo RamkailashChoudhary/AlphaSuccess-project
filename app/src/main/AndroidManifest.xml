@@ -26,6 +26,7 @@
         <activity
             android:name=".ui.VideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="landscape"
             android:launchMode="singleTop"
             android:label="Player View"
             android:theme="@style/PlayerTheme" />

@@ -23,6 +23,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
@@ -139,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                // Log.d("LoginActivity","Response Data "+response.body().getReplycode());
                 if (response.body().getReplycode()!=null && response.body().getReplycode().equalsIgnoreCase("1") ){
                     loadingProgressBar.setVisibility(View.VISIBLE);
+                    MyApplication.AUTH_TOKEN = response.body().getAccess_token();
                     Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(forgotPassword1);
                     finish();
