@@ -1,5 +1,6 @@
 package com.app.alphasucess.service;
 
+import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.google.gson.JsonObject;
@@ -32,7 +33,7 @@ public interface RestServiceLayer
     Call<Object> signUpApi(@Field("Email")String uEmail,@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("Address") String uAddress,@Field("isReffered") boolean isRefer);
 
     @POST("api/App/StatesList")
-    Call<Object> stateListData();
+    Call<StateResponse> stateListData();
 
     @POST
     Call<JsonObject> resourceData(@Url String url);
