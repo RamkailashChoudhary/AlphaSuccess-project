@@ -6,10 +6,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.app.alphasucess.ui.VideoPlayerActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.app.alphasucess.ui.tabui.test.OnlineTestActivity;
 
@@ -86,6 +88,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent loginPage = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(loginPage);
+              //  playerVire();
                 finish();
             }
         },2000);
@@ -96,5 +99,27 @@ public class SplashActivity extends AppCompatActivity {
         // Show the system bar
         mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+    }
+
+    private void playerVire(){
+
+        Intent intent = new Intent(this, VideoPlayerActivity.class);
+        Sample sample = getSampleObj("Video",Uri.parse("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"),null,false,null,null,null,null);
+        sample.addToIntent(intent);
+        startActivity(intent);
+    }
+
+    private Sample getSampleObj(String sampleName, Uri uri, String extension, boolean isLive, Sample.DrmInfo drmInfo,String adTagUri,String sphericalStereoMode,
+                              Sample.SubtitleInfo subtitleInfo){
+
+        return new Sample.UriSample(
+                sampleName,
+                uri,
+                extension,
+                isLive,
+                drmInfo,
+                adTagUri != null ? Uri.parse(adTagUri) : null,
+                sphericalStereoMode,
+                subtitleInfo);
     }
 }
