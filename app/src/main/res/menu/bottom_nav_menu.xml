@@ -21,7 +21,7 @@
         android:icon="@drawable/ic_assignment_black_24dp"
         android:title="@string/title_test" />
 
-    <item
+   <item
         android:id="@+id/navigation_Download"
         android:icon="@drawable/ic_cloud_download_black_24dp"
         android:title="@string/title_download" />

@@ -32,23 +32,27 @@ public DownloadDataAdapter(Context context, ArrayList<DownloadData> values) {
 
 public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private TextView textView;
+    private TextView textView,pdfViews,pdfLikes,pdfComments;
     private ImageView imageView;
-    private RelativeLayout relativeLayout;
     private DownloadData item;
 
     public ViewHolder(View v) {
         super(v);
         v.setOnClickListener(this);
         textView = (TextView) v.findViewById(R.id.titleTxt);
+        pdfViews = (TextView) v.findViewById(R.id.pdfViews);
+        pdfLikes = (TextView) v.findViewById(R.id.pdfLikes);
+        pdfComments = (TextView) v.findViewById(R.id.pdfComments);
         imageView = (ImageView) v.findViewById(R.id.downloadImg);
     }
 
     public void setData(DownloadData item) {
         this.item = item;
-        // textView.setText("AAAA");
-
-        Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
+         textView.setText(item.getPdfname());
+        pdfViews.setText(""+item.getViews());
+        pdfLikes.setText(""+item.getLikescount());
+        pdfComments.setText(""+item.getViews());
+         Picasso.with(mContext).load("http://demo1.stsm.co.in"+item.getThumbnailurl())
                 .into(imageView);
         //imageView.setImageResource(R.drawable.ic_launcher_background);
     }

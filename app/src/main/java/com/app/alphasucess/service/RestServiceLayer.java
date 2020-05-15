@@ -3,6 +3,7 @@ package com.app.alphasucess.service;
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
+import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.google.gson.JsonObject;
@@ -46,4 +47,8 @@ public interface RestServiceLayer
     @POST("api/App/BooksList")
     @FormUrlEncoded
     Call<ResoureData<List<EbookData>>> ebookListData(@Header ("Authorization") String authorization, @Field("page_number")String pageNumber);
+
+    @POST("/api/App/PDFList")
+    @FormUrlEncoded
+    Call<ResoureData<List<DownloadData>>> pdfListData(@Header ("Authorization") String authorization,@Field("page_number")String pageNumber,@Field("category_id")String categoryId,@Field("subject_id")String subjectId);
 }

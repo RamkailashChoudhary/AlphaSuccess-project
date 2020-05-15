@@ -25,31 +25,29 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class EBookFragment extends Fragment {
+public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private EBookViewModel notificationsViewModel;
     private ArrayList<EbookData> ebookDataList = new ArrayList<>();
     private EbookRecyclerViewAdapter ebookRecyclerViewAdapter;
+    private SwipeRefreshLayout swipeContainer;
+    private int index = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
                 ViewModelProviders.of(this).get(EBookViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
         final RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
         initEbookView(recyclerView);
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        swipeContainer = (SwipeRefreshLayout) root.findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(this);
         return root;
     }
 
@@ -67,7 +65,7 @@ public class EBookFragment extends Fragment {
 
     private void ebookDataList(){
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.ebookListData("Bearer "+ MyApplication.AUTH_TOKEN,"1").enqueue(new Callback<ResoureData<List<EbookData>>>() {
+        restServiceLayer.ebookListData("Bearer "+ MyApplication.AUTH_TOKEN,""+index).enqueue(new Callback<ResoureData<List<EbookData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<EbookData>>> call, Response<ResoureData<List<EbookData>>> response) {
                if(response.body() != null && response.body().getReplycode().equalsIgnoreCase("1")){
@@ -82,5 +80,12 @@ public class EBookFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onRefresh() {
+        index++;
+        ebookDataList();
+        swipeContainer.setRefreshing(false);
     }
 }
