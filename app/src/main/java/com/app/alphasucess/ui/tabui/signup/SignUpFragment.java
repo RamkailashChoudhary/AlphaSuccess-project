@@ -27,6 +27,10 @@ import com.app.alphasucess.ui.VerifyOtpActivity;
 import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -89,19 +93,28 @@ btn_signup.setOnClickListener(new View.OnClickListener() {
     private void signupApiService(String Email,String Name,String Password,String Phone,String StateID,String Address,boolean isReffered){
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.signUpApi(Email,Name,Password,Phone,StateID,Address,isReffered).enqueue(new Callback<Object>() {
+        restServiceLayer.signUpApi(Email,Name,Password,Phone,StateID,Address,isReffered).enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
 //                loadingProgressBar.setVisibility(View.VISIBLE);
-                Intent forgotPassword1 = new Intent(getActivity(), VerifyOtpActivity.class);
-                forgotPassword1.putExtra("phoneNumber",Phone);
-                startActivity(forgotPassword1);
-                getActivity().finish();
+                try {
+
+                    JSONObject responseData = new JSONObject(response.body().toString());
+                    if(responseData.optString("replycode").equalsIgnoreCase("1")) {
+                        Intent forgotPassword1 = new Intent(getActivity(), VerifyOtpActivity.class);
+                        forgotPassword1.putExtra("phoneNumber", Phone);
+                        startActivity(forgotPassword1);
+                        getActivity().finish();
+                    }else
+                      Toast.makeText(getContext(),""+responseData.optString("message"),Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
 
 //                loadingProgressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(),""+t.getMessage(),Toast.LENGTH_LONG).show();

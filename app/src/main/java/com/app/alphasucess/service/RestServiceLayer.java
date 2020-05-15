@@ -33,9 +33,9 @@ public interface RestServiceLayer
     @FormUrlEncoded
     Call<VerifyOTP> verifyOtp(@Field("Phone")String uPhone, @Field("OTP")String uOTP);
 
-    @POST("/api/App/oauth/UserRegister")
+    @POST("/api/App/UserRegister")
     @FormUrlEncoded
-    Call<Object> signUpApi(@Field("Email")String uEmail,@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("Address") String uAddress,@Field("isReffered") boolean isRefer);
+    Call<JsonObject> signUpApi(@Field("Email")String uEmail,@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("Address") String uAddress,@Field("isReffered") boolean isRefer);
 
     @POST("api/App/StatesList")
     Call<StateResponse> stateListData();
