@@ -1,10 +1,6 @@
 package com.app.alphasucess.ui.tabui.home.adapter;
 
-/**
- * Created by Hrusikesh swain on 5/16/2020.
- * Be U Salons
- * hrusikeshswain@beusalons.com
- */
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
