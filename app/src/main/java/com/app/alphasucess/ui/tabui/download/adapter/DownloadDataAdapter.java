@@ -1,6 +1,7 @@
 package com.app.alphasucess.ui.tabui.download.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
+import com.app.alphasucess.ui.CommentActivity;
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookRecyclerViewAdapter;
@@ -62,7 +64,9 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         pdfLikes.setText(""+item.getLikescount());
         pdfComments.setText(""+item.getViews());
         pdfLikes.setTag(item);
+        pdfComments.setTag(item);
         pdfLikes.setOnClickListener(this);
+        pdfComments.setOnClickListener(this);
         Drawable like_blue = mContext.getResources().getDrawable(R.drawable.like_blue);
         Drawable like_black = mContext.getResources().getDrawable(R.drawable.like);
         pdfLikes.setCompoundDrawablesWithIntrinsicBounds(item.isLikedbyUser() ? like_blue : like_black,null,null,null);
@@ -73,8 +77,13 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-       DownloadData data = (DownloadData) view.getTag();
-       pdfLikeApi(data.isLikedbyUser()?"/api/App/UpdateUnlike":"/api/App/UpdateLike",data);
+        if(view == pdfLikes) {
+            DownloadData data = (DownloadData) view.getTag();
+            pdfLikeApi(data.isLikedbyUser() ? "/api/App/UpdateUnlike" : "/api/App/UpdateLike", data);
+        }else if(view == pdfComments){
+            Intent commentView = new Intent(mContext, CommentActivity.class);
+            mContext.startActivity(commentView);
+        }
     }
 }
 

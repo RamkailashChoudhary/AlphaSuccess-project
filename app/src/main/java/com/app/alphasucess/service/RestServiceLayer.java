@@ -3,6 +3,7 @@ package com.app.alphasucess.service;
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
+import com.app.alphasucess.ui.tabui.adapter.CommentData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
@@ -51,4 +52,8 @@ public interface RestServiceLayer
     @POST
     @FormUrlEncoded
     Call<ResoureData> bookLikeOrUnLike(@Url String url,@Header ("Authorization") String authorization,@Field("ID")String userId);
+
+    @POST("/api/App/CommentList")
+    @FormUrlEncoded
+    Call<ResoureData<List<CommentData>>> commentDataList(@Header ("Authorization") String authorization,@Field("id")String id,@Field("page_number")String pageNumber);
 }
