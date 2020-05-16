@@ -24,9 +24,9 @@
         <!-- reference our hint & error styles -->
         <item name="android:textColor">#ffffff</item>
         <item name="android:textColorHint">#ffffff</item>
-        <item name="colorControlNormal">#ffffff</item>
-        <item name="colorControlActivated">#ffffff</item>
-        <item name="colorControlHighlight">#ffffff</item>
+        <item name="android:colorControlNormal">#ffffff</item>
+        <item name="android:colorControlActivated">#ffffff</item>
+        <item name="android:colorControlHighlight">#ffffff</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
