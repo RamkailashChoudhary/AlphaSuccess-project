@@ -56,4 +56,8 @@ public interface RestServiceLayer
     @POST("/api/App/CommentList")
     @FormUrlEncoded
     Call<ResoureData<List<CommentData>>> commentDataList(@Header ("Authorization") String authorization,@Field("id")String id,@Field("page_number")String pageNumber);
+
+    @POST("/api/App//AddCommentOnPDF")
+    @FormUrlEncoded
+    Call<ResoureData> addCommentData(@Header ("Authorization") String authorization,@Field("exampdfid")String exampdfid,@Field("comment")String comment);
 }
