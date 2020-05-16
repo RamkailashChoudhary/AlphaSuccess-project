@@ -20,6 +20,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:hint="Name"
+                    android:id="@+id/txt_name"
                     android:textColorHint="#000000"
                     android:textColor="#000000"
                     android:drawablePadding="5dp"
@@ -33,6 +34,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:hint="Email"
+                    android:id="@+id/txt_email"
                     android:textColorHint="#000000"
                     android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/password"
@@ -45,6 +47,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:hint="Mobile Number"
+                    android:id="@+id/txt_mobile_number"
                     android:textColorHint="#000000"
                     android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/mobile_number"
@@ -56,6 +59,7 @@
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/txtx_address"
                     android:hint="Address"
                     android:textColorHint="#000000"
                     android:drawablePadding="5dp"
@@ -82,6 +86,7 @@
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/txt_password"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:textColorHint="#000000"
@@ -96,7 +101,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:hint="Confirm Password"
-
+                    android:id="@+id/txt_confirm_password"
                     android:inputType="textPassword"
                     android:textColorHint="#000000"
                     android:drawablePadding="5dp"
@@ -109,6 +114,7 @@
                 android:layout_height="wrap_content">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/txt_refer"
                     android:hint="Referral Code (Optional)"
                     android:inputType="text"
                     android:textColorHint="#000000"
@@ -136,6 +142,7 @@
                     android:layout_marginBottom="64dp"
                     android:background="@drawable/sign_up_bar"
                     android:gravity="center"
+                    android:id="@+id/btn_signup"
                     android:layout_marginLeft="35dp"
                     android:layout_marginRight="35dp"
                     android:textColor="#ffffff"
