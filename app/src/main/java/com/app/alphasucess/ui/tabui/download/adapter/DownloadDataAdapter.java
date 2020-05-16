@@ -1,6 +1,7 @@
 package com.app.alphasucess.ui.tabui.download.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,9 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         pdfViews.setText(""+item.getViews());
         pdfLikes.setText(""+item.getLikescount());
         pdfComments.setText(""+item.getViews());
+        Drawable like_blue = mContext.getResources().getDrawable(R.drawable.like_blue);
+        Drawable like_black = mContext.getResources().getDrawable(R.drawable.like);
+        pdfLikes.setCompoundDrawablesWithIntrinsicBounds(item.isLikedbyUser() ? like_blue : like_black,null,null,null);
          Picasso.with(mContext).load("http://demo1.stsm.co.in"+item.getThumbnailurl())
                 .into(imageView);
         //imageView.setImageResource(R.drawable.ic_launcher_background);

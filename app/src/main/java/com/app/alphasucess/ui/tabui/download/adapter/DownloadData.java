@@ -14,6 +14,15 @@ public class DownloadData {
     private String amount;
     private String ispaid;
     private String trash;
+    private boolean likedbyUser;
+
+    public boolean isLikedbyUser() {
+        return likedbyUser;
+    }
+
+    public void setLikedbyUser(boolean likedbyUser) {
+        this.likedbyUser = likedbyUser;
+    }
 
     public String getId() {
         return id;
