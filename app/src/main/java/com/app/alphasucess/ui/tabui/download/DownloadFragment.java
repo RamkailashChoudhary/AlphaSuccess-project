@@ -5,11 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
+import com.app.alphasucess.service.NetworkServiceLayer;
+import com.app.alphasucess.service.RestServiceLayer;
+import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadDataAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +25,15 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DownloadFragment  extends Fragment {
 
     private DownloadViewModel dashboardViewModel;
+    private ArrayList<DownloadData> downloadDataList = new ArrayList<>();
+    private DownloadDataAdapter downloadDataAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,20 +55,27 @@ public class DownloadFragment  extends Fragment {
 
     private void initDownloadView(RecyclerView recyclerView){
 
-        ArrayList<DownloadData> downloadDataList = new ArrayList<>();
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        downloadDataList.add(new DownloadData());
-        DownloadDataAdapter downloadDataAdapter = new DownloadDataAdapter(getActivity(),downloadDataList);
+        downloadDataAdapter = new DownloadDataAdapter(getActivity(),downloadDataList);
         recyclerView.setAdapter(downloadDataAdapter);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
+        initPdfDataList();
+    }
+
+    private void initPdfDataList(){
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        restServiceLayer.pdfListData("Bearer "+MyApplication.AUTH_TOKEN,"1","0","0").enqueue(new Callback<ResoureData<List<DownloadData>>>() {
+            @Override
+            public void onResponse(Call<ResoureData<List<DownloadData>>> call, Response<ResoureData<List<DownloadData>>> response) {
+                downloadDataList.addAll(response.body().getData());
+                downloadDataAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData<List<DownloadData>>> call, Throwable t) {
+
+            }
+        });
     }
 }

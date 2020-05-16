@@ -28,7 +28,7 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView textView;
+        private TextView textView,bookPrice;
         private ImageView imageView;
         private RelativeLayout relativeLayout;
         private EbookData item;
@@ -37,14 +37,17 @@ public class EbookRecyclerViewAdapter extends RecyclerView.Adapter<EbookRecycler
             super(v);
             v.setOnClickListener(this);
             textView = (TextView) v.findViewById(R.id.titleTxt);
+            bookPrice = (TextView) v.findViewById(R.id.bookPrice);
             imageView = (ImageView) v.findViewById(R.id.ebookImg);
         }
 
         public void setData(EbookData item) {
             this.item = item;
-            Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
+            Picasso.with(mContext).load("http://demo1.stsm.co.in/"+item.getImageurl())
                     .into(imageView);
-            //imageView.setImageResource(R.drawable.ic_launcher_background);
+            textView.setText(item.getBookname());
+            String rupee = mContext.getResources().getString(R.string.Rs);
+            bookPrice.setText(rupee+ " "+item.getBookprice());
         }
 
         @Override

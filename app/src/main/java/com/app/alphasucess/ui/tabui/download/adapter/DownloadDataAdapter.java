@@ -1,14 +1,22 @@
 package com.app.alphasucess.ui.tabui.download.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
+import com.app.alphasucess.service.NetworkServiceLayer;
+import com.app.alphasucess.service.RestServiceLayer;
+import com.app.alphasucess.ui.CommentActivity;
+import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookRecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
@@ -16,6 +24,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DownloadDataAdapter extends RecyclerView.Adapter<DownloadDataAdapter.ViewHolder> {
 
@@ -32,37 +43,53 @@ public DownloadDataAdapter(Context context, ArrayList<DownloadData> values) {
 
 public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private TextView textView;
+    private TextView textView,pdfViews,pdfLikes,pdfComments;
     private ImageView imageView;
-    private RelativeLayout relativeLayout;
     private DownloadData item;
 
     public ViewHolder(View v) {
         super(v);
         v.setOnClickListener(this);
         textView = (TextView) v.findViewById(R.id.titleTxt);
+        pdfViews = (TextView) v.findViewById(R.id.pdfViews);
+        pdfLikes = (TextView) v.findViewById(R.id.pdfLikes);
+        pdfComments = (TextView) v.findViewById(R.id.pdfComments);
         imageView = (ImageView) v.findViewById(R.id.downloadImg);
     }
 
     public void setData(DownloadData item) {
         this.item = item;
-        // textView.setText("AAAA");
-
-        Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
+         textView.setText(item.getPdfname());
+        pdfViews.setText(""+item.getViews());
+        pdfLikes.setText(""+item.getLikescount());
+        pdfComments.setText(""+item.getViews());
+        pdfLikes.setTag(item);
+        pdfComments.setTag(item);
+        pdfLikes.setOnClickListener(this);
+        pdfComments.setOnClickListener(this);
+        Drawable like_blue = mContext.getResources().getDrawable(R.drawable.like_blue);
+        Drawable like_black = mContext.getResources().getDrawable(R.drawable.like);
+        pdfLikes.setCompoundDrawablesWithIntrinsicBounds(item.isLikedbyUser() ? like_blue : like_black,null,null,null);
+         Picasso.with(mContext).load("http://demo1.stsm.co.in"+item.getThumbnailurl())
                 .into(imageView);
         //imageView.setImageResource(R.drawable.ic_launcher_background);
     }
 
     @Override
     public void onClick(View view) {
-
+        if(view == pdfLikes) {
+            DownloadData data = (DownloadData) view.getTag();
+            pdfLikeApi(data.isLikedbyUser() ? "/api/App/UpdateUnlike" : "/api/App/UpdateLike", data);
+        }else if(view == pdfComments){
+            Intent commentView = new Intent(mContext, CommentActivity.class);
+            mContext.startActivity(commentView);
+        }
     }
 }
 
     @Override
     public DownloadDataAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.download_row, parent, false);
-//        view.setLayoutParams(new ViewGroup.LayoutParams(getColumnWidth(parent.getContext()),ViewGroup.LayoutParams.WRAP_CONTENT));
         return new DownloadDataAdapter.ViewHolder(view);
     }
 
@@ -75,6 +102,30 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    private void pdfLikeApi(String url,DownloadData data){
+       RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+       restServiceLayer.bookLikeOrUnLike(url, "Bearer "+MyApplication.AUTH_TOKEN,data.getId()).enqueue(new Callback<ResoureData>() {
+            @Override
+            public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {
+
+                if(response.body() != null && response.body().getReplycode().equalsIgnoreCase("1")) {
+
+                    int likeCount = Integer.parseInt(data.getLikescount());
+                    likeCount = data.isLikedbyUser() ? (likeCount-1) : (likeCount+1);
+                    data.setLikescount(likeCount+"");
+                    data.setLikedbyUser(data.isLikedbyUser() ? false : true);
+                    notifyDataSetChanged();
+                    Toast.makeText(mContext,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData> call, Throwable t) {
+
+            }
+        });
     }
 }
 

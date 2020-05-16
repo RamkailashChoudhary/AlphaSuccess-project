@@ -139,7 +139,6 @@ public class VideoPlayerActivity extends BaseActivity
     private MediaSource mediaSource;
     private DefaultTrackSelector trackSelector;
     private DefaultTrackSelector.Parameters trackSelectorParameters;
-    private DebugTextViewHelper debugViewHelper;
     private TrackGroupArray lastSeenTrackGroupArray;
 
     private boolean startAutoPlay;
@@ -168,7 +167,6 @@ public class VideoPlayerActivity extends BaseActivity
 
         setContentView(R.layout.player_view);
         debugRootView = findViewById(R.id.controls_root);
-        debugTextView = findViewById(R.id.debug_text_view);
         selectTracksButton = findViewById(R.id.select_tracks_button);
         selectTracksButton.setOnClickListener(this);
 
@@ -307,16 +305,16 @@ public class VideoPlayerActivity extends BaseActivity
 
     @Override
     public void onClick(View view) {
-        if (view == selectTracksButton
+    /*    if (view == selectTracksButton
                 && !isShowingTrackSelectionDialog
                 && TrackSelectionDialog.willHaveContent(trackSelector)) {
             isShowingTrackSelectionDialog = true;
             TrackSelectionDialog trackSelectionDialog =
                     TrackSelectionDialog.createForTrackSelector(
                             trackSelector,
-                            /* onDismissListener= */ dismissedDialog -> isShowingTrackSelectionDialog = false);
-            trackSelectionDialog.show(getSupportFragmentManager(), /* tag= */ null);
-        }
+                            *//* onDismissListener= *//* dismissedDialog -> isShowingTrackSelectionDialog = false);
+            trackSelectionDialog.show(getSupportFragmentManager(), *//* tag= *//* null);
+        }*/
     }
 
     // PlaybackControlView.PlaybackPreparer implementation
@@ -375,8 +373,6 @@ public class VideoPlayerActivity extends BaseActivity
             player.addAnalyticsListener(new EventLogger(trackSelector));
             playerView.setPlayer(player);
             playerView.setPlaybackPreparer(this);
-            debugViewHelper = new DebugTextViewHelper(player, debugTextView);
-            debugViewHelper.start();
             if (adsLoader != null) {
                 adsLoader.setPlayer(player);
             }
@@ -546,8 +542,6 @@ public class VideoPlayerActivity extends BaseActivity
         if (player != null) {
             updateTrackSelectorParameters();
             updateStartPosition();
-            debugViewHelper.stop();
-            debugViewHelper = null;
             player.release();
             player = null;
             mediaSource = null;
