@@ -1,48 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tabui.home.HomeFragment">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/examTitleView"
+    <!--<include android:id="@+id/include"
+        layout="@layout/generic_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="India's Examination"
-        android:gravity="left"
-        android:textColor="#000000"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/examRecyclerView"
+    <View
+        style="@style/SimpleLine"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:paddingLeft="10dp"
-        android:scrollbars="vertical"
-        android:layout_marginTop="10dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/examTitleView" />
+        android:layout_height="1dp"/>-->
 
-
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:paddingBottom="8dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="@drawable/gradient_bg">
+
+                        <TextView
+                            android:id="@+id/txt_live"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:text="Free Live Courses"
+                            android:textAllCaps="true"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txt_class"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="For Class XII-Science"
+                            android:textColor="#FFFFFF"
+                            android:textSize="8sp"
+                            app:layout_constraintStart_toStartOf="@+id/txt_live"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_live" />
+
+                        <TextView
+                            android:id="@+id/txt_all_courses"
+                            android:layout_width="58dp"
+                            android:layout_height="18dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@drawable/white_rounded"
+                            android:text="View All"
+                            android:padding="5dp"
+                            android:gravity="center"
+                            android:textAllCaps="true"
+                            android:textColor="#FFFFFF"
+                            android:textSize="8sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcy__livecourses"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="40dp"
+                        android:orientation="horizontal"
+                        android:layout_height="wrap_content"/>
+                    <!--<include android:id="@+id/include"
+                        layout="@layout/adapter_livecourses"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="40dp"
+                        android:visibility="visible"
+                        android:layout_height="wrap_content"/>-->
+                </FrameLayout>
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/txt_indxam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:text="Free Live Courses"
+                        android:textAllCaps="true"
+                        android:textColor="#B3000000"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/txt_allxams"
+                        android:layout_width="58dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/allxam_rounded"
+                        android:text="View All"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:textColor="#B3000000"
+                        android:textSize="8sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+                        <include android:id="@+id/include"
+                            layout="@layout/adapter_indianexam"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"/>
+                        <include android:id="@+id/include"
+                            layout="@layout/adapter_indianexam"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+                        <include android:id="@+id/include"
+                            layout="@layout/adapter_indianexam"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"/>
+                        <include android:id="@+id/include"
+                            layout="@layout/adapter_indianexam"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.5"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcy_online_education"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"/>
+                <!-- <include android:id="@+id/include"
+                     layout="@layout/adapter_online_education"
+                     android:layout_width="0dp"
+                     android:layout_weight="0.5"
+                     android:layout_height="wrap_content"/>-->
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/txt_popular_video"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Popular Videos"
+                        android:textAllCaps="true"
+                        android:textColor="#B3000000"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/txt_allvideo"
+                        android:layout_width="58dp"
+                        android:layout_height="18dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/allxam_rounded"
+                        android:text="View All"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:textColor="#B3000000"
+                        android:textSize="8sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcy_online_video"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+            <!-- <LinearLayout
+                 android:paddingLeft="@dimen/activity_horizontal_margin"
+                 android:paddingRight="@dimen/activity_horizontal_margin"
+                 android:weightSum="1"
+                 android:visibility="gone"
+                 android:orientation="horizontal"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content">
+
+                 <TextView
+                     android:textSize="13sp"
+                     android:textColor="@color/black_ninety"
+                     tools:ignore="MissingPrefix"
+                     fontPath="fonts/Lato-Medium.ttf"
+                     android:text="@string/txt_order_summary_static_grand_total"
+                     android:layout_gravity="start"
+                     android:layout_weight=".7"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content" />
+
+                 <TextView
+                     android:textSize="13sp"
+                     android:textColor="@color/black_ninety"
+                     tools:ignore="MissingPrefix"
+                     fontPath="fonts/Lato-Medium.ttf"
+                     android:id="@+id/txt_order_summary_grand_total"
+                     android:gravity="end"
+                     android:layout_weight=".3"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content" />
+             </LinearLayout>-->
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
