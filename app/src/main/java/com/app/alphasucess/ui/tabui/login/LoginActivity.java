@@ -142,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.body().getReplycode()!=null && response.body().getReplycode().equalsIgnoreCase("1") ){
                     loadingProgressBar.setVisibility(View.VISIBLE);
                     MyApplication.AUTH_TOKEN = response.body().getAccess_token();
+                    MyApplication.USER_ID = response.body().getId();
                     Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(forgotPassword1);
                     finish();

@@ -7,11 +7,7 @@ import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -51,4 +47,8 @@ public interface RestServiceLayer
     @POST("/api/App/PDFList")
     @FormUrlEncoded
     Call<ResoureData<List<DownloadData>>> pdfListData(@Header ("Authorization") String authorization,@Field("page_number")String pageNumber,@Field("category_id")String categoryId,@Field("subject_id")String subjectId);
+
+    @POST
+    @FormUrlEncoded
+    Call<ResoureData> bookLikeOrUnLike(@Url String url,@Header ("Authorization") String authorization,@Field("ID")String userId);
 }
