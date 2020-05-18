@@ -88,4 +88,8 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(examAdapter);
 
     }
+
+    private void examListData(){
+
+    }
 }

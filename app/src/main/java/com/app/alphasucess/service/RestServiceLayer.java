@@ -7,6 +7,7 @@ import com.app.alphasucess.ui.tabui.adapter.CommentData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
+import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.google.gson.JsonObject;
 import java.util.List;
 import retrofit2.Call;
@@ -60,4 +61,8 @@ public interface RestServiceLayer
     @POST("/api/App//AddCommentOnPDF")
     @FormUrlEncoded
     Call<ResoureData> addCommentData(@Header ("Authorization") String authorization,@Field("exampdfid")String exampdfid,@Field("comment")String comment);
+
+    @POST("api/App/TestList")
+    @FormUrlEncoded
+    Call<ResoureData<List<AllTestData>>> testListData(@Header ("Authorization") String authorization, @Field("page_number")String pageNumber);
 }

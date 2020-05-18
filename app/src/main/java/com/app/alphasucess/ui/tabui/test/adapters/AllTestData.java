@@ -1,6 +1,6 @@
-package com.app.alphasucess.ui.tabui.adapter;
+package com.app.alphasucess.ui.tabui.test.adapters;
 
-public class ExamData {
+public class AllTestData {
 
     private String id;
     private String testname;
