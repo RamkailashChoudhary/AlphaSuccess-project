@@ -83,8 +83,10 @@ public class OnlineTestActivity extends AppCompatActivity implements OnlineTestL
     @Override
     public void onClick(View view) {
         if(view == preBtnView){
+
             QUESTION_INDEX--;
             if(QUESTION_INDEX > 0 && singleTestQuestion.getQuestions().size() > QUESTION_INDEX) {
+
                 preQuestion(singleTestQuestion.getQuestions().get(QUESTION_INDEX));
             }
         }else if(view == nextBtnView) {
