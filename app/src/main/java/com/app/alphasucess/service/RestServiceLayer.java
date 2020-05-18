@@ -4,6 +4,7 @@ import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.adapter.CommentData;
+import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;

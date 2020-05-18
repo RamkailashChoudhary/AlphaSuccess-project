@@ -13,6 +13,7 @@ import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
+import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.ebook.EBookViewModel;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.app.alphasucess.ui.tabui.test.adapters.OnlineTestAdapter;
@@ -35,13 +36,15 @@ import retrofit2.Response;
 public class TestFragment extends Fragment {
 
     private TestViewModel notificationsViewModel;
+    private ArrayList<AllTestData> onLineTestData = new ArrayList<>();
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
                 ViewModelProviders.of(this).get(TestViewModel.class);
         View root = inflater.inflate(R.layout.fragment_online_test, container, false);
-        RecyclerView recyclerView = root.findViewById(R.id.onlineTestRecyclerView);
+        recyclerView = root.findViewById(R.id.onlineTestRecyclerView);
         initTestRows(recyclerView);
         final TextView textView = root.findViewById(R.id.text_test);
 
@@ -54,19 +57,14 @@ public class TestFragment extends Fragment {
         return root;
     }
 
+    private  OnlineTestAdapter onlineTestAdapter;
+
     private void initTestRows(RecyclerView recyclerView){
 
-        ArrayList<TestData> onLineTestData = new ArrayList<>();
-        onLineTestData.add(new TestData());
-        onLineTestData.add(new TestData());
-        onLineTestData.add(new TestData());
-        onLineTestData.add(new TestData());
-        onLineTestData.add(new TestData());
-        onLineTestData.add(new TestData());
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        OnlineTestAdapter onlineTestAdapter = new OnlineTestAdapter(getContext(),onLineTestData);
+        onlineTestAdapter = new OnlineTestAdapter(getContext(),onLineTestData);
         recyclerView.setAdapter(onlineTestAdapter);
         testListData();
     }
@@ -77,7 +75,11 @@ public class TestFragment extends Fragment {
             @Override
             public void onResponse(Call<ResoureData<List<AllTestData>>> call, Response<ResoureData<List<AllTestData>>> response) {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
-                    Log.d("TestList","Size of the List Data :"+response.body().getData().size());
+
+                    onLineTestData.addAll(response.body().getData());
+                    //
+                    onLineTestData.add(0,new AllTestData());
+                    onlineTestAdapter.notifyDataSetChanged();
                     Toast.makeText(getContext(),"Message :"+response.body().getMessage(),Toast.LENGTH_LONG).show();
                 }
             }

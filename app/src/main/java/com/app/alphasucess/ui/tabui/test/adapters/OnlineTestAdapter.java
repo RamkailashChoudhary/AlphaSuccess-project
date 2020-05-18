@@ -30,13 +30,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class OnlineTestAdapter extends RecyclerView.Adapter {
 
-    private ArrayList<TestData> mValues;
+    private ArrayList<AllTestData> mValues;
     private Context mContext;
     private String fileName;
     private static final int TEST_LIST_ROW = 0;
     private static final int TEST_LIST_DATA = 1;
+    private List<ExamData> examListData;
 
-    public OnlineTestAdapter(Context context, ArrayList<TestData> values) {
+    public OnlineTestAdapter(Context context, ArrayList<AllTestData> values) {
         mValues = values;
         mContext = context;
     }
@@ -51,8 +52,8 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView OnlinetextView1,OnlinetextView2,OnlinetextView3;
-        private TestData item;
+        private TextView OnlinetextView1,questionMarks,OnlinetextView2,OnlinetextView3,examDuration,noQuestions;
+        private AllTestData item;
         private MaterialButton playTestBtn,seeBtn;
 
         public ViewHolder(View v) {
@@ -61,14 +62,19 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
             playTestBtn = (MaterialButton) v.findViewById(R.id.playTextButton);
             seeBtn = (MaterialButton) v.findViewById(R.id.seeResultBtn);
             OnlinetextView1 = (TextView) v.findViewById(R.id.OnlinetextView1);
-            OnlinetextView2 = (TextView) v.findViewById(R.id.OnlinetextView2);
+            noQuestions = (TextView) v.findViewById(R.id.noQuestions);
+            examDuration = (TextView) v.findViewById(R.id.examDuration);
+            questionMarks = (TextView) v.findViewById(R.id.questionMarks);
             OnlinetextView3 = (TextView) v.findViewById(R.id.OnlinetextView3);
             playTestBtn.setOnClickListener(this);
         }
 
-        public void setData(TestData item) {
+        public void setData(AllTestData item) {
             this.item = item;
-            OnlinetextView1.setText("AAAA");
+            OnlinetextView1.setText(item.getTestname()+"");
+            examDuration.setText(item.getTimeinminutes()+" Mins");
+            noQuestions.setText(item.getQuestioncount());
+            questionMarks.setText(item.getTotalmarks());
         }
 
         @Override
