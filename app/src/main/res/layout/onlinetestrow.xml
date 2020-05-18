@@ -4,8 +4,8 @@
     android:id="@+id/card"
     app:cardElevation="1dp"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
-    android:layout_margin="5dp">
+    android:layout_height="135dp"
+    android:layout_margin="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,23 +26,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:text="Test B"
+            android:visibility="gone"
             android:layout_marginLeft="5dp"
             android:id="@+id/OnlinetextView2"
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
             android:text="|"
+            android:visibility="gone"
             android:layout_marginLeft="5dp"
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
             android:text="Test C"
+            android:visibility="gone"
             android:layout_marginLeft="5dp"
             android:id="@+id/OnlinetextView3"
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
-            android:text="|"
+            android:text="Online Test"
             android:layout_marginLeft="5dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -61,6 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:text="25 Min"
+                android:id="@+id/examDuration"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -72,6 +76,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:text="50"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/question"
+                android:id="@+id/noQuestions"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -83,20 +90,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:text="25 Min"
+                android:id="@+id/questionMarks"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/question_test"
                 android:layout_centerHorizontal="true"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_marginRight="8dp"
             android:layout_height="wrap_content">
             <TextView
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="left"
-                android:text="Data"
+                android:text="By Alpha Success"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
     </LinearLayout>
@@ -114,7 +126,7 @@
             android:paddingLeft="15dp"
             style="@style/MaterialButtonComponent"
             android:textColor="#ffffff"
-            android:layout_height="35dp"
+            android:layout_height="37dp"
             android:layout_marginLeft="10dp" />
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
@@ -128,6 +140,6 @@
             android:paddingLeft="15dp"
             style="@style/MaterialButtonComponent"
             android:textColor="#ffffff"
-            android:layout_height="35dp"/>
+            android:layout_height="37dp"/>
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

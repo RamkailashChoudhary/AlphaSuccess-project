@@ -1,6 +1,8 @@
-package com.app.alphasucess.ui.tabui.adapter;
+package com.app.alphasucess.ui.tabui.test.adapters;
 
-public class ExamData {
+import java.util.List;
+
+public class SingleTestQuestion {
 
     private String id;
     private String testname;
@@ -9,7 +11,7 @@ public class ExamData {
     private String timeinminutes;
     private String totalmarks;
     private String questioncount;
-    private String adddate;
+    private List<TestData> questions;
 
     public String getId() {
         return id;
@@ -67,11 +69,11 @@ public class ExamData {
         this.questioncount = questioncount;
     }
 
-    public String getAdddate() {
-        return adddate;
+    public List<TestData> getQuestions() {
+        return questions;
     }
 
-    public void setAdddate(String adddate) {
-        this.adddate = adddate;
+    public void setQuestions(List<TestData> questions) {
+        this.questions = questions;
     }
 }
