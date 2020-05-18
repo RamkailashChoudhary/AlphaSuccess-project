@@ -9,9 +9,11 @@ import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
+import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
 import com.google.gson.JsonObject;
 import java.util.List;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -66,4 +68,8 @@ public interface RestServiceLayer
     @POST("api/App/TestList")
     @FormUrlEncoded
     Call<ResoureData<List<AllTestData>>> testListData(@Header ("Authorization") String authorization, @Field("page_number")String pageNumber);
+
+    @POST("/api/App/SingleTestQuestions")
+    @FormUrlEncoded
+    Call<ResoureData<SingleTestQuestion>> singleTestQuestions(@Header ("Authorization") String authorization, @Field("ID")String Id);
 }
