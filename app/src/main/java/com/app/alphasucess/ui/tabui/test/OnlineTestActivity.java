@@ -60,10 +60,15 @@ public class OnlineTestActivity extends AppCompatActivity implements OnlineTestL
 
     @Override
     public void nextQuestion(TestData testData) {
+
         QUESTION_INDEX++;
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(singleTestQuestion.getQuestions().get(QUESTION_INDEX)))
-                .commitNow();
+        if(singleTestQuestion.getQuestions().size() > QUESTION_INDEX) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(singleTestQuestion.getQuestions().get(QUESTION_INDEX)))
+                    .commitNow();
+            Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
+          }else
+            Toast.makeText(OnlineTestActivity.this, "END" , Toast.LENGTH_LONG).show();
     }
 
     @Override
