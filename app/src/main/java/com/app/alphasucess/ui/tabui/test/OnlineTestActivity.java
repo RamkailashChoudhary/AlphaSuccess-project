@@ -63,34 +63,37 @@ public class OnlineTestActivity extends AppCompatActivity implements OnlineTestL
     @Override
     public void nextQuestion(TestData testData) {
 
-        QUESTION_INDEX++;
-        if(singleTestQuestion.getQuestions().size() > QUESTION_INDEX) {
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(singleTestQuestion.getQuestions().get(QUESTION_INDEX)))
+                    .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(testData))
                     .commitNow();
             Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
-          }else
-            Toast.makeText(OnlineTestActivity.this, "END" , Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void preQuestion(TestData testData) {
-        QUESTION_INDEX--;
-        if(QUESTION_INDEX > 0 && singleTestQuestion.getQuestions().size() > QUESTION_INDEX) {
+
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(singleTestQuestion.getQuestions().get(QUESTION_INDEX)))
+                    .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(testData))
                     .commitNow();
             Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
-        }else
-            Toast.makeText(OnlineTestActivity.this, "END" , Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void onClick(View view) {
         if(view == preBtnView){
-             preQuestion(null);
+            QUESTION_INDEX--;
+            if(QUESTION_INDEX > 0 && singleTestQuestion.getQuestions().size() > QUESTION_INDEX) {
+                preQuestion(singleTestQuestion.getQuestions().get(QUESTION_INDEX));
+            }
         }else if(view == nextBtnView) {
-            nextQuestion(null);
+
+            QUESTION_INDEX++;
+            if(singleTestQuestion.getQuestions().size() > QUESTION_INDEX) {
+
+                nextQuestion(singleTestQuestion.getQuestions().get(QUESTION_INDEX));
+            }
         }
     }
 }
