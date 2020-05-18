@@ -6,10 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.tabui.test.OnlineTestActivity">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar" />
+
     <FrameLayout
         android:id="@+id/ontestScreenView"
         android:layout_width="match_parent"
         android:layout_marginBottom="50dp"
+        android:layout_marginTop="70dp"
         android:layout_height="match_parent"/>
 
     <LinearLayout

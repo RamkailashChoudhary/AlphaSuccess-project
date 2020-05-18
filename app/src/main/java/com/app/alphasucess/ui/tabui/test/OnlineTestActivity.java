@@ -7,9 +7,12 @@ import retrofit2.Response;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.alphasucess.BaseActivity;
 import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
@@ -19,17 +22,23 @@ import com.app.alphasucess.ui.tabui.test.adapters.OnlineTestListener;
 import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
 import com.app.alphasucess.ui.tabui.test.adapters.TestData;
 
-public class OnlineTestActivity extends AppCompatActivity implements OnlineTestListener, View.OnClickListener {
+public class OnlineTestActivity extends BaseActivity implements OnlineTestListener, View.OnClickListener {
 
     private int QUESTION_INDEX = 0;
 
     private SingleTestQuestion singleTestQuestion;
     private RelativeLayout nextBtnView,preBtnView;
+    private ImageView backBtnView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_test);
+
+        TextView header=findViewById(R.id.middleTitle);
+        header.setText("Questions");
+        backBtnView = findViewById(R.id.backBtnView);
+        backBtnView.setOnClickListener(this);
         nextBtnView = findViewById(R.id.nextBtnView);
         preBtnView = findViewById(R.id.preBtnView);
         nextBtnView.setOnClickListener(this);
@@ -96,6 +105,9 @@ public class OnlineTestActivity extends AppCompatActivity implements OnlineTestL
 
                 nextQuestion(singleTestQuestion.getQuestions().get(QUESTION_INDEX));
             }
+        }else if(view == backBtnView){
+
+            onBackPressed();
         }
     }
 }
