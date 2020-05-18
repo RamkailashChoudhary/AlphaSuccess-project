@@ -2,6 +2,7 @@ package com.app.alphasucess.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -31,10 +32,11 @@ public class VerifyOtpActivity extends BaseActivity {
         final ImageView backBtnView = findViewById(R.id.backBtnView);
         final EditText usernameEditText = findViewById(R.id.editText);
         TextView header=findViewById(R.id.middleTitle);
+        Button btn=findViewById(R.id.forgotPasswordBtn);
         header.setText("Verify Otp");
         Bundle bundle = getIntent().getExtras();
         final String phoneNumber=bundle.getString("phoneNumber");
-        usernameEditText.setOnClickListener(view ->{
+        btn.setOnClickListener(view ->{
             if (usernameEditText.getText().toString().trim().length()>0){
                 forgotApiService(phoneNumber,usernameEditText.getText().toString());
             }else Toast.makeText(VerifyOtpActivity.this,"Enter OTP",Toast.LENGTH_LONG).show();

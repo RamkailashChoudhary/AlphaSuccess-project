@@ -80,6 +80,9 @@ btn_signup.setOnClickListener(new View.OnClickListener() {
 
         return view;
     }
+   /* private boolean isValid(){
+
+    }*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
