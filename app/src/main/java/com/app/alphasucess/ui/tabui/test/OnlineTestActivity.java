@@ -24,14 +24,16 @@ public class OnlineTestActivity extends AppCompatActivity implements OnlineTestL
     private int QUESTION_INDEX = 0;
 
     private SingleTestQuestion singleTestQuestion;
-    private RelativeLayout nextBtnView;
+    private RelativeLayout nextBtnView,preBtnView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_test);
         nextBtnView = findViewById(R.id.nextBtnView);
+        preBtnView = findViewById(R.id.preBtnView);
         nextBtnView.setOnClickListener(this);
+        preBtnView.setOnClickListener(this);
         testQuestionDataList();
     }
 
@@ -73,11 +75,22 @@ public class OnlineTestActivity extends AppCompatActivity implements OnlineTestL
 
     @Override
     public void preQuestion(TestData testData) {
-
+        QUESTION_INDEX--;
+        if(QUESTION_INDEX > 0 && singleTestQuestion.getQuestions().size() > QUESTION_INDEX) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(singleTestQuestion.getQuestions().get(QUESTION_INDEX)))
+                    .commitNow();
+            Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
+        }else
+            Toast.makeText(OnlineTestActivity.this, "END" , Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onClick(View view) {
-        nextQuestion(null);
+        if(view == preBtnView){
+             preQuestion(null);
+        }else if(view == nextBtnView) {
+            nextQuestion(null);
+        }
     }
 }
