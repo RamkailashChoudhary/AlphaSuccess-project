@@ -1,11 +1,14 @@
 package com.app.alphasucess.ui.tabui.test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import de.mrapp.android.dialog.MaterialDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -21,13 +24,14 @@ import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.test.adapters.OnlineTestListener;
 import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
 import com.app.alphasucess.ui.tabui.test.adapters.TestData;
+import com.app.alphasucess.ui.view.CircleProgressBar;
 
 public class OnlineTestActivity extends BaseActivity implements OnlineTestListener, View.OnClickListener {
 
     private int QUESTION_INDEX = 0;
 
     private SingleTestQuestion singleTestQuestion;
-    private RelativeLayout nextBtnView,preBtnView;
+    private RelativeLayout nextBtnView,preBtnView,submitBtnView;
     private ImageView backBtnView;
 
     @Override
@@ -41,8 +45,10 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         backBtnView.setOnClickListener(this);
         nextBtnView = findViewById(R.id.nextBtnView);
         preBtnView = findViewById(R.id.preBtnView);
+        submitBtnView = findViewById(R.id.submitBtnView);
         nextBtnView.setOnClickListener(this);
         preBtnView.setOnClickListener(this);
+        submitBtnView.setOnClickListener(this);
         testQuestionDataList();
     }
 
@@ -108,6 +114,64 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         }else if(view == backBtnView){
 
             onBackPressed();
+        } else if(view == submitBtnView){
+            showDialog();
+
         }
+    }
+
+    private void resultCalculation(){
+
+        int RESUT_COUND = 0;
+        for (int i=0; i < singleTestQuestion.getQuestions().size(); i++){
+
+            int answer = singleTestQuestion.getQuestions().get(i).getAnswerData();
+            for(int j = 0; j < singleTestQuestion.getQuestions().get(i).getOptions().size(); j++) {
+
+                if(singleTestQuestion.getQuestions().get(i).getOptions().get(j).getIscorrect().equalsIgnoreCase("true")) {
+
+                    if(answer == j){
+                        RESUT_COUND++;
+                        break;
+                    }
+                }
+            }
+        }
+
+        int totalQuestion = singleTestQuestion.getQuestions().size();
+        int percentageResult = RESUT_COUND % totalQuestion;
+        percentageResult = percentageResult * 100;
+        Log.d("Result", "Data RESULT :" + RESUT_COUND+"/"+singleTestQuestion.getQuestions().size());
+       // showDialog(percentageResult);
+        showResultView(percentageResult);
+    }
+
+    private void showDialog(){
+
+        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(this);
+        dialogBuilder.setTitle(R.string.app_name);
+        dialogBuilder.setMessage("Do you want to submit your test ?");
+        dialogBuilder.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+            resultCalculation();
+        });
+        dialogBuilder.setNegativeButton(android.R.string.cancel, null);
+        MaterialDialog dialog = dialogBuilder.create();
+        dialog.show();
+       // showResultView();
+    }
+
+    private void showResultView(int percentage){
+
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+        builder.setView(R.layout.result_body);
+        MaterialDialog dialog = builder.create();
+       /* CircleProgressBar circleProgressBar = dialog.findViewById(R.id.progressBarPercentage);
+        circleProgressBar.setProgress(percentage);*/
+        dialog.show();
+
+//        builder.setCustomTitle(R.layout.custom_dialog_title);
+//        builder.setCustomMessage(R.layout.custom_dialog_message);
+//        builder.setCustomButtonBar(R.layout.custom_dialog_button_bar);
+//        builder.setCustomHeader(R.layout.custom_dialog_header);
     }
 }

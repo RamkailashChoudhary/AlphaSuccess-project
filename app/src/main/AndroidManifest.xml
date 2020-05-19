@@ -35,6 +35,10 @@
         <activity
             android:name=".ui.tabui.test.OnlineTestActivity"
             android:label="@string/title_activity_otp" />
+
+        <activity android:name=".ui.PDFViewActivity"
+            android:label="PDFView"/>
+
         <activity
             android:name=".ui.WebBaseActivity"
             android:label="@string/title_activity_login" />

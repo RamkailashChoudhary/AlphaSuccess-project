@@ -80,7 +80,7 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View view) {
 
-           Toast.makeText(view.getContext(),"Content of the ",Toast.LENGTH_LONG).show();
+           //Toast.makeText(view.getContext(),"Content of the ",Toast.LENGTH_LONG).show();
             Intent playTestView = new Intent(view.getContext(), OnlineTestActivity.class);
             view.getContext().startActivity(playTestView);
         }

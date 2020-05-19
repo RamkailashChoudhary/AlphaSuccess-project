@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.app.alphasucess.ui.PDFViewActivity;
 import com.app.alphasucess.ui.VideoPlayerActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.app.alphasucess.ui.tabui.test.OnlineTestActivity;
@@ -88,7 +89,6 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent loginPage = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(loginPage);
-             //   playerVire();
                 finish();
             }
         },2000);
