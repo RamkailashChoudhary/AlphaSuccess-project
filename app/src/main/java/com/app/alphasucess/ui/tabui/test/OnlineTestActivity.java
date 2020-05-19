@@ -116,7 +116,6 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             onBackPressed();
         } else if(view == submitBtnView){
             showDialog();
-
         }
     }
 
