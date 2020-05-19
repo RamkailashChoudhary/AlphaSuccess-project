@@ -5,7 +5,7 @@
     android:layout_height="300dp">
 
     <com.app.alphasucess.ui.view.CircleProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarPercentage"
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:progressColor="#e76130"

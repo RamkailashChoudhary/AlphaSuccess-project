@@ -24,6 +24,7 @@ import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.test.adapters.OnlineTestListener;
 import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
 import com.app.alphasucess.ui.tabui.test.adapters.TestData;
+import com.app.alphasucess.ui.view.CircleProgressBar;
 
 public class OnlineTestActivity extends BaseActivity implements OnlineTestListener, View.OnClickListener {
 
@@ -114,8 +115,8 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
 
             onBackPressed();
         } else if(view == submitBtnView){
-            //showDialog();
-            showResultView();
+            showDialog();
+
         }
     }
 
@@ -137,7 +138,12 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             }
         }
 
+        int totalQuestion = singleTestQuestion.getQuestions().size();
+        int percentageResult = RESUT_COUND % totalQuestion;
+        percentageResult = percentageResult * 100;
         Log.d("Result", "Data RESULT :" + RESUT_COUND+"/"+singleTestQuestion.getQuestions().size());
+       // showDialog(percentageResult);
+        showResultView(percentageResult);
     }
 
     private void showDialog(){
@@ -154,12 +160,15 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
        // showResultView();
     }
 
-    private void showResultView(){
+    private void showResultView(int percentage){
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
         builder.setView(R.layout.result_body);
         MaterialDialog dialog = builder.create();
+       /* CircleProgressBar circleProgressBar = dialog.findViewById(R.id.progressBarPercentage);
+        circleProgressBar.setProgress(percentage);*/
         dialog.show();
+
 //        builder.setCustomTitle(R.layout.custom_dialog_title);
 //        builder.setCustomMessage(R.layout.custom_dialog_message);
 //        builder.setCustomButtonBar(R.layout.custom_dialog_button_bar);
