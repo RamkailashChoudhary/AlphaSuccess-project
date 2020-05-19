@@ -115,24 +115,28 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             onBackPressed();
         } else if(view == submitBtnView){
             showDialog();
-            int RESUT_COUND = 0;
-            for (int i=0; i < singleTestQuestion.getQuestions().size(); i++){
+        }
+    }
 
-                int answer = singleTestQuestion.getQuestions().get(i).getAnswerData();
-                for(int j = 0; j < singleTestQuestion.getQuestions().get(i).getOptions().size(); j++) {
+    private void resultCalculation(){
 
-                    if(singleTestQuestion.getQuestions().get(i).getOptions().get(j).getIscorrect().equalsIgnoreCase("true")) {
+        int RESUT_COUND = 0;
+        for (int i=0; i < singleTestQuestion.getQuestions().size(); i++){
 
-                        if(answer == j){
-                            RESUT_COUND++;
-                            break;
-                        }
+            int answer = singleTestQuestion.getQuestions().get(i).getAnswerData();
+            for(int j = 0; j < singleTestQuestion.getQuestions().get(i).getOptions().size(); j++) {
+
+                if(singleTestQuestion.getQuestions().get(i).getOptions().get(j).getIscorrect().equalsIgnoreCase("true")) {
+
+                    if(answer == j){
+                        RESUT_COUND++;
+                        break;
                     }
                 }
             }
-
-            Log.d("Result", "Data RESULT :" + RESUT_COUND);
         }
+
+        Log.d("Result", "Data RESULT :" + RESUT_COUND+"/"+singleTestQuestion.getQuestions().size());
     }
 
     private void showDialog(){
@@ -141,7 +145,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         dialogBuilder.setTitle(R.string.app_name);
         dialogBuilder.setMessage("Do you want to submit your test ?");
         dialogBuilder.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-
+            resultCalculation();
         });
         dialogBuilder.setNegativeButton(android.R.string.cancel, null);
         MaterialDialog dialog = dialogBuilder.create();
