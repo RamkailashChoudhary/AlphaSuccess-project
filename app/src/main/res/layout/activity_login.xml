@@ -29,6 +29,7 @@
                 android:id="@+id/username"
                 android:hint="User Name"
                 android:textColorHint="#ffffff"
+                android:textColor="@color/pure_white"
                 android:drawablePadding="5dp"
                 android:drawableLeft="@drawable/name"
                 android:layout_height="wrap_content"/>
@@ -47,6 +48,7 @@
                 android:drawableLeft="@drawable/password"
                 android:drawablePadding="5dp"
                 android:hint="Password"
+                android:textColor="@color/pure_white"
                 android:inputType="textPassword"
                 android:textColorHint="#ffffff" />
         </com.google.android.material.textfield.TextInputLayout>
