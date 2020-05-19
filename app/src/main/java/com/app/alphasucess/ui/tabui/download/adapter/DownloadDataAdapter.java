@@ -16,6 +16,7 @@ import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.CommentActivity;
+import com.app.alphasucess.ui.PDFViewActivity;
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookRecyclerViewAdapter;
@@ -63,6 +64,8 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         pdfViews.setText(""+item.getViews());
         pdfLikes.setText(""+item.getLikescount());
         pdfComments.setText(""+item.getViews());
+        imageView.setTag(item);
+        imageView.setOnClickListener(this);
         pdfLikes.setTag(item);
         pdfComments.setTag(item);
         pdfLikes.setOnClickListener(this);
@@ -86,6 +89,13 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
             DownloadData data = (DownloadData) view.getTag();
             Intent commentView = new Intent(mContext, CommentActivity.class);
             commentView.putExtra("COMMENT_ID",data.getId());
+            mContext.startActivity(commentView);
+        } else if(view == imageView){
+
+            DownloadData data = (DownloadData) view.getTag();
+
+            Intent commentView = new Intent(mContext, PDFViewActivity.class);
+            commentView.putExtra("PDF_URL",data.getPdfurl());
             mContext.startActivity(commentView);
         }
     }

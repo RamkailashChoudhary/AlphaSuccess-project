@@ -22,16 +22,19 @@ public class PDFViewActivity extends BaseActivity implements DownloadFile.Listen
     private FrameLayout rootPdfView;
     private PDFPagerAdapter adapter;
     private RemotePDFViewPager remotePDFViewPager;
+    private String pdfUrl = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pdf_view);
+        Bundle bundle = getIntent().getExtras();
+        pdfUrl = bundle.getString("PDF_URL");
         TextView header=findViewById(R.id.middleTitle);
         header.setText("Online PDF");
         final ImageView backBtnView = findViewById(R.id.backBtnView);
         rootPdfView = findViewById(R.id.rootPdfView);
-        remotePDFViewPager = new RemotePDFViewPager(this, "http://demo1.stsm.co.in/Content/Uploads/PDF/PDF.pdf", this);
+        remotePDFViewPager = new RemotePDFViewPager(this, "http://demo1.stsm.co.in/"+pdfUrl, this);
         backBtnView.setOnClickListener(view -> {
             onBackPressed();
         });

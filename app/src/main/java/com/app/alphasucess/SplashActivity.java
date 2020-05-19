@@ -87,9 +87,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent loginPage = new Intent(SplashActivity.this, PDFViewActivity.class);
+                Intent loginPage = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(loginPage);
-             //   playerVire();
                 finish();
             }
         },2000);
