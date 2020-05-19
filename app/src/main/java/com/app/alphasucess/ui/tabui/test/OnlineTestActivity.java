@@ -115,9 +115,23 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             onBackPressed();
         } else if(view == submitBtnView){
             showDialog();
+            int RESUT_COUND = 0;
             for (int i=0; i < singleTestQuestion.getQuestions().size(); i++){
-                Log.d("Result","Data :"+singleTestQuestion.getQuestions().get(i).getAnswerData());
+
+                int answer = singleTestQuestion.getQuestions().get(i).getAnswerData();
+                for(int j = 0; j < singleTestQuestion.getQuestions().get(i).getOptions().size(); j++) {
+
+                    if(singleTestQuestion.getQuestions().get(i).getOptions().get(j).getIscorrect().equalsIgnoreCase("true")) {
+
+                        if(answer == j){
+                            RESUT_COUND++;
+                            break;
+                        }
+                    }
+                }
             }
+
+            Log.d("Result", "Data RESULT :" + RESUT_COUND);
         }
     }
 

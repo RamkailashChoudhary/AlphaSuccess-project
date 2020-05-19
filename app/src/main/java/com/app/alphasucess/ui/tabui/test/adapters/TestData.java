@@ -8,14 +8,14 @@ public class TestData {
     private String testid;
     private String testquestion;
     private String explaination;
-    private String answerData;
+    private int answerData;
     private List<OptionData> options;
 
-    public String getAnswerData() {
+    public int getAnswerData() {
         return answerData;
     }
 
-    public void setAnswerData(String answerData) {
+    public void setAnswerData(int answerData) {
         this.answerData = answerData;
     }
 

@@ -73,7 +73,7 @@ public class TestScreenFragment extends Fragment implements View.OnClickListener
                 answerSelected = answerA;
                 answerA.setChecked(true);
             }
-            testData.setAnswerData("A");
+            testData.setAnswerData(0);
         }else if(view == answerB){
             if(answerSelected == null) {
                 answerSelected = answerB;
@@ -83,7 +83,7 @@ public class TestScreenFragment extends Fragment implements View.OnClickListener
                 answerSelected = answerB;
                 answerB.setChecked(true);
             }
-            testData.setAnswerData("B");
+            testData.setAnswerData(1);
         }else if(view == answerC){
             if(answerSelected == null) {
                 answerSelected = answerC;
@@ -93,7 +93,7 @@ public class TestScreenFragment extends Fragment implements View.OnClickListener
                 answerSelected = answerC;
                 answerC.setChecked(true);
             }
-            testData.setAnswerData("C");
+            testData.setAnswerData(2);
         }else if(view == answerD){
             if(answerSelected == null) {
                 answerSelected = answerD;
@@ -103,7 +103,7 @@ public class TestScreenFragment extends Fragment implements View.OnClickListener
                 answerSelected = answerD;
                 answerD.setChecked(true);
             }
-            testData.setAnswerData("D");
+            testData.setAnswerData(3);
         }
     }
 }
