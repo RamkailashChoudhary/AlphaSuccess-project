@@ -93,10 +93,14 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         } else if(view == imageView){
 
             DownloadData data = (DownloadData) view.getTag();
+            if(data.getIspaid().equalsIgnoreCase("false") && (data.getDemopdfurl() != null && data.getDemopdfurl().length()> 0)) {
 
-            Intent commentView = new Intent(mContext, PDFViewActivity.class);
-            commentView.putExtra("PDF_URL",data.getPdfurl());
-            mContext.startActivity(commentView);
+                Intent commentView = new Intent(mContext, PDFViewActivity.class);
+                commentView.putExtra("PDF_URL", data.getPdfurl());
+                mContext.startActivity(commentView);
+            }else{
+                Toast.makeText(mContext,"Please first purchase this PDF Book",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
