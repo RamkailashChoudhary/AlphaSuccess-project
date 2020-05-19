@@ -114,7 +114,8 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
 
             onBackPressed();
         } else if(view == submitBtnView){
-            showDialog();
+            //showDialog();
+            showResultView();
         }
     }
 
@@ -150,15 +151,18 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         dialogBuilder.setNegativeButton(android.R.string.cancel, null);
         MaterialDialog dialog = dialogBuilder.create();
         dialog.show();
+       // showResultView();
     }
 
     private void showResultView(){
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-       /* builder.setView(R.layout.custom_dialog_content);
-        builder.setCustomTitle(R.layout.custom_dialog_title);
-        builder.setCustomMessage(R.layout.custom_dialog_message);
-        builder.setCustomButtonBar(R.layout.custom_dialog_button_bar);
-        builder.setCustomHeader(R.layout.custom_dialog_header);*/
+        builder.setView(R.layout.result_body);
+        MaterialDialog dialog = builder.create();
+        dialog.show();
+//        builder.setCustomTitle(R.layout.custom_dialog_title);
+//        builder.setCustomMessage(R.layout.custom_dialog_message);
+//        builder.setCustomButtonBar(R.layout.custom_dialog_button_bar);
+//        builder.setCustomHeader(R.layout.custom_dialog_header);
     }
 }
