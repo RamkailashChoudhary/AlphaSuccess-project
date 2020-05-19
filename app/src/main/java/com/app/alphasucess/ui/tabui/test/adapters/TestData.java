@@ -8,7 +8,16 @@ public class TestData {
     private String testid;
     private String testquestion;
     private String explaination;
+    private String answerData;
     private List<OptionData> options;
+
+    public String getAnswerData() {
+        return answerData;
+    }
+
+    public void setAnswerData(String answerData) {
+        this.answerData = answerData;
+    }
 
     public String getId() {
         return id;

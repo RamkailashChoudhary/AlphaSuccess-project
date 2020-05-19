@@ -1,11 +1,14 @@
 package com.app.alphasucess.ui.tabui.test;
 
 import androidx.appcompat.app.AppCompatActivity;
+import de.mrapp.android.dialog.MaterialDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -27,7 +30,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
     private int QUESTION_INDEX = 0;
 
     private SingleTestQuestion singleTestQuestion;
-    private RelativeLayout nextBtnView,preBtnView;
+    private RelativeLayout nextBtnView,preBtnView,submitBtnView;
     private ImageView backBtnView;
 
     @Override
@@ -41,8 +44,10 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         backBtnView.setOnClickListener(this);
         nextBtnView = findViewById(R.id.nextBtnView);
         preBtnView = findViewById(R.id.preBtnView);
+        submitBtnView = findViewById(R.id.submitBtnView);
         nextBtnView.setOnClickListener(this);
         preBtnView.setOnClickListener(this);
+        submitBtnView.setOnClickListener(this);
         testQuestionDataList();
     }
 
@@ -108,6 +113,34 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         }else if(view == backBtnView){
 
             onBackPressed();
+        } else if(view == submitBtnView){
+            showDialog();
+            for (int i=0; i < singleTestQuestion.getQuestions().size(); i++){
+                Log.d("Result","Data :"+singleTestQuestion.getQuestions().get(i).getAnswerData());
+            }
         }
+    }
+
+    private void showDialog(){
+
+        MaterialDialog.Builder dialogBuilder = new MaterialDialog.Builder(this);
+        dialogBuilder.setTitle(R.string.app_name);
+        dialogBuilder.setMessage("Do you want to submit your test ?");
+        dialogBuilder.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+
+        });
+        dialogBuilder.setNegativeButton(android.R.string.cancel, null);
+        MaterialDialog dialog = dialogBuilder.create();
+        dialog.show();
+    }
+
+    private void showResultView(){
+
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+       /* builder.setView(R.layout.custom_dialog_content);
+        builder.setCustomTitle(R.layout.custom_dialog_title);
+        builder.setCustomMessage(R.layout.custom_dialog_message);
+        builder.setCustomButtonBar(R.layout.custom_dialog_button_bar);
+        builder.setCustomHeader(R.layout.custom_dialog_header);*/
     }
 }
