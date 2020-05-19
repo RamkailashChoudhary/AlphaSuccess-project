@@ -78,10 +78,14 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     @Override
     public void onClick(View view) {
         if(view == pdfLikes) {
+
             DownloadData data = (DownloadData) view.getTag();
             pdfLikeApi(data.isLikedbyUser() ? "/api/App/UpdateUnlike" : "/api/App/UpdateLike", data);
         }else if(view == pdfComments){
+
+            DownloadData data = (DownloadData) view.getTag();
             Intent commentView = new Intent(mContext, CommentActivity.class);
+            commentView.putExtra("COMMENT_ID",data.getId());
             mContext.startActivity(commentView);
         }
     }
