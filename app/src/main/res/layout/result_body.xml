@@ -1,33 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@android:color/white">
 
-    <com.app.alphasucess.ui.view.CircleProgressBar
-        android:id="@+id/progressBarPercentage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:progressColor="#e76130"
-        app:backgroundColor="#e7b330"
-        app:backgroundWidth="8"
-        app:textSize="18sp"
-        app:roundedCorners="true"
-        app:suffix=" %"
-        app:prefix=""
-        app:progressText="Result"
-        app:maxValue="100"
-        app:progressTextColor="#f9916b"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@drawable/top_rounded_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:text="Hello! Subham Sharma"
+                android:textColor="@android:color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:paddingTop="3dp"
+                android:paddingLeft="10dp"
+                android:text="Your result has been submitted successfully"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/chaticon_bg_outgng"
+                android:padding="10dp"
+                app:srcCompat="@drawable/logo" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_acc">
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +76,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
             android:text="Over All Result"
-            android:textColor="#ff0000"
+            android:textColor="#3E743E"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -45,8 +86,56 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:text="5/20"
-            android:textColor="#ff0000"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
+
+    <com.app.alphasucess.ui.view.CircleProgressBar
+        android:id="@+id/progressBarPercentage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="1dp"
+        app:backgroundColor="#E8E8E8"
+        app:backgroundWidth="8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:maxValue="100"
+        app:prefix=""
+        app:progressColor="#e76130"
+        app:progressText="Result"
+        app:progressTextColor="#996B6868"
+        app:roundedCorners="true"
+        app:suffix=" %"
+        app:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txt_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accuracy"
+        android:textColor="#CC000000"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarPercentage"
+        app:layout_constraintStart_toStartOf="@+id/progressBarPercentage"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarPercentage" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/btm_rounded_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="OK"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
