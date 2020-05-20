@@ -5,6 +5,7 @@ import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.adapter.CommentData;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
+import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
@@ -72,4 +73,8 @@ public interface RestServiceLayer
     @POST("/api/App/SingleTestQuestions")
     @FormUrlEncoded
     Call<ResoureData<SingleTestQuestion>> singleTestQuestions(@Header ("Authorization") String authorization, @Field("ID")String Id);
+
+    @POST("/api/App/VideoList")
+    @FormUrlEncoded
+    Call<ResoureData<List<LiveData>>> liveDataList(@Header ("Authorization") String authorization, @Field("page_number")String pageNumber);
 }
