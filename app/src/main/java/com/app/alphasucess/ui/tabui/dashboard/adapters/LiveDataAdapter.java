@@ -98,7 +98,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
             public void onResponse(Call<ResoureData<LiveData>> call, Response<ResoureData<LiveData>> response) {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
 
-                    playerView("http://demo1.stsm.co.in/"+response.body().getData().getVideourl());
+                    playerView("http://demo1.stsm.co.in/"+response.body().getData().getVideourl(),response.body().getData().getTitle());
                 }
             }
 
@@ -109,9 +109,10 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
         });
     }
 
-    public void playerView(String url){
+    public void playerView(String url,String title){
 
         Intent intent = new Intent(mContext, VideoPlayerActivity.class);
+        intent.putExtra("VIDEO_TITLE",title);
         Sample sample = getSampleObj("Video", Uri.parse(url),null,false,null,null,null,null);
         sample.addToIntent(intent);
         mContext.startActivity(intent);
