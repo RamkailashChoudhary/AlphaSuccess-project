@@ -29,6 +29,7 @@ public class WebBaseActivity extends BaseActivity {
 
     private WebView webviewData;
     private String dataResponse;
+    String responseData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,14 +40,13 @@ public class WebBaseActivity extends BaseActivity {
         webviewData = findViewById(R.id.webViewData);
         webviewData.setWebViewClient(new MyWebClient());
         webviewData.getSettings().setJavaScriptEnabled(true);
-       /* String responseData = "<!DOCTYPE html><head> <meta http-equiv=\"Content-Type\" " +
+        responseData = "<!DOCTYPE html><head> <meta http-equiv=\"Content-Type\" " +
                 "content=\"text/html; charset=utf-8\"> <html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1250\">"+
                 "<meta name=\"spanish press\" content=\"spain, spanish newspaper, news,economy,politics,sports\"><title></title></head><body id=\"body\">"+
                 "<script src=\"http://www.myscript.com/a\"></script>şlkasşldkasşdksaşdkaşskdşk</body></html>";
-        webviewData.loadData(responseData,"text/html", "utf-8");*/
 //        webviewData.loadUrl("https://www.google.com/");
         final ImageView backBtnView = findViewById(R.id.backBtnView);
-        initLoadResourceData();
+       initLoadResourceData();
         TextView header=findViewById(R.id.middleTitle);
         header.setText(bundle.getString("View-Name"));
         backBtnView.setOnClickListener(view -> {
