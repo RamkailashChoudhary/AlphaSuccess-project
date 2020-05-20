@@ -7,6 +7,15 @@ public class LiveData {
     private String thumbnailurl;
     private String teachername;
     private int views;
+    private String videourl;
+
+    public String getVideourl() {
+        return videourl;
+    }
+
+    public void setVideourl(String videourl) {
+        this.videourl = videourl;
+    }
 
     public String getId() {
         return id;

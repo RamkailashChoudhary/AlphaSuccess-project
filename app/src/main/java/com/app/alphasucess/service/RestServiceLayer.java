@@ -77,4 +77,8 @@ public interface RestServiceLayer
     @POST("/api/App/VideoList")
     @FormUrlEncoded
     Call<ResoureData<List<LiveData>>> liveDataList(@Header ("Authorization") String authorization, @Field("page_number")String pageNumber);
+
+    @POST("/api/App/SingleVideo")
+    @FormUrlEncoded
+    Call<ResoureData<LiveData>> singleVideodetails(@Header ("Authorization") String authorization, @Field("id")String Id);
 }

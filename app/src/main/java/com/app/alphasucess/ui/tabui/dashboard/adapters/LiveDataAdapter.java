@@ -50,14 +50,14 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     public ViewHolder(View v) {
         super(v);
-        v.setOnClickListener(this);
-        v.setTag(item);
         textView = (TextView) v.findViewById(R.id.teacherName);
         imageView = (ImageView) v.findViewById(R.id.videoThumbnialImg);
     }
 
     public void setData(LiveData item) {
         this.item = item;
+        imageView.setOnClickListener(this);
+        imageView.setTag(item);
         textView.setText(item.getTeachername());
 
         Picasso.with(mContext).load("http://demo1.stsm.co.in"+item.getThumbnailurl())
@@ -69,10 +69,47 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     public void onClick(View view) {
 
         LiveData data = (LiveData) view.getTag();
-        playerView(data.getId());
+        playerVideoUrl(data.getId());
+      }
+   }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.video_view_row, parent, false);
+        return new ViewHolder(view);
     }
 
-    private void playerView(String url){
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+
+        viewHolder.setData(mValues.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mValues.size();
+    }
+
+    private void playerVideoUrl(String id){
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        restServiceLayer.singleVideodetails("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<LiveData>>() {
+            @Override
+            public void onResponse(Call<ResoureData<LiveData>> call, Response<ResoureData<LiveData>> response) {
+                if(response.body().getReplycode().equalsIgnoreCase("1")) {
+
+                    playerView("http://demo1.stsm.co.in/"+response.body().getData().getVideourl());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData<LiveData>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void playerView(String url){
 
         Intent intent = new Intent(mContext, VideoPlayerActivity.class);
         Sample sample = getSampleObj("Video", Uri.parse(url),null,false,null,null,null,null);
@@ -92,24 +129,6 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
                 adTagUri != null ? Uri.parse(adTagUri) : null,
                 sphericalStereoMode,
                 subtitleInfo);
-    }
-}
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.video_view_row, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
-
-        viewHolder.setData(mValues.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return mValues.size();
     }
 }
 
