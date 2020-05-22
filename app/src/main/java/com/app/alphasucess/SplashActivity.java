@@ -14,6 +14,7 @@ import android.view.View;
 import com.app.alphasucess.ui.PDFViewActivity;
 import com.app.alphasucess.ui.VideoPlayerActivity;
 import com.app.alphasucess.ui.WebBaseActivity;
+import com.app.alphasucess.ui.tabui.home.adapter.ViewAllLiveClassesActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.app.alphasucess.ui.tabui.test.OnlineTestActivity;
 

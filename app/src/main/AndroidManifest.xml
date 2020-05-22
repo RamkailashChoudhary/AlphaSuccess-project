@@ -40,6 +40,10 @@
             android:label="PDFView"/>
 
         <activity
+            android:name=".ui.tabui.home.adapter.ViewAllLiveClassesActivity"
+            android:label="Live Classes" />
+
+        <activity
             android:name=".ui.WebBaseActivity"
             android:label="@string/title_activity_login" />
         <activity

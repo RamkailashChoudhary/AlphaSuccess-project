@@ -1,5 +1,6 @@
 package com.app.alphasucess.ui.tabui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseAdapter;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseEdu;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseVideo;
+import com.app.alphasucess.ui.tabui.home.adapter.ViewAllLiveClassesActivity;
 import com.app.alphasucess.ui.tabui.test.adapters.QuestionCountAdapter;
 
 import java.util.ArrayList;
@@ -28,10 +30,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private HomeViewModel homeViewModel;
     RecyclerView recyclerView_onlinecourse,recyclerView_onlineeducation,recyclerView_onlinevideo;
+    private TextView txt_all_courses;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -46,6 +50,8 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });*/
+
+        txt_all_courses = root.findViewById(R.id.txt_all_courses);
         recyclerView_onlinecourse = (RecyclerView) root.findViewById(R.id.rcy__livecourses);
         recyclerView_onlineeducation = (RecyclerView) root.findViewById(R.id.rcy_online_education);
         recyclerView_onlinevideo = (RecyclerView) root.findViewById(R.id.rcy_online_video);
@@ -68,6 +74,7 @@ public class HomeFragment extends Fragment {
         recyclerView_onlinevideo.setAdapter(livecourseVideo);
         recyclerView_onlinecourse.setAdapter(mAdapter);
         recyclerView_onlineeducation.setAdapter(livecourseEdu);
+        txt_all_courses.setOnClickListener(this);
         return root;
     }
 
@@ -91,5 +98,14 @@ public class HomeFragment extends Fragment {
 
     private void examListData(){
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == txt_all_courses){
+
+            Intent viewAllLiveClasses = new Intent(getContext(), ViewAllLiveClassesActivity.class);
+            getActivity().startActivity(viewAllLiveClasses);
+        }
     }
 }
