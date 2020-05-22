@@ -164,8 +164,8 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
         builder.setView(R.layout.result_body);
         MaterialDialog dialog = builder.create();
-       /* CircleProgressBar circleProgressBar = dialog.findViewById(R.id.progressBarPercentage);
-        circleProgressBar.setProgress(percentage);*/
+
+
         dialog.show();
 
 //        builder.setCustomTitle(R.layout.custom_dialog_title);

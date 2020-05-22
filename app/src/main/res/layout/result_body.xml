@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     android:background="@android:color/transparent">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:background="@drawable/top_rounded_bg"
+        android:background="#2978BB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -125,7 +125,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/btm_rounded_bg"
+        android:background="#2978BB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
