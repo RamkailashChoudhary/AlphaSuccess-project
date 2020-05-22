@@ -13,21 +13,15 @@ import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseAdapter;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseEdu;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseVideo;
-import com.app.alphasucess.ui.tabui.home.adapter.ViewAllLiveClassesActivity;
-import com.app.alphasucess.ui.tabui.test.adapters.QuestionCountAdapter;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {

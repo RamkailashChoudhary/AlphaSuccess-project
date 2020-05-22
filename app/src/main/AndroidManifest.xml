@@ -11,19 +11,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.CommentActivity"></activity>
+        <activity android:name=".ui.CommentActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.HomeActivity"
             android:label="@string/title_activity_home" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.tabui.signup.SignUpActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.ForgotPasswordActivity" />
+        <activity android:name=".ui.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".ui.tabui.login.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ui.VerifyOtpActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_otp" />
         <activity
             android:name=".ui.VideoPlayerActivity"
@@ -33,20 +41,25 @@
             android:screenOrientation="landscape"
             android:theme="@style/PlayerTheme" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.tabui.test.OnlineTestActivity"
             android:label="@string/title_activity_otp" />
 
         <activity android:name=".ui.PDFViewActivity"
+            android:screenOrientation="portrait"
             android:label="PDFView"/>
 
         <activity
-            android:name=".ui.tabui.home.adapter.ViewAllLiveClassesActivity"
+            android:screenOrientation="portrait"
+            android:name=".ui.tabui.home.ViewAllLiveClassesActivity"
             android:label="Live Classes" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.WebBaseActivity"
             android:label="@string/title_activity_login" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"

@@ -11,12 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
-import com.app.alphasucess.ui.PDFViewActivity;
 import com.app.alphasucess.ui.VideoPlayerActivity;
-import com.app.alphasucess.ui.WebBaseActivity;
-import com.app.alphasucess.ui.tabui.home.adapter.ViewAllLiveClassesActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
-import com.app.alphasucess.ui.tabui.test.OnlineTestActivity;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

@@ -1,4 +1,4 @@
-package com.app.alphasucess.ui.tabui.home.adapter;
+package com.app.alphasucess.ui.tabui.home;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.app.alphasucess.BaseActivity;
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.tabui.home.adapter.LivecourseAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
