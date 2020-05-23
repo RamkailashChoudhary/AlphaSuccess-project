@@ -70,7 +70,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(singleTestQuestion.getQuestions().get(QUESTION_INDEX)))
                             .commitNow();
-                    Toast.makeText(OnlineTestActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+              //      Toast.makeText(OnlineTestActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -88,7 +88,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(testData))
                     .commitNow();
-            Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -97,7 +97,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(testData))
                     .commitNow();
-            Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
 
     }
 
