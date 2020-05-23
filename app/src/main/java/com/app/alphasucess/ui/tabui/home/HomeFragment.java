@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private HomeViewModel homeViewModel;
     RecyclerView recyclerView_onlinecourse,recyclerView_onlineeducation,recyclerView_onlinevideo;
-    private TextView txt_all_courses;
+    private TextView txt_all_courses,txt_allExams;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });*/
 
         txt_all_courses = root.findViewById(R.id.txt_all_courses);
+        txt_allExams = root.findViewById(R.id.txt_allxams);
         recyclerView_onlinecourse = (RecyclerView) root.findViewById(R.id.rcy__livecourses);
         recyclerView_onlineeducation = (RecyclerView) root.findViewById(R.id.rcy_online_education);
         recyclerView_onlinevideo = (RecyclerView) root.findViewById(R.id.rcy_online_video);
@@ -69,6 +70,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView_onlinecourse.setAdapter(mAdapter);
         recyclerView_onlineeducation.setAdapter(livecourseEdu);
         txt_all_courses.setOnClickListener(this);
+        txt_allExams.setOnClickListener(this);
         return root;
     }
 
@@ -100,6 +102,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             Intent viewAllLiveClasses = new Intent(getContext(), ViewAllLiveClassesActivity.class);
             getActivity().startActivity(viewAllLiveClasses);
+        }else if(view == txt_allExams){
+
+
         }
     }
 }
