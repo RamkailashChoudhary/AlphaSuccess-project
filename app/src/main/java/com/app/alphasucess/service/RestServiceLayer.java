@@ -8,6 +8,7 @@ import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
+import com.app.alphasucess.ui.tabui.home.adapter.HomeData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
@@ -81,4 +82,7 @@ public interface RestServiceLayer
     @POST("/api/App/SingleVideo")
     @FormUrlEncoded
     Call<ResoureData<LiveData>> singleVideodetails(@Header ("Authorization") String authorization, @Field("id")String Id);
+
+    @POST("/api/App/HomeScreen")
+    Call<ResoureData<HomeData>> homeScreenDataList(@Header ("Authorization") String authorization);
 }

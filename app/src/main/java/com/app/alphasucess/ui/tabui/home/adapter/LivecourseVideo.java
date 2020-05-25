@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
+import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveDataAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -22,13 +25,13 @@ import java.util.ArrayList;
  * ashishsharma@beusalons.com
  */
 public class LivecourseVideo extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context ctx;
-    private ArrayList<String> categories;
+    private Context mContext;
+    private ArrayList<LiveData> categories;
     private boolean isProducts;
 
-    public LivecourseVideo(Context ctx) {
-        this.ctx = ctx;
-
+    public LivecourseVideo(Context ctx,ArrayList<LiveData> categories) {
+        this.mContext = ctx;
+        this.categories = categories;
     }
 
     @NonNull
@@ -43,31 +46,40 @@ public class LivecourseVideo extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-
-
+        ((OriginalViewHolder)holder).setData(categories.get(position));
     }
 
 
 
     @Override
     public int getItemCount() {
-        return 6;
+        return categories.size();
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
-        public TextView title;
+
+        public ImageView homeScreenVideoImg;
+        public TextView txt_by,txt_viewer;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
+            homeScreenVideoImg = v.findViewById(R.id.homeScreenVideoImg);
+            txt_by = v.findViewById(R.id.txt_by);
+            txt_viewer = v.findViewById(R.id.txt_viewer);
            /* image = (ImageView) v.findViewById(R.id.img_service);
             title = (TextView) v.findViewById(R.id.txt_service_name);
             lyt_parent = v.findViewById(R.id.parent_layout);*/
            /* Typeface lato_regular  = ResourcesCompat.getFont(ctx, R.font.lato_regular);
             title.setTypeface(lato_regular);*/
+        }
 
+        public void setData(LiveData item){
 
+            Picasso.with(mContext).load("http://demo1.stsm.co.in/"+item.getThumbnailurl())
+                    .into(homeScreenVideoImg);
+            txt_by.setText(""+item.getTeachername());
+            txt_viewer.setText(""+item.getViews());
         }
     }
 

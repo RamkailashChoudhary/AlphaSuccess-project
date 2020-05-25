@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="70dp">
             <ImageView
+                android:id="@+id/homeScreenVideoImg"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:src="@drawable/alphatest"

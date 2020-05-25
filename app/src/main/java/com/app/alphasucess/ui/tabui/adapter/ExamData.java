@@ -10,6 +10,33 @@ public class ExamData {
     private String totalmarks;
     private String questioncount;
     private String adddate;
+    private String categoryname;
+    private String colorcode;
+    private String iconurl;
+
+    public String getCategoryname() {
+        return categoryname;
+    }
+
+    public void setCategoryname(String categoryname) {
+        this.categoryname = categoryname;
+    }
+
+    public String getColorcode() {
+        return colorcode;
+    }
+
+    public void setColorcode(String colorcode) {
+        this.colorcode = colorcode;
+    }
+
+    public String getIconurl() {
+        return iconurl;
+    }
+
+    public void setIconurl(String iconurl) {
+        this.iconurl = iconurl;
+    }
 
     public String getId() {
         return id;

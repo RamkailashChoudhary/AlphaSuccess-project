@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
  */
 public class LivecourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context ctx;
-    private ArrayList<String> categories;
+    private ArrayList<LiveData> categories;
     private boolean isProducts;
 
     public LivecourseAdapter(Context ctx) {
@@ -61,12 +62,6 @@ public class LivecourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public OriginalViewHolder(View v) {
             super(v);
-           /* image = (ImageView) v.findViewById(R.id.img_service);
-            title = (TextView) v.findViewById(R.id.txt_service_name);
-            lyt_parent = v.findViewById(R.id.parent_layout);*/
-           /* Typeface lato_regular  = ResourcesCompat.getFont(ctx, R.font.lato_regular);
-            title.setTypeface(lato_regular);*/
-
 
         }
     }
