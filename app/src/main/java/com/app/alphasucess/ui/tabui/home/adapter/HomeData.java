@@ -10,7 +10,6 @@ public class HomeData {
     private List<LiveData> videos;
     private List<BannerData> homebanners;
     private List<ExamData> examcategory;
-    private List liveclassdata;
 
     public List<LiveData> getVideos() {
         return videos;
