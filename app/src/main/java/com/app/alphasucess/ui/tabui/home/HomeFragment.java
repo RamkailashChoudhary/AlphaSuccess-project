@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private HomeViewModel homeViewModel;
     RecyclerView recyclerView_onlinecourse,recyclerView_onlineeducation,recyclerView_onlinevideo;
-    private TextView txt_all_courses,txt_allExams;
+    private TextView txt_all_courses,txt_allExams,txt_allvideo;
     private LivecourseAdapter mAdapter;
     private BannerViewAdaper livecourseEdu;
     private LivecourseVideo livecourseVideo;
@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         txt_all_courses = root.findViewById(R.id.txt_all_courses);
+        txt_allvideo = root.findViewById(R.id.txt_allvideo);
         txt_allExams = root.findViewById(R.id.txt_allxams);
         recyclerView_onlinecourse = (RecyclerView) root.findViewById(R.id.rcy__livecourses);
         recyclerView_onlineeducation = (RecyclerView) root.findViewById(R.id.rcy_online_education);
@@ -72,6 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView_onlineeducation.setAdapter(livecourseEdu);
         txt_all_courses.setOnClickListener(this);
         txt_allExams.setOnClickListener(this);
+        txt_allvideo.setOnClickListener(this);
         initHomeDataListView();
         return root;
     }
@@ -95,7 +97,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         ExamAdapter examAdapter = new ExamAdapter(getActivity(),examDataList);
         recyclerView.setAdapter(examAdapter);
-
     }
 
     @Override
@@ -107,6 +108,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }else if(view == txt_allExams){
 
 
+        }else if(view == txt_allvideo){
+
+            
         }
     }
 

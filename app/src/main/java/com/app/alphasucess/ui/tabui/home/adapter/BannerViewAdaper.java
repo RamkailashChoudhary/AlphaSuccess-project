@@ -25,6 +25,7 @@ import java.util.List;
  * ashishsharma@beusalons.com
  */
 public class BannerViewAdaper extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private Context ctx;
     private List<BannerData> categories;
     private boolean isProducts;
