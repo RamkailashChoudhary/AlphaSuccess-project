@@ -23,13 +23,13 @@ import java.util.ArrayList;
  * ashishsharma@beusalons.com
  */
 public class LivecourseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private Context ctx;
     private ArrayList<LiveData> categories;
     private boolean isProducts;
 
     public LivecourseAdapter(Context ctx) {
         this.ctx = ctx;
-
     }
 
     @NonNull
