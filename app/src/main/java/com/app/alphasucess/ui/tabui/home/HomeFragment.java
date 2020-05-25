@@ -79,6 +79,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void examListData(View root){
+
         TextView img_star = root.findViewById(R.id.img_star);
     }
 
@@ -101,16 +102,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+
         if(view == txt_all_courses){
 
             Intent viewAllLiveClasses = new Intent(getContext(), ViewAllLiveClassesActivity.class);
             getActivity().startActivity(viewAllLiveClasses);
         }else if(view == txt_allExams){
 
-
+          Toast.makeText(getActivity(),"Exam view all",Toast.LENGTH_LONG).show();
         }else if(view == txt_allvideo){
 
-            
+            Toast.makeText(getActivity(),"Video view all",Toast.LENGTH_LONG).show();
         }
     }
 
