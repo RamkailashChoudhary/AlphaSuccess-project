@@ -7,11 +7,14 @@ import android.widget.TextView;
 
 import com.app.alphasucess.BaseActivity;
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.tabui.home.adapter.LiveClassData;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class ViewAllLiveClassesActivity extends BaseActivity implements View.OnClickListener {
 
@@ -31,8 +34,8 @@ public class ViewAllLiveClassesActivity extends BaseActivity implements View.OnC
     }
 
     private void initViewAll(RecyclerView recyclerView){
-
-        LivecourseAdapter mAdapter = new LivecourseAdapter(this);
+        ArrayList<LiveClassData> categories=new ArrayList<>();
+        LivecourseAdapter mAdapter = new LivecourseAdapter(this,categories);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
