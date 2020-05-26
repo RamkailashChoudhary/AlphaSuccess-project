@@ -35,11 +35,15 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
     private String fileName;
     private static final int TEST_LIST_ROW = 0;
     private static final int TEST_LIST_DATA = 1;
-    private List<ExamData> examListData;
+    private ArrayList<ExamData> examListData = new ArrayList<>();
 
     public OnlineTestAdapter(Context context, ArrayList<AllTestData> values) {
         mValues = values;
         mContext = context;
+    }
+
+    public void setExamCategoryDataList(ArrayList<ExamData> examCategoryDataList){
+        examListData = examCategoryDataList;
     }
 
     @Override
@@ -104,7 +108,7 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
 
         switch (viewHolder.getItemViewType()) {
             case TEST_LIST_ROW:
-               ((TestListDataViewHolder)viewHolder).bind(null);
+               ((TestListDataViewHolder)viewHolder).bind(examListData);
                break;
             case TEST_LIST_DATA:
                 ((ViewHolder)viewHolder).setData(mValues.get(position));
@@ -127,17 +131,10 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
             recyclerView = (RecyclerView) itemView.findViewById(R.id.testListRecyclerView);
         }
 
-        void bind(List<AllTestData> allTestData) {
-            ArrayList<ExamData> examDataList = new ArrayList<>();
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
+        void bind(ArrayList<ExamData> allTestData) {
+
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
-            ExamAdapter examAdapter = new ExamAdapter(mContext,examDataList);
+            ExamAdapter examAdapter = new ExamAdapter(mContext,allTestData);
             recyclerView.setAdapter(examAdapter);
         }
     }

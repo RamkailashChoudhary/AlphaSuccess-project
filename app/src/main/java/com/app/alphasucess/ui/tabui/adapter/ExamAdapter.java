@@ -49,10 +49,9 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
         public void setData(ExamData item) {
             this.item = item;
-            // textView.setText("AAAA");
-
-            Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
+            Picasso.with(mContext).load("http://demo1.stsm.co.in/"+item.getIconurl())
                     .into(imageView);
+            textView.setText(item.getCategoryname());
             //imageView.setImageResource(R.drawable.ic_launcher_background);
         }
 
