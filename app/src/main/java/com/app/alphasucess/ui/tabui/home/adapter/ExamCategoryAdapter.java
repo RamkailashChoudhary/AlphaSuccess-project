@@ -46,7 +46,9 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-//        ((OriginalViewHolder)holder).setData(categories.get(position));
+        ((OriginalViewHolder)holder).txt_type.setText(categories.get(position).getCategoryname());
+        Picasso.with(mContext).load("http://demo1.stsm.co.in/"+categories.get(position).getIconurl())
+                .into(((OriginalViewHolder)holder).img_star);
     }
 
 
@@ -59,13 +61,13 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView img_star;
-        public TextView txt_by,txt_viewer;
+        public TextView txt_type,txt_viewer;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
-//            homeScreenVideoImg = v.findViewById(R.id.homeScreenVideoImg);
-//            txt_by = v.findViewById(R.id.txt_by);
+            img_star = v.findViewById(R.id.img_star);
+            txt_type = v.findViewById(R.id.txt_type);
 //            txt_viewer = v.findViewById(R.id.txt_viewer);
            /* image = (ImageView) v.findViewById(R.id.img_service);
             title = (TextView) v.findViewById(R.id.txt_service_name);
