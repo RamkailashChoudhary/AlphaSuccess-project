@@ -2,6 +2,7 @@ package com.app.alphasucess.ui.tabui.home.adapter;
 
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
+import com.app.alphasucess.ui.tabui.home.ExamCategoryData;
 
 import java.util.List;
 
@@ -9,7 +10,8 @@ public class HomeData {
 
     private List<LiveData> videos;
     private List<BannerData> homebanners;
-    private List<ExamData> examcategory;
+    private List<ExamCategoryData> examcategory;
+    private List<LiveClassData> liveclassdata;
 
     public List<LiveData> getVideos() {
         return videos;
@@ -23,15 +25,23 @@ public class HomeData {
         return homebanners;
     }
 
+    public List<LiveClassData> getLiveclassdata() {
+        return liveclassdata;
+    }
+
+    public void setLiveclassdata(List<LiveClassData> liveclassdata) {
+        this.liveclassdata = liveclassdata;
+    }
+
     public void setHomebanners(List<BannerData> homebanners) {
         this.homebanners = homebanners;
     }
 
-    public List<ExamData> getExamcategory() {
+    public List<ExamCategoryData> getExamcategory() {
         return examcategory;
     }
 
-    public void setExamcategory(List<ExamData> examcategory) {
+    public void setExamcategory(List<ExamCategoryData> examcategory) {
         this.examcategory = examcategory;
     }
 }

@@ -139,8 +139,13 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <LinearLayout
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rec_live_courses"
+    android:layout_marginTop="8dp"
+    />
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -177,7 +182,7 @@
                             android:layout_weight="0.5"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
-                </LinearLayout>
+                </LinearLayout>-->
 
 
 
