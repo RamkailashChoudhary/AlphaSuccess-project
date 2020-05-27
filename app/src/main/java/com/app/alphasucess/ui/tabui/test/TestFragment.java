@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
+import com.app.alphasucess.TopBarClickEvent;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
@@ -23,6 +24,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,7 +69,21 @@ public class TestFragment extends Fragment {
         recyclerView.setAdapter(onlineTestAdapter);
         testListData();
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(TopBarClickEvent event) {/* Do something */
+    Toast.makeText(getActivity(),"Clicked on test"+event.getId(),Toast.LENGTH_LONG).show();};
     private void testListData(){
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
         restServiceLayer.testListData("Bearer "+ MyApplication.AUTH_TOKEN,"1").enqueue(new Callback<ResoureData<List<AllTestData>>>() {

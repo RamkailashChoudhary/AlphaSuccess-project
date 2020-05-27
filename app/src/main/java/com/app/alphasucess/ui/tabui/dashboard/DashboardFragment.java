@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
+import com.app.alphasucess.TopBarClickEvent;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
@@ -20,6 +23,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,7 +60,21 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
         recyclerView.setAdapter(liveDataAdapter);
         initLiveDataList();
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(TopBarClickEvent event) {/* Do something */
+        Toast.makeText(getActivity(),"Clicked on live data "+event.getId(),Toast.LENGTH_LONG).show();};
     private void initLiveDataList(){
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
