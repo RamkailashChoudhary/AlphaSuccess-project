@@ -44,12 +44,16 @@ private Context mContext;
 private String fileName;
     private static final int TEST_LIST_ROW = 0;
     private static final int TEST_LIST_DATA = 1;
-    private List<ExamData> examListData;
+    private ArrayList<ExamData> examListData = new ArrayList<>();
 
 
 public LiveDataAdapter(Context context, ArrayList<LiveData> values) {
         mValues = values;
         mContext = context;
+        }
+
+        public void setExamCategoryData(ArrayList<ExamData> examCategoryDataList){
+            examListData = examCategoryDataList;
         }
 
 public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -109,7 +113,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
         switch (viewHolder.getItemViewType()) {
             case TEST_LIST_ROW:
-                ((TestListDataViewHolder)viewHolder).bind(null);
+                ((TestListDataViewHolder)viewHolder).bind(examListData);
                 break;
             case TEST_LIST_DATA:
                 ((ViewHolder)viewHolder).setData(mValues.get(position));
@@ -131,17 +135,10 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
             recyclerView = (RecyclerView) itemView.findViewById(R.id.testListRecyclerView);
         }
 
-        void bind(List<AllTestData> allTestData) {
-            ArrayList<ExamData> examDataList = new ArrayList<>();
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
-            examDataList.add(new ExamData());
+        void bind(ArrayList<ExamData> allTestData) {
+
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
-            ExamAdapter examAdapter = new ExamAdapter(mContext,examDataList);
+            ExamAdapter examAdapter = new ExamAdapter(mContext,allTestData);
             recyclerView.setAdapter(examAdapter);
         }
     }

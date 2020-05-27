@@ -85,7 +85,8 @@ public class LoginActivity extends AppCompatActivity {
 
         passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                loginViewModel.login(usernameEditText.getText().toString(),
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                loginApiService(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
             return false;

@@ -132,7 +132,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<ResoureData<HomeData>> call, Response<ResoureData<HomeData>> response) {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
-                    Toast.makeText(getContext(),"Home screen data",Toast.LENGTH_LONG).show();
                     liveCourseVideos.addAll(response.body().getData().getVideos());
                     bannerDataList.addAll(response.body().getData().getHomebanners());
                     liveCourselist.addAll(response.body().getData().getLiveclassdata());

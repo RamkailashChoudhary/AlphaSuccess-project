@@ -9,6 +9,7 @@ import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
+import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveDataAdapter;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
     private LiveDataAdapter liveDataAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private int INDEX = 1;
+    private ArrayList<ExamData> examDataList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -62,11 +64,34 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
                     liveDataList.add(0,new LiveData());
                     liveDataList.addAll(response.body().getData());
                     liveDataAdapter.notifyDataSetChanged();
+                    examCategoryListData();
                 }
             }
 
             @Override
             public void onFailure(Call<ResoureData<List<LiveData>>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void examCategoryListData(){
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        restServiceLayer.examCategoryList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<List<ExamData>>>() {
+            @Override
+            public void onResponse(Call<ResoureData<List<ExamData>>> call, Response<ResoureData<List<ExamData>>> response) {
+
+                if(response.body().getReplycode().equalsIgnoreCase("1")) {
+
+                    examDataList.addAll(response.body().getData());
+                    liveDataAdapter.setExamCategoryData(examDataList);
+                    liveDataAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData<List<ExamData>>> call, Throwable t) {
 
             }
         });

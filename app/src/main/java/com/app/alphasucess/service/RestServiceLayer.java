@@ -4,6 +4,7 @@ import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.adapter.CommentData;
+import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
@@ -84,4 +85,7 @@ public interface RestServiceLayer
 
     @POST("/api/App/HomeScreen")
     Call<ResoureData<HomeData>> homeScreenDataList(@Header ("Authorization") String authorization);
+
+    @POST("/api/App/ExamCategory")
+    Call<ResoureData<List<ExamData>>> examCategoryList(@Header ("Authorization") String authorization);
 }

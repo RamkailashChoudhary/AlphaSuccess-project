@@ -11,6 +11,7 @@ import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
+import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.app.alphasucess.ui.tabui.test.adapters.OnlineTestAdapter;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class TestFragment extends Fragment {
     private TestViewModel notificationsViewModel;
     private ArrayList<AllTestData> onLineTestData = new ArrayList<>();
     private RecyclerView recyclerView;
+    private ArrayList<ExamData> examCategoryList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,10 +72,10 @@ public class TestFragment extends Fragment {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
 
                     onLineTestData.addAll(response.body().getData());
-                    //
                     onLineTestData.add(0,new AllTestData());
                     onlineTestAdapter.notifyDataSetChanged();
-                    Toast.makeText(getContext(),"Message :"+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                    examCategoryListData();
+//                    Toast.makeText(getContext(),"Message :"+response.body().getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -82,6 +84,28 @@ public class TestFragment extends Fragment {
 
             }
         });
+    }
+
+    private void examCategoryListData(){
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        restServiceLayer.examCategoryList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<List<ExamData>>>() {
+            @Override
+            public void onResponse(Call<ResoureData<List<ExamData>>> call, Response<ResoureData<List<ExamData>>> response) {
+
+                if(response.body().getReplycode().equalsIgnoreCase("1")) {
+
+                    examCategoryList.addAll(response.body().getData());
+                    onlineTestAdapter.setExamCategoryDataList(examCategoryList);
+                    onlineTestAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData<List<ExamData>>> call, Throwable t) {
+
+            }
+         });
     }
 }
 

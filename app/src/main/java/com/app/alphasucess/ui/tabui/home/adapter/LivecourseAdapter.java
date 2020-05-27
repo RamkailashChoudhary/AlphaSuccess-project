@@ -78,9 +78,6 @@ public class LivecourseAdapter extends RecyclerView.Adapter<LivecourseAdapter.Or
             txt_enrolled=v.findViewById(R.id.txt_enrolled);
             txt_timings=v.findViewById(R.id.txt_timings);
 
-
         }
     }
-
-
 }
