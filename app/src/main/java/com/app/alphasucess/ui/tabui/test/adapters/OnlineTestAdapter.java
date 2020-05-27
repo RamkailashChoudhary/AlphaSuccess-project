@@ -133,7 +133,7 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
 
         void bind(ArrayList<ExamData> allTestData) {
 
-            recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, true));
+            recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
             ExamAdapter examAdapter = new ExamAdapter(mContext,allTestData);
             recyclerView.setAdapter(examAdapter);
         }
