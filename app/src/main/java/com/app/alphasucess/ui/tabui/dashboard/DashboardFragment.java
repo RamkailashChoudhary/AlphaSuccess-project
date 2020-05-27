@@ -106,6 +106,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
 
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
 
+                    examDataList.clear();
                     examDataList.addAll(response.body().getData());
                     liveDataAdapter.setExamCategoryData(examDataList);
                     liveDataAdapter.notifyDataSetChanged();

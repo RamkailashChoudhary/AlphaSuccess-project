@@ -115,6 +115,7 @@ public class TestFragment extends Fragment {
 
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
 
+                    examCategoryList.clear();
                     examCategoryList.addAll(response.body().getData());
                     onlineTestAdapter.setExamCategoryDataList(examCategoryList);
                     onlineTestAdapter.notifyDataSetChanged();
