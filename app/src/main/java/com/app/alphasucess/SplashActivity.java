@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.app.alphasucess.ui.HomeActivity;
 import com.app.alphasucess.ui.VideoPlayerActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
+import com.app.alphasucess.utility.AlphaSharedPrefrence;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -85,7 +87,12 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent loginPage = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent loginPage;
+                if (AlphaSharedPrefrence.getUserId()!=null){
+                    loginPage = new Intent(SplashActivity.this, HomeActivity.class);
+                }else
+                 loginPage = new Intent(SplashActivity.this, LoginActivity.class);
+
                 startActivity(loginPage);
                 finish();
             }

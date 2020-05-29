@@ -1,5 +1,7 @@
 package com.app.alphasucess.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -7,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.tabui.login.LoginActivity;
+import com.app.alphasucess.utility.AlphaSharedPrefrence;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,6 +85,28 @@ public class HomeActivity extends AppCompatActivity {
                 break;
             case R.id.nav_refunds:
             case R.id.nav_logout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                builder.setTitle(R.string.app_name);
+                builder.setIcon(R.mipmap.ic_launcher);
+
+//                builder.setBu
+                builder.setMessage("Do you really want to logout?")
+                        .setCancelable(false)
+
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                AlphaSharedPrefrence.clearData();
+                                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                                finish();
+                            }
+                        })
+                        .setNeutralButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
                 break;
         }
         menuItem.setChecked(true);

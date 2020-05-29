@@ -1,5 +1,7 @@
 package com.app.alphasucess;
 import android.app.Application;
+
+import com.app.alphasucess.utility.AlphaSharedPrefrence;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.RenderersFactory;
 import com.google.android.exoplayer2.database.DatabaseProvider;
@@ -49,6 +51,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         userAgent = Util.getUserAgent(this, "ExoPlayerDemo");
+        AlphaSharedPrefrence.init(this);
     }
 
     /** Returns a {@link DataSource.Factory}. */
