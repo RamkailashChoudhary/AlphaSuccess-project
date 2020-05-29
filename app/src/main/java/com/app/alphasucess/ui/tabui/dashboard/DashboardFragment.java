@@ -39,6 +39,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
     private LiveDataAdapter liveDataAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private int INDEX = 1;
+    private String examId = "0";
     private ArrayList<ExamData> examDataList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -73,12 +74,18 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(TopBarClickEvent event) {/* Do something */
-        Toast.makeText(getActivity(),"Clicked on live data "+event.getId(),Toast.LENGTH_LONG).show();};
+    public void onMessageEvent(TopBarClickEvent event) {
+        /* Do something */
+        examId = event.getId();
+        liveDataList.clear();
+        initLiveDataList();
+//        Toast.makeText(getActivity(),"Clicked on live data "+event.getId(),Toast.LENGTH_LONG).show();
+    };
+
     private void initLiveDataList(){
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.liveDataList("Bearer "+ MyApplication.AUTH_TOKEN,INDEX+"").enqueue(new Callback<ResoureData<List<LiveData>>>() {
+        restServiceLayer.liveDataList("Bearer "+ MyApplication.AUTH_TOKEN,examId,INDEX+"").enqueue(new Callback<ResoureData<List<LiveData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<LiveData>>> call, Response<ResoureData<List<LiveData>>> response) {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
