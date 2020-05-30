@@ -56,9 +56,10 @@ public class AlphaSharedPrefrence {
     public static String getAccessTocken(){
         return sharedPref.getString(ACCESS_TOCKEN,null);
     }
+
     public static void setAccessTocken(String accessTocken){
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(accessTocken,null);
+        editor.putString(ACCESS_TOCKEN,accessTocken);
         editor.apply();
     }
 
