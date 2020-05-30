@@ -146,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                     MyApplication.AUTH_TOKEN = response.body().getAccess_token();
                     MyApplication.USER_ID = response.body().getId();
                     AlphaSharedPrefrence.setUserId(response.body().getId());
-AlphaSharedPrefrence.setAccessTocken(response.body().getAccess_token());
+                    AlphaSharedPrefrence.setAccessTocken(response.body().getAccess_token());
                     Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(forgotPassword1);
                     finish();
