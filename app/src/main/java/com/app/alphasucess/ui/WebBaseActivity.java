@@ -10,16 +10,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.app.alphasucess.BaseActivity;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.google.gson.JsonObject;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import androidx.annotation.Nullable;
 import retrofit2.Call;
 import retrofit2.Callback;

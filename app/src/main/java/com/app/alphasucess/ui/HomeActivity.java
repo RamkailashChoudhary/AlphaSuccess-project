@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.app.alphasucess.utility.AlphaSharedPrefrence;
@@ -37,7 +38,8 @@ public class HomeActivity extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
         TextView headerTxt = headerView.findViewById(R.id.logedInuserName);
-        headerTxt.setText("Name:  Ram kailash");
+
+        headerTxt.setText("Name: "+ MyApplication.USER_NAME.toUpperCase());
          appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_home, R.id.navigation_dashboard,R.id.navigation_eBook, R.id.navigation_Test)
                 .setDrawerLayout(drawer)
                 .build();
@@ -61,7 +63,6 @@ public class HomeActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
 
             case R.id.navigation_Profile:
-            case R.id.nav_Orders:
             case R.id.nav_Invitefrds:
             case R.id.nav_Contactus:
 

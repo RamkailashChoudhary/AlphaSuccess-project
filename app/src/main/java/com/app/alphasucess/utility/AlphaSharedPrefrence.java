@@ -34,6 +34,9 @@ public class AlphaSharedPrefrence {
     public static final String LOGIN_DETAILS = "login";
     public static final String USER_ID = "userId";
     public static final String ACCESS_TOCKEN = "accessToken";
+    public static final String USER_NAME = "userName";
+
+
     public static void init(Context context) {
 
         sharedPref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -63,7 +66,15 @@ public class AlphaSharedPrefrence {
         editor.apply();
     }
 
+    public static String getUserName(){
+        return sharedPref.getString(USER_NAME,null);
+    }
 
+    public static void setUserName(String userName){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(USER_NAME,userName);
+        editor.apply();
+    }
 
 
 

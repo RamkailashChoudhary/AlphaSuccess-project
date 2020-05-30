@@ -145,8 +145,10 @@ public class LoginActivity extends AppCompatActivity {
                     loadingProgressBar.setVisibility(View.VISIBLE);
                     MyApplication.AUTH_TOKEN = response.body().getAccess_token();
                     MyApplication.USER_ID = response.body().getId();
+                    MyApplication.USER_NAME = response.body().getName();
                     AlphaSharedPrefrence.setUserId(response.body().getId());
                     AlphaSharedPrefrence.setAccessTocken(response.body().getAccess_token());
+                    AlphaSharedPrefrence.setUserName(response.body().getName());
                     Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(forgotPassword1);
                     finish();
