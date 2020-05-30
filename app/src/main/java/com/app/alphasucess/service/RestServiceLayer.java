@@ -69,7 +69,7 @@ public interface RestServiceLayer
 
     @POST("api/App/TestList")
     @FormUrlEncoded
-    Call<ResoureData<List<AllTestData>>> testListData(@Header ("Authorization") String authorization, @Field("page_number")String pageNumber);
+    Call<ResoureData<List<AllTestData>>> testListData(@Header ("Authorization") String authorization,@Field("exam_id")String examId, @Field("page_number")String pageNumber);
 
     @POST("/api/App/SingleTestQuestions")
     @FormUrlEncoded

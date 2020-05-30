@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.app.alphasucess.MyApplication;
@@ -39,6 +40,8 @@ public class TestFragment extends Fragment {
     private ArrayList<AllTestData> onLineTestData = new ArrayList<>();
     private RecyclerView recyclerView;
     private ArrayList<ExamData> examCategoryList = new ArrayList<>();
+    private ProgressBar testProgress;
+    private String examId = "0";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,15 +49,9 @@ public class TestFragment extends Fragment {
                 ViewModelProviders.of(this).get(TestViewModel.class);
         View root = inflater.inflate(R.layout.fragment_online_test, container, false);
         recyclerView = root.findViewById(R.id.onlineTestRecyclerView);
+        testProgress = root.findViewById(R.id.testProgress);
         initTestRows(recyclerView);
-        final TextView textView = root.findViewById(R.id.text_test);
 
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 
@@ -83,14 +80,19 @@ public class TestFragment extends Fragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(TopBarClickEvent event) {/* Do something */
-    Toast.makeText(getActivity(),"Clicked on test"+event.getId(),Toast.LENGTH_LONG).show();};
+        testProgress.setVisibility(View.VISIBLE);
+        examId = event.getId();
+        onLineTestData.clear();
+        testListData();
+    };
     private void testListData(){
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.testListData("Bearer "+ MyApplication.AUTH_TOKEN,"1").enqueue(new Callback<ResoureData<List<AllTestData>>>() {
+        restServiceLayer.testListData("Bearer "+ MyApplication.AUTH_TOKEN,examId,"1").enqueue(new Callback<ResoureData<List<AllTestData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<AllTestData>>> call, Response<ResoureData<List<AllTestData>>> response) {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
 
+                    testProgress.setVisibility(View.INVISIBLE);
                     onLineTestData.addAll(response.body().getData());
                     onLineTestData.add(0,new AllTestData());
                     onlineTestAdapter.notifyDataSetChanged();
@@ -101,7 +103,7 @@ public class TestFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ResoureData<List<AllTestData>>> call, Throwable t) {
-
+                testProgress.setVisibility(View.INVISIBLE);
             }
         });
     }

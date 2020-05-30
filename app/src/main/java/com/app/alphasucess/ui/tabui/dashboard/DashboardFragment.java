@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.app.alphasucess.MyApplication;
@@ -39,6 +40,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
     private int INDEX = 1;
     private String examId = "0";
     private ArrayList<ExamData> examDataList = new ArrayList<>();
+    private ProgressBar progressBarApi;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         RecyclerView recyclerView = root.findViewById(R.id.recyclerViewVideoPlayer);
         swipeRefreshLayout = root.findViewById(R.id.swipeContainerLive);
+        progressBarApi = root.findViewById(R.id.progressBarApi);
         swipeRefreshLayout.setOnRefreshListener(this);
         initLiveDataListView(recyclerView);
         return root;
@@ -76,6 +79,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
         /* Do something */
         examId = event.getId();
         liveDataList.clear();
+        progressBarApi.setVisibility(View.VISIBLE);
         initLiveDataList();
 //        Toast.makeText(getActivity(),"Clicked on live data "+event.getId(),Toast.LENGTH_LONG).show();
     };
@@ -88,6 +92,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
             public void onResponse(Call<ResoureData<List<LiveData>>> call, Response<ResoureData<List<LiveData>>> response) {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
 
+                    progressBarApi.setVisibility(View.INVISIBLE);
                     liveDataList.add(0,new LiveData());
                     liveDataList.addAll(response.body().getData());
                     liveDataAdapter.notifyDataSetChanged();
@@ -97,7 +102,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
 
             @Override
             public void onFailure(Call<ResoureData<List<LiveData>>> call, Throwable t) {
-
+                progressBarApi.setVisibility(View.INVISIBLE);
             }
         });
     }
