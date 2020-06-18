@@ -15,7 +15,9 @@
         android:id="@+id/examName"
         android:layout_width="wrap_content"
         android:text="Railway Exam"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom|center"
         android:lines="1"
+        android:layout_marginBottom="3dp"
+        android:textColor="#000000"
         android:layout_height="wrap_content"/>
 </com.google.android.material.card.MaterialCardView>

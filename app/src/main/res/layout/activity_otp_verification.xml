@@ -59,6 +59,7 @@
         android:layout_margin="35dp"
         android:layout_marginTop="3dp"
         android:hint="Enter OTP"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/forgotPasswordBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

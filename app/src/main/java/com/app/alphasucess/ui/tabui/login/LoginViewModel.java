@@ -3,9 +3,7 @@ package com.app.alphasucess.ui.tabui.login;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import android.util.Patterns;
-
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.data.LoginRepository;
 import com.app.alphasucess.ui.data.Result;

@@ -11,6 +11,7 @@
        android:layout_width="match_parent"
        android:layout_marginLeft="10dp"
        android:textColor="#000000"
+       android:id="@+id/testQuestion"
        android:gravity="left"
        android:text="This is the question of the view data with is exist."
        android:layout_marginRight="10dp"
@@ -21,7 +22,12 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_height="wrap_content">
-       <com.app.alphasucess.ui.view.CircleTextView
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+        <com.app.alphasucess.ui.view.CircleTextView
            android:layout_width="35dp"
            android:text="A"
            android:id="@+id/questionA"
@@ -30,8 +36,16 @@
            android:layout_centerVertical="true"
            android:layout_alignParentLeft="true"
            android:layout_height="35dp"/>
-
+        <TextView
+            android:id="@+id/optionA"
+            android:layout_width="wrap_content"
+            android:text="Abc this is view"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
         <RadioButton
+            android:id="@+id/answerA"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
@@ -43,6 +57,10 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_height="wrap_content">
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:orientation="horizontal"
+           android:layout_height="wrap_content">
         <com.app.alphasucess.ui.view.CircleTextView
             android:layout_width="35dp"
             android:text="B"
@@ -52,8 +70,16 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_height="35dp"/>
-
+        <TextView
+            android:id="@+id/optionB"
+            android:layout_width="wrap_content"
+            android:text="Abc this is view"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"/>
+       </LinearLayout>
         <RadioButton
+            android:id="@+id/answerB"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
@@ -65,6 +91,10 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
         <com.app.alphasucess.ui.view.CircleTextView
             android:layout_width="35dp"
             android:text="C"
@@ -74,8 +104,17 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_height="35dp"/>
+        <TextView
+            android:id="@+id/optionC"
+            android:layout_width="wrap_content"
+            android:text="Abc this is view"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         <RadioButton
+            android:id="@+id/answerC"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
@@ -87,6 +126,10 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
         <com.app.alphasucess.ui.view.CircleTextView
             android:layout_width="35dp"
             android:text="D"
@@ -96,52 +139,20 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_height="35dp"/>
-
+        <TextView
+            android:id="@+id/optionD"
+            android:layout_width="wrap_content"
+            android:text="Abc this is view"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"/>
+        </LinearLayout>
         <RadioButton
+            android:id="@+id/answerD"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_height="wrap_content"/>
     </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:weightSum="3"
-        android:background="@color/colorPrimary"
-        android:layout_alignParentBottom="true"
-        android:layout_height="50dp">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:text="BACK"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_height="match_parent"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:text="SUBMIT"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_height="match_parent"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="match_parent"
-                android:text="NEXT"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_height="match_parent"/>
-        </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

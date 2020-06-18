@@ -33,11 +33,14 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private CommentAdapter commentAdapter;
     private MaterialButton sendBtnView;
     private EditText commentTxtData;
+    private String commentId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        Bundle bundle = getIntent().getExtras();
+        commentId = bundle.getString("COMMENT_ID");
         TextView header=findViewById(R.id.middleTitle);
         header.setText("Comments");
         final ImageView backBtnView = findViewById(R.id.backBtnView);
@@ -62,7 +65,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     private void commentDataList() {
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.commentDataList("Bearer "+ MyApplication.AUTH_TOKEN, "1", "1").enqueue(new Callback<ResoureData<List<CommentData>>>() {
+        restServiceLayer.commentDataList("Bearer "+ MyApplication.AUTH_TOKEN, commentId, "1").enqueue(new Callback<ResoureData<List<CommentData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<CommentData>>> call, Response<ResoureData<List<CommentData>>> response) {
 
@@ -84,7 +87,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.addCommentData("Bearer "+ MyApplication.AUTH_TOKEN,"1",""+commentTxtData.getText().toString()).enqueue(new Callback<ResoureData>() {
+        restServiceLayer.addCommentData("Bearer "+ MyApplication.AUTH_TOKEN,commentId,""+commentTxtData.getText().toString()).enqueue(new Callback<ResoureData>() {
             @Override
             public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {
 
