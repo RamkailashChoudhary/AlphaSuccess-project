@@ -64,14 +64,14 @@ public class HomeViewAdapter extends RecyclerView.Adapter<HomeViewAdapter.ViewHo
         }
     }
 
-    @Override
+  /*  @Override
     public int getItemViewType(int position) {
         if (TextUtils.isEmpty(mValues.get(position).getViewType()) && mValues.get(position).getViewType().equalsIgnoreCase("")) {
             return INDIAN_EXAM_VIEW;
         } else {
             return RECOMMEND_VIEW;
         }
-    }
+    }*/
 
     @Override
     public HomeViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

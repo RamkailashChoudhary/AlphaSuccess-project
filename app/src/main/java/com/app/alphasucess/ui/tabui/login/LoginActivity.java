@@ -31,6 +31,7 @@ import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.ForgotPasswordActivity;
 import com.app.alphasucess.ui.HomeActivity;
 import com.app.alphasucess.ui.tabui.signup.SignUpActivity;
+import com.app.alphasucess.utility.AlphaSharedPrefrence;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
@@ -84,7 +85,8 @@ public class LoginActivity extends AppCompatActivity {
 
         passwordEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                loginViewModel.login(usernameEditText.getText().toString(),
+                loadingProgressBar.setVisibility(View.VISIBLE);
+                loginApiService(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
             return false;
@@ -142,6 +144,10 @@ public class LoginActivity extends AppCompatActivity {
                     loadingProgressBar.setVisibility(View.VISIBLE);
                     MyApplication.AUTH_TOKEN = response.body().getAccess_token();
                     MyApplication.USER_ID = response.body().getId();
+                    MyApplication.USER_NAME = response.body().getName();
+                    AlphaSharedPrefrence.setUserId(response.body().getId());
+                    AlphaSharedPrefrence.setAccessTocken(response.body().getAccess_token());
+                    AlphaSharedPrefrence.setUserName(response.body().getName());
                     Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(forgotPassword1);
                     finish();

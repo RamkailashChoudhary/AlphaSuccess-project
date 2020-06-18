@@ -9,8 +9,12 @@ import retrofit2.Response;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +37,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
     private SingleTestQuestion singleTestQuestion;
     private RelativeLayout nextBtnView,preBtnView,submitBtnView;
     private ImageView backBtnView;
+    private FrameLayout frameLayoutView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         setContentView(R.layout.activity_online_test);
 
         TextView header=findViewById(R.id.middleTitle);
+        frameLayoutView = findViewById(R.id.ontestScreenView);
         header.setText("Questions");
         backBtnView = findViewById(R.id.backBtnView);
         backBtnView.setOnClickListener(this);
@@ -64,7 +70,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(singleTestQuestion.getQuestions().get(QUESTION_INDEX)))
                             .commitNow();
-                    Toast.makeText(OnlineTestActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+              //      Toast.makeText(OnlineTestActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -82,7 +88,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(testData))
                     .commitNow();
-            Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -91,7 +97,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.ontestScreenView, TestScreenFragment.newInstance(testData))
                     .commitNow();
-            Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
+          //  Toast.makeText(OnlineTestActivity.this, "" + singleTestQuestion.getQuestions().get(QUESTION_INDEX).getTestquestion(), Toast.LENGTH_LONG).show();
 
     }
 
@@ -138,11 +144,13 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         }
 
         int totalQuestion = singleTestQuestion.getQuestions().size();
-        int percentageResult = RESUT_COUND % totalQuestion;
-        percentageResult = percentageResult * 100;
+        Log.d("Result", "Total Size :"+totalQuestion);
+        float percentageResult = ((RESUT_COUND * 100) / totalQuestion);
+        Log.d("Result", "Divide data :"+percentageResult);
+        Log.d("Result", "percentage :"+percentageResult);
         Log.d("Result", "Data RESULT :" + RESUT_COUND+"/"+singleTestQuestion.getQuestions().size());
        // showDialog(percentageResult);
-        showResultView(percentageResult);
+        showResultView(percentageResult,RESUT_COUND+"/"+singleTestQuestion.getQuestions().size());
     }
 
     private void showDialog(){
@@ -159,18 +167,27 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
        // showResultView();
     }
 
-    private void showResultView(int percentage){
+    private void showResultView(float percentage,String overAllResultData){
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-        builder.setView(R.layout.result_body);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.result_body,viewGroup,false);
+        builder.setView(view);
         MaterialDialog dialog = builder.create();
-       /* CircleProgressBar circleProgressBar = dialog.findViewById(R.id.progressBarPercentage);
-        circleProgressBar.setProgress(percentage);*/
         dialog.show();
-
-//        builder.setCustomTitle(R.layout.custom_dialog_title);
-//        builder.setCustomMessage(R.layout.custom_dialog_message);
-//        builder.setCustomButtonBar(R.layout.custom_dialog_button_bar);
-//        builder.setCustomHeader(R.layout.custom_dialog_header);
+        TextView overAllResult = view.findViewById(R.id.overAllResult);
+        overAllResult.setText(overAllResultData);
+        LinearLayout okButtonView = view.findViewById(R.id.okDialogView);
+        CircleProgressBar circleProgressBar = view.findViewById(R.id.progressBarPercentage);
+        if(circleProgressBar != null){
+            circleProgressBar.setText(""+percentage);
+           circleProgressBar.setProgress(percentage);
+        }else {
+            Toast.makeText(this,"NULL FOUND",Toast.LENGTH_LONG).show();
+        }
+        okButtonView.setOnClickListener(view1 -> {
+            dialog.dismiss();
+        });
     }
 }

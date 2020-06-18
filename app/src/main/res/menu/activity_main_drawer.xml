@@ -8,15 +8,7 @@
             android:id="@+id/navigation_Profile"
             android:icon="@drawable/name_blue"
             android:title="My Profile" />
-        <item
-            android:id="@+id/nav_Orders"
-            android:icon="@drawable/cart_blue"
-            android:title="My Order" />
 
-        <item
-            android:id="@+id/nav_mycourses"
-            android:icon="@drawable/my_courses"
-            android:title="My Course" />
         <item
             android:id="@+id/nav_Invitefrds"
             android:icon="@drawable/invite_friends"

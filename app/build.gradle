@@ -9,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,4 +53,5 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
     implementation 'es.voghdev.pdfviewpager:library:1.1.2'
     implementation 'com.github.michael-rapp:android-material-dialog:5.2.3'
+    implementation 'org.greenrobot:eventbus:3.2.0'
 }

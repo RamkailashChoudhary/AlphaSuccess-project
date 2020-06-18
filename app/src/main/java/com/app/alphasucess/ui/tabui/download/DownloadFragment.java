@@ -68,8 +68,10 @@ public class DownloadFragment  extends Fragment {
         restServiceLayer.pdfListData("Bearer "+MyApplication.AUTH_TOKEN,"1","0","0").enqueue(new Callback<ResoureData<List<DownloadData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<DownloadData>>> call, Response<ResoureData<List<DownloadData>>> response) {
-                downloadDataList.addAll(response.body().getData());
-                downloadDataAdapter.notifyDataSetChanged();
+              if (response.body().getReplycode().equals("1")) {
+                  downloadDataList.addAll(response.body().getData());
+                  downloadDataAdapter.notifyDataSetChanged();
+              }
             }
 
             @Override

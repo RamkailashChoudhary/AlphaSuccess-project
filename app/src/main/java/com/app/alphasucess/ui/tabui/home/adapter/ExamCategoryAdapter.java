@@ -13,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
+import com.app.alphasucess.ui.tabui.home.ExamCategoryData;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -21,21 +24,21 @@ import java.util.ArrayList;
  * Be U Salons
  * ashishsharma@beusalons.com
  */
-public class LivecourseEdu extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context ctx;
-    private ArrayList<String> categories;
+public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private Context mContext;
+    private ArrayList<ExamCategoryData> categories;
     private boolean isProducts;
 
-    public LivecourseEdu(Context ctx) {
-        this.ctx = ctx;
-
+    public ExamCategoryAdapter(Context ctx, ArrayList<ExamCategoryData> categories) {
+        this.mContext = ctx;
+        this.categories = categories;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_online_education, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_indianexam, parent, false);
         vh = new OriginalViewHolder(v);
         return vh;
     }
@@ -43,31 +46,42 @@ public class LivecourseEdu extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-
-
+        ((OriginalViewHolder)holder).txt_type.setText(categories.get(position).getCategoryname());
+        Picasso.with(mContext).load("http://demo1.stsm.co.in/"+categories.get(position).getIconurl())
+                .into(((OriginalViewHolder)holder).img_star);
     }
 
 
 
     @Override
     public int getItemCount() {
-        return 6;
+        return categories.size();
     }
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-        public ImageView image;
-        public TextView title;
+
+        public ImageView img_star;
+        public TextView txt_type,txt_viewer;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
+            img_star = v.findViewById(R.id.img_star);
+            txt_type = v.findViewById(R.id.txt_type);
+//            txt_viewer = v.findViewById(R.id.txt_viewer);
            /* image = (ImageView) v.findViewById(R.id.img_service);
             title = (TextView) v.findViewById(R.id.txt_service_name);
             lyt_parent = v.findViewById(R.id.parent_layout);*/
            /* Typeface lato_regular  = ResourcesCompat.getFont(ctx, R.font.lato_regular);
             title.setTypeface(lato_regular);*/
+        }
 
+        public void setData(LiveData item){
 
+//            Picasso.with(mContext).load("http://demo1.stsm.co.in/"+item.getThumbnailurl())
+//                    .into(homeScreenVideoImg);
+//            txt_by.setText(""+item.getTeachername());
+//            txt_viewer.setText(""+item.getViews());
         }
     }
 

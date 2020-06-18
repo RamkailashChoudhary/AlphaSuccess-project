@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:background="@android:color/white">
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:orientation="horizontal"
-        android:background="@drawable/top_rounded_bg"
+        android:background="#2978BB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -81,6 +81,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/overAllResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -103,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:maxValue="100"
         app:prefix=""
-        app:progressColor="#e76130"
+        app:progressColor="@color/colorPrimaryDark"
         app:progressText="Result"
         app:progressTextColor="#996B6868"
         app:roundedCorners="true"
@@ -121,11 +122,12 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBarPercentage" />
 
     <LinearLayout
+        android:id="@+id/okDialogView"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/btm_rounded_bg"
+        android:background="#2978BB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">

@@ -11,20 +11,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.CommentActivity"></activity>
+        <activity android:name=".ui.tabui.home.ViewAllVideoListActivity"></activity>
+        <activity
+            android:name=".ui.CommentActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.HomeActivity"
-            android:label="@string/title_activity_home" />
+            android:label="@string/title_activity_home"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.tabui.signup.SignUpActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.ForgotPasswordActivity" />
+        <activity
+            android:name=".ui.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.tabui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.VerifyOtpActivity"
-            android:label="@string/title_activity_otp" />
+            android:label="@string/title_activity_otp"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.VideoPlayerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
@@ -34,18 +43,25 @@
             android:theme="@style/PlayerTheme" />
         <activity
             android:name=".ui.tabui.test.OnlineTestActivity"
-            android:label="@string/title_activity_otp" />
-
-        <activity android:name=".ui.PDFViewActivity"
-            android:label="PDFView"/>
-
+            android:label="@string/title_activity_otp"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.PDFViewActivity"
+            android:label="PDFView"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.tabui.home.ViewAllLiveClassesActivity"
+            android:label="Live Classes"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.WebBaseActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,17 +86,17 @@
     </application>
 
     <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
-    <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-sdk />
 

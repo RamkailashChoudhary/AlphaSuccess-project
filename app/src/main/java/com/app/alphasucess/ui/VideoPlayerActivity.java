@@ -9,7 +9,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -149,6 +151,8 @@ public class VideoPlayerActivity extends BaseActivity
 
     private AdsLoader adsLoader;
     private Uri loadedAdTagUri;
+    private RelativeLayout headerRootView;
+    private ImageView backBtnView;
 
     // Activity lifecycle
 
@@ -167,8 +171,15 @@ public class VideoPlayerActivity extends BaseActivity
 
         setContentView(R.layout.player_view);
         debugRootView = findViewById(R.id.controls_root);
+        headerRootView = findViewById(R.id.include);
         selectTracksButton = findViewById(R.id.select_tracks_button);
         selectTracksButton.setOnClickListener(this);
+        TextView header=findViewById(R.id.middleTitle);
+
+        Bundle bundle = getIntent().getExtras();
+        header.setText(bundle.getString("VIDEO_TITLE"));
+        backBtnView = findViewById(R.id.backBtnView);
+        backBtnView.setOnClickListener(this);
 
         playerView = findViewById(R.id.player_view);
         playerView.setControllerVisibilityListener(this);
@@ -315,6 +326,9 @@ public class VideoPlayerActivity extends BaseActivity
                             *//* onDismissListener= *//* dismissedDialog -> isShowingTrackSelectionDialog = false);
             trackSelectionDialog.show(getSupportFragmentManager(), *//* tag= *//* null);
         }*/
+        if(view == backBtnView){
+            onBackPressed();
+        }
     }
 
     // PlaybackControlView.PlaybackPreparer implementation
@@ -329,6 +343,7 @@ public class VideoPlayerActivity extends BaseActivity
     @Override
     public void onVisibilityChange(int visibility) {
         debugRootView.setVisibility(visibility);
+        headerRootView.setVisibility(visibility);
     }
 
     // Internal methods
@@ -644,6 +659,7 @@ public class VideoPlayerActivity extends BaseActivity
 
     private void showControls() {
         debugRootView.setVisibility(View.VISIBLE);
+        headerRootView.setVisibility(View.VISIBLE);
     }
 
     private void showToast(int messageId) {

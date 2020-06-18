@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.alphasucess.R;
+import com.app.alphasucess.TopBarClickEvent;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadDataAdapter;
 import com.squareup.picasso.Picasso;
@@ -16,6 +17,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,7 +44,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
         public ViewHolder(View v) {
             super(v);
-            v.setOnClickListener(this);
+//            v.setOnClickListener(this);
             textView = (TextView) v.findViewById(R.id.examName);
             imageView = (CircleImageView) v.findViewById(R.id.examImg);
            // imageView = (CircleImageView) v.findViewById(R.id.examImg);
@@ -49,10 +52,15 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
         public void setData(ExamData item) {
             this.item = item;
-            // textView.setText("AAAA");
-
-            Picasso.with(mContext).load("https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg")
+            Picasso.with(mContext).load("http://demo1.stsm.co.in/"+item.getIconurl())
                     .into(imageView);
+            textView.setText(item.getCategoryname());
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EventBus.getDefault().post(new TopBarClickEvent(item.getId()));
+                }
+            });
             //imageView.setImageResource(R.drawable.ic_launcher_background);
         }
 

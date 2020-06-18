@@ -1,74 +1,95 @@
 package com.app.alphasucess.ui.tabui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
+import com.app.alphasucess.service.NetworkServiceLayer;
+import com.app.alphasucess.service.RestServiceLayer;
+import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.adapter.ExamAdapter;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
+import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
+import com.app.alphasucess.ui.tabui.home.adapter.BannerData;
+import com.app.alphasucess.ui.tabui.home.adapter.ExamCategoryAdapter;
+import com.app.alphasucess.ui.tabui.home.adapter.HomeData;
+import com.app.alphasucess.ui.tabui.home.adapter.LiveClassData;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseAdapter;
-import com.app.alphasucess.ui.tabui.home.adapter.LivecourseEdu;
+import com.app.alphasucess.ui.tabui.home.adapter.BannerViewAdaper;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseVideo;
-import com.app.alphasucess.ui.tabui.test.adapters.QuestionCountAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 
-
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private HomeViewModel homeViewModel;
-    RecyclerView recyclerView_onlinecourse,recyclerView_onlineeducation,recyclerView_onlinevideo;
+    RecyclerView recyclerView_onlinecourse,recyclerView_onlineeducation,recyclerView_onlinevideo,rec_live_courses;
+    private TextView txt_all_courses,txt_allExams,txt_allvideo;
+    private LivecourseAdapter mAdapter;
+    private ExamCategoryAdapter examCategoryAdapter;
+    private BannerViewAdaper livecourseEdu;
+    private LivecourseVideo livecourseVideo;
+    private ArrayList<LiveData> liveCourseVideos = new ArrayList<>();
+    private ArrayList<ExamCategoryData> examCategoryDataArrayList = new ArrayList<>();
+    private ArrayList<LiveClassData> liveCourselist = new ArrayList<>();
+    private List<BannerData> bannerDataList = new ArrayList<>();
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-//        final TextView textView = root.findViewById(R.id.text_home);
-//        final RecyclerView recyclerView = root.findViewById(R.id.examRecyclerView);
-//        initHomeExamView(recyclerView);
-        /*homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+
+        txt_all_courses = root.findViewById(R.id.txt_all_courses);
+        txt_allvideo = root.findViewById(R.id.txt_allvideo);
+        txt_allExams = root.findViewById(R.id.txt_allxams);
         recyclerView_onlinecourse = (RecyclerView) root.findViewById(R.id.rcy__livecourses);
         recyclerView_onlineeducation = (RecyclerView) root.findViewById(R.id.rcy_online_education);
         recyclerView_onlinevideo = (RecyclerView) root.findViewById(R.id.rcy_online_video);
-
+        rec_live_courses = (RecyclerView) root.findViewById(R.id.rec_live_courses);
 
         recyclerView_onlinevideo.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-
-
+        rec_live_courses.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView_onlinecourse.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-
-
         recyclerView_onlineeducation.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-
-
         //set data and list adapter
-        LivecourseAdapter mAdapter = new LivecourseAdapter(getActivity());
-        LivecourseEdu livecourseEdu = new LivecourseEdu(getActivity());
-        LivecourseVideo livecourseVideo = new LivecourseVideo(getActivity());
+        mAdapter = new LivecourseAdapter(getActivity(),liveCourselist);
+        livecourseEdu = new BannerViewAdaper(getActivity(),bannerDataList);
+        examCategoryAdapter = new ExamCategoryAdapter(getActivity(),examCategoryDataArrayList);
+        livecourseVideo = new LivecourseVideo(getActivity(),liveCourseVideos);
         recyclerView_onlinevideo.setAdapter(livecourseVideo);
+        rec_live_courses.setAdapter(examCategoryAdapter);
         recyclerView_onlinecourse.setAdapter(mAdapter);
         recyclerView_onlineeducation.setAdapter(livecourseEdu);
+        txt_all_courses.setOnClickListener(this);
+        txt_allExams.setOnClickListener(this);
+        txt_allvideo.setOnClickListener(this);
+        initHomeDataListView();
         return root;
+    }
+
+    private void examListData(View root){
+
+        TextView img_star = root.findViewById(R.id.img_star);
     }
 
     private void initHomeExamView(RecyclerView recyclerView){
@@ -86,10 +107,46 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
         ExamAdapter examAdapter = new ExamAdapter(getActivity(),examDataList);
         recyclerView.setAdapter(examAdapter);
-
     }
 
-    private void examListData(){
+    @Override
+    public void onClick(View view) {
 
+        if(view == txt_all_courses){
+
+            Intent viewAllLiveClasses = new Intent(getContext(), ViewAllLiveClassesActivity.class);
+            getActivity().startActivity(viewAllLiveClasses);
+        }else if(view == txt_allExams){
+
+          Toast.makeText(getActivity(),"Exam view all",Toast.LENGTH_LONG).show();
+        }else if(view == txt_allvideo){
+
+            Toast.makeText(getActivity(),"Video view all",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void initHomeDataListView(){
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        restServiceLayer.homeScreenDataList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<HomeData>>() {
+            @Override
+            public void onResponse(Call<ResoureData<HomeData>> call, Response<ResoureData<HomeData>> response) {
+                if(response.body().getReplycode().equalsIgnoreCase("1")) {
+                    liveCourseVideos.addAll(response.body().getData().getVideos());
+                    bannerDataList.addAll(response.body().getData().getHomebanners());
+                    liveCourselist.addAll(response.body().getData().getLiveclassdata());
+                    examCategoryDataArrayList.addAll(response.body().getData().getExamcategory());
+                    livecourseVideo.notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
+                    examCategoryAdapter.notifyDataSetChanged();
+                    livecourseEdu.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData<HomeData>> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -85,12 +85,12 @@ public class CommentAdapter extends RecyclerView.Adapter {
         SentMessageHolder(View itemView) {
             super(itemView);
 
-//            messageText = (TextView) itemView.findViewById(R.id.text_message_body);
-//            timeText = (TextView) itemView.findViewById(R.id.text_message_time);
+            messageText = (TextView) itemView.findViewById(R.id.txt_msg);
+            timeText = (TextView) itemView.findViewById(R.id.txt_time);
         }
 
         void bind(CommentData message) {
-//            messageText.setText(message.getComment());
+            messageText.setText(message.getComment());
 
             // Format the stored timestamp into a readable String using method.
 //            timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
@@ -104,19 +104,19 @@ public class CommentAdapter extends RecyclerView.Adapter {
         ReceivedMessageHolder(View itemView) {
             super(itemView);
 
-            /*messageText = (TextView) itemView.findViewById(R.id.text_message_body);
-            timeText = (TextView) itemView.findViewById(R.id.text_message_time);
-            nameText = (TextView) itemView.findViewById(R.id.text_message_name);
-            profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);*/
+            messageText = (TextView) itemView.findViewById(R.id.txt_msg);
+            timeText = (TextView) itemView.findViewById(R.id.txt_time);
+//            nameText = (TextView) itemView.findViewById(R.id.text_message_name);
+//            profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
         }
 
         void bind(CommentData message) {
-            /*messageText.setText(message.getComment());
+            messageText.setText(message.getComment());
 
             // Format the stored timestamp into a readable String using method.
             timeText.setText("12/04/2020");
 
-            nameText.setText("Sender Namw");*/
+//            nameText.setText("Sender Namw");
 
             // Insert the profile image from the URL into the ImageView.
          //   Utils.displayRoundImageFromUrl(mContext, message.getSender().getProfileUrl(), profileImage);
