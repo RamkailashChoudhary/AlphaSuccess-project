@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<ResoureData<HomeData>> call, Response<ResoureData<HomeData>> response) {
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
                     liveCourseVideos.addAll(response.body().getData().getVideos());
-                    bannerDataList.addAll(response.body().getData().getHomebanners());
+//                    bannerDataList.addAll(response.body().getData().getHomebanners());
                     liveCourselist.addAll(response.body().getData().getLiveclassdata());
                     examCategoryDataArrayList.addAll(response.body().getData().getExamcategory());
                     livecourseVideo.notifyDataSetChanged();
@@ -142,6 +142,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     livecourseEdu.notifyDataSetChanged();
                 }
             }
+
 
             @Override
             public void onFailure(Call<ResoureData<HomeData>> call, Throwable t) {

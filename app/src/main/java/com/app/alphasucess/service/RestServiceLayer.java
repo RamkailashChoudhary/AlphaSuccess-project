@@ -27,7 +27,7 @@ public interface RestServiceLayer
 {
     @POST("/api/App/oauth/login")
     @FormUrlEncoded
-    Call<LoginResponse> loginService(@Field("UserName")String uName, @Field("Password")String password, @Field("grant_type")String grant_type);
+    Call<LoginResponse> loginService(@Field("UserName")String uName, @Field("Password")String password, @Field("grant_type")String grant_type,@Field("DeviceID") String deviceID,@Field("DeviceType") String deviceType);
 
     @POST("/api/App/oauth/ForgotPassword")
     @FormUrlEncoded
