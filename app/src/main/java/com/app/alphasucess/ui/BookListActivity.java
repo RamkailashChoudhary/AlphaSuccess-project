@@ -32,27 +32,4 @@ public class BookListActivity extends BaseActivity {
             onBackPressed();
         });
     }
-
-
-    private void forgotApiService(String username){
-
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.forgotPassword(username).enqueue(new Callback<Object>() {
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-
-//                loadingProgressBar.setVisibility(View.VISIBLE);
-                Intent forgotPassword1 = new Intent(BookListActivity.this, LoginActivity.class);
-                startActivity(forgotPassword1);
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-
-//                loadingProgressBar.setVisibility(View.GONE);
-                Toast.makeText(BookListActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 }

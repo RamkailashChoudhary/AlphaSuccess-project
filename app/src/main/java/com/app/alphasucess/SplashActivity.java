@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.app.alphasucess.ui.HomeActivity;
+import com.app.alphasucess.ui.VerifyOtpActivity;
 import com.app.alphasucess.ui.VideoPlayerActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.app.alphasucess.utility.AlphaSharedPrefrence;
@@ -93,6 +94,7 @@ public class SplashActivity extends AppCompatActivity {
                     MyApplication.USER_ID = AlphaSharedPrefrence.getUserId();
                     MyApplication.USER_NAME = AlphaSharedPrefrence.getUserName();
                     loginPage = new Intent(SplashActivity.this, HomeActivity.class);
+//                    loginPage = new Intent(SplashActivity.this, VerifyOtpActivity.class);
                 }else
                  loginPage = new Intent(SplashActivity.this, LoginActivity.class);
 

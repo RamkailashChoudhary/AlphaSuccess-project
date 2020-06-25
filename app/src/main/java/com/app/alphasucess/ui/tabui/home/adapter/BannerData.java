@@ -4,7 +4,16 @@ public class BannerData {
 
     private String id;
     private String bannerurl;
+    private String subscription_id;
     private String bannertype;
+
+    public String getSubscription_id() {
+        return subscription_id;
+    }
+
+    public void setSubscription_id(String subscription_id) {
+        this.subscription_id = subscription_id;
+    }
 
     public String getId() {
         return id;

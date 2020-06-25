@@ -63,6 +63,13 @@ public class HomeActivity extends AppCompatActivity {
 
             case R.id.navigation_Profile:
             case R.id.nav_Invitefrds:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.app.alphasucess&hl=en");
+                sendIntent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+                break;
             case R.id.nav_Contactus:
 
                 resourceView.putExtra("View-Name","Contact Us");

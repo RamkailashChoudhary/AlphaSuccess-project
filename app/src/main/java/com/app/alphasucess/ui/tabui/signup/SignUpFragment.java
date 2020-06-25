@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,25 +55,23 @@ public class SignUpFragment extends Fragment {
         View view=inflater.inflate(R.layout.sign_up_fragment, container, false);
 
         TextInputEditText txt_name=view.findViewById(R.id.txt_name);
-        TextInputEditText txt_email=view.findViewById(R.id.txt_email);
         TextInputEditText txt_mobile=view.findViewById(R.id.txt_mobile_number);
-        TextInputEditText txt_address=view.findViewById(R.id.txtx_address);
+        //TextInputEditText txt_address=view.findViewById(R.id.txtx_address);
         TextInputEditText txt_password=view.findViewById(R.id.txt_password);
-        TextInputEditText txt_conf_password=view.findViewById(R.id.txt_confirm_password);
         TextInputEditText txt_refer=view.findViewById(R.id.txt_refer);
         Button btn_signup=view.findViewById(R.id.btn_signup);
 
-btn_signup.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if (txt_name.getText().toString().length()>0 &&txt_email.getText().toString().length()>0
-                &&txt_mobile.getText().toString().length()>0 &&txt_address.getText().toString().length()>0
-                &&txt_password.getText().toString().length()>0 &&txt_conf_password.getText().toString().length()>0 ){
-            signupApiService(txt_email.getText().toString(),txt_name.getText().toString(),txt_password.getText().toString(),txt_mobile.getText().toString(),"2",
-                    txt_address.getText().toString(),false);
+btn_signup.setOnClickListener(v -> {
+    System.out.println("NAME :"+txt_name.getText().toString());
+    System.out.println("Mobile :"+txt_mobile.getText().toString());
+    System.out.println("password :"+txt_password.getText().toString());
+    System.out.println("NAME :"+txt_password.getText().toString());
+    if (txt_name.getText().toString().length()>0 &&txt_mobile.getText().toString().length()>0
+            &&txt_password.getText().toString().length()>0 ){
+        signupApiService(txt_name.getText().toString(),txt_password.getText().toString(),txt_mobile.getText().toString(),"2",
+                false);
 
-        }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
-    }
+    }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
 });
          editTextFilledExposedDropdown =
                 view.findViewById(R.id.drop_state);
@@ -80,9 +79,6 @@ btn_signup.setOnClickListener(new View.OnClickListener() {
 
         return view;
     }
-   /* private boolean isValid(){
-
-    }*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -93,10 +89,12 @@ btn_signup.setOnClickListener(new View.OnClickListener() {
 
     }
 
-    private void signupApiService(String Email,String Name,String Password,String Phone,String StateID,String Address,boolean isReffered){
+    private void signupApiService(String Name,String Password,String Phone,String StateID,boolean isReffered){
+
+         String androidIdd = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.signUpApi(Email,Name,Password,Phone,StateID,Address,isReffered).enqueue(new Callback<JsonObject>() {
+        restServiceLayer.signUpApi(Name,Password,Phone,StateID,isReffered,androidIdd,"Android").enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 

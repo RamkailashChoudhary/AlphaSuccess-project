@@ -15,17 +15,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="Enter OTP "
+        android:text="Enter OTP to confirm your registration."
+        android:layout_marginTop="40dp"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        app:layout_constraintVertical_bias="0.094" />
+        app:layout_constraintTop_toBottomOf="@+id/include" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,7 +36,7 @@
         android:id="@+id/forgotPasswordBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/sign_up_bar"
         android:gravity="center"
         android:text="SUBMIT"
@@ -57,7 +53,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="35dp"
-        android:layout_marginTop="3dp"
         android:hint="Enter OTP"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/forgotPasswordBtn"

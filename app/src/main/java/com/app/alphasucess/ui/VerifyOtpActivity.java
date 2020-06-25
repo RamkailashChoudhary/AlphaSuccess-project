@@ -35,7 +35,7 @@ public class VerifyOtpActivity extends BaseActivity {
         Button btn=findViewById(R.id.forgotPasswordBtn);
         header.setText("Verify Otp");
         Bundle bundle = getIntent().getExtras();
-        final String phoneNumber=bundle.getString("phoneNumber");
+        final String phoneNumber="";//bundle.getString("phoneNumber");
         btn.setOnClickListener(view ->{
             if (usernameEditText.getText().toString().trim().length()>0){
                 forgotApiService(phoneNumber,usernameEditText.getText().toString());
