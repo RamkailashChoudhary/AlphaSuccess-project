@@ -50,6 +50,7 @@ public class TestFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_online_test, container, false);
         recyclerView = root.findViewById(R.id.onlineTestRecyclerView);
         testProgress = root.findViewById(R.id.testProgress);
+        testProgress.setVisibility(View.VISIBLE);
         initTestRows(recyclerView);
 
         return root;

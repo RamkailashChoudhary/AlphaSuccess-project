@@ -27,4 +27,13 @@
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/downloadLoaderView"
+        app:layout_constraintBottom_toBottomOf="@+id/downloadRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/downloadRecyclerView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

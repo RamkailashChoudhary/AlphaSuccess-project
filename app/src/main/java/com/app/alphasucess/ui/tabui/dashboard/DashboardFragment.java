@@ -50,6 +50,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
         RecyclerView recyclerView = root.findViewById(R.id.recyclerViewVideoPlayer);
         swipeRefreshLayout = root.findViewById(R.id.swipeContainerLive);
         progressBarApi = root.findViewById(R.id.progressBarApi);
+        progressBarApi.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setOnRefreshListener(this);
         initLiveDataListView(recyclerView);
         return root;
@@ -77,11 +78,14 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(TopBarClickEvent event) {
         /* Do something */
-        examId = event.getId();
-        liveDataList.clear();
-        progressBarApi.setVisibility(View.VISIBLE);
-        initLiveDataList();
-//        Toast.makeText(getActivity(),"Clicked on live data "+event.getId(),Toast.LENGTH_LONG).show();
+        if(event.getId().equalsIgnoreCase("-1")){
+            progressBarApi.setVisibility(View.VISIBLE);
+        }else {
+            examId = event.getId();
+            liveDataList.clear();
+            progressBarApi.setVisibility(View.VISIBLE);
+            initLiveDataList();
+        }
     };
 
     private void initLiveDataList(){
