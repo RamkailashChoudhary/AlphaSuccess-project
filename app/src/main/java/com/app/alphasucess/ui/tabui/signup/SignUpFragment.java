@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
@@ -93,7 +94,7 @@ btn_signup.setOnClickListener(v -> {
 
          String androidIdd = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
         restServiceLayer.signUpApi(Name,Password,Phone,StateID,isReffered,androidIdd,"Android").enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -125,7 +126,7 @@ btn_signup.setOnClickListener(v -> {
 
     private void stateListData(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.stateListData().enqueue(new Callback<StateResponse>() {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {

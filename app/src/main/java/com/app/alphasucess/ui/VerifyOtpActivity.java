@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.alphasucess.BaseActivity;
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
@@ -49,7 +50,7 @@ public class VerifyOtpActivity extends BaseActivity {
 
     private void forgotApiService(String phoneNumber,String otp){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
         restServiceLayer.verifyOtp(phoneNumber,otp).enqueue(new Callback<VerifyOTP>() {
             @Override
             public void onResponse(Call<VerifyOTP> call, Response<VerifyOTP> response) {

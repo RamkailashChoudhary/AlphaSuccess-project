@@ -74,7 +74,7 @@ public class SignFragment extends Fragment {
 
     private void loginApiService(String username,String password){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.loginService(username,password,"password","Ghasguidshjadknkds78877jbjb2bujb4b4jb","Android").enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -85,9 +85,11 @@ public class SignFragment extends Fragment {
                     MyApplication.AUTH_TOKEN = response.body().getAccess_token();
                     MyApplication.USER_ID = response.body().getId();
                     MyApplication.USER_NAME = response.body().getName();
+                    MyApplication.REFRESH_TOKEN = response.body().getRefresh_token();
                     AlphaSharedPrefrence.setUserId(response.body().getId());
                     AlphaSharedPrefrence.setAccessTocken(response.body().getAccess_token());
                     AlphaSharedPrefrence.setUserName(response.body().getName());
+                    AlphaSharedPrefrence.setRefreshToken(response.body().getRefresh_token());
                     Intent forgotPassword1 = new Intent(getContext(), HomeActivity.class);
                     startActivity(forgotPassword1);
                     //finish();

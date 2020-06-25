@@ -90,7 +90,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
 
     private void initLiveDataList(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.liveDataList("Bearer "+ MyApplication.AUTH_TOKEN,examId,INDEX+"").enqueue(new Callback<ResoureData<List<LiveData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<LiveData>>> call, Response<ResoureData<List<LiveData>>> response) {
@@ -113,7 +113,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
 
     private void examCategoryListData(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.examCategoryList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<List<ExamData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<ExamData>>> call, Response<ResoureData<List<ExamData>>> response) {

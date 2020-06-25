@@ -67,7 +67,7 @@ public class DownloadFragment  extends Fragment {
     }
 
     private void initPdfDataList(){
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.pdfListData("Bearer "+MyApplication.AUTH_TOKEN,"1","0","0").enqueue(new Callback<ResoureData<List<DownloadData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<DownloadData>>> call, Response<ResoureData<List<DownloadData>>> response) {

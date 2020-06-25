@@ -93,8 +93,8 @@ public class SplashActivity extends AppCompatActivity {
                     MyApplication.AUTH_TOKEN = AlphaSharedPrefrence.getAccessTocken();
                     MyApplication.USER_ID = AlphaSharedPrefrence.getUserId();
                     MyApplication.USER_NAME = AlphaSharedPrefrence.getUserName();
+                    MyApplication.REFRESH_TOKEN = AlphaSharedPrefrence.getRefreshToken();
                     loginPage = new Intent(SplashActivity.this, HomeActivity.class);
-//                    loginPage = new Intent(SplashActivity.this, VerifyOtpActivity.class);
                 }else
                  loginPage = new Intent(SplashActivity.this, LoginActivity.class);
 

@@ -157,7 +157,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void initHomeDataListView(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.homeScreenDataList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<HomeData>>() {
             @Override
             public void onResponse(Call<ResoureData<HomeData>> call, Response<ResoureData<HomeData>> response) {

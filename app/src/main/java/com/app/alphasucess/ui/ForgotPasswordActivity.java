@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.alphasucess.BaseActivity;
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
@@ -53,7 +54,7 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     private void forgotApiService(String username){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
         restServiceLayer.forgotPassword(username).enqueue(new Callback<ResoureData>() {
             @Override
             public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {

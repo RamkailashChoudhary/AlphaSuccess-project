@@ -67,7 +67,7 @@ public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     private void ebookDataList(){
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.ebookListData("Bearer "+ MyApplication.AUTH_TOKEN,""+index).enqueue(new Callback<ResoureData<List<EbookData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<EbookData>>> call, Response<ResoureData<List<EbookData>>> response) {

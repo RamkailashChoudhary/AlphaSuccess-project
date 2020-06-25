@@ -106,7 +106,7 @@ public class LivecourseVideo extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void playerVideoUrl(String id){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.singleVideodetails("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<LiveData>>() {
             @Override
             public void onResponse(Call<ResoureData<LiveData>> call, Response<ResoureData<LiveData>> response) {

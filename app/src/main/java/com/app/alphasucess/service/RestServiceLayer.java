@@ -2,6 +2,7 @@ package com.app.alphasucess.service;
 
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
+import com.app.alphasucess.ui.data.model.SubscriptionData;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.adapter.CommentData;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
@@ -28,6 +29,11 @@ public interface RestServiceLayer
     @POST("/api/App/oauth/login")
     @FormUrlEncoded
     Call<LoginResponse> loginService(@Field("UserName")String uName, @Field("Password")String password, @Field("grant_type")String grant_type,@Field("DeviceID") String deviceID,@Field("DeviceType") String deviceType);
+
+    @POST("/api/App/oauth/login")
+    @FormUrlEncoded
+    Call<LoginResponse> refreshToken(@Field("refresh_token")String refresh_token, @Field("grant_type")String grant_type);
+
 
     @POST("/api/App/ForgotPassword")
     @FormUrlEncoded
@@ -88,4 +94,7 @@ public interface RestServiceLayer
 
     @POST("/api/App/ExamCategory")
     Call<ResoureData<List<ExamData>>> examCategoryList(@Header ("Authorization") String authorization);
+
+    @POST("/api/App/SubscriptionList")
+    Call<ResoureData<List<SubscriptionData>>> subscriptionList(@Header ("Authorization") String authorization);
 }
