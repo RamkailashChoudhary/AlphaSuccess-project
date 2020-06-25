@@ -135,12 +135,12 @@ public class LoginActivity extends AppCompatActivity {
     private void loginApiService(String username,String password){
 
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.loginService(username,password,"password").enqueue(new Callback<LoginResponse>() {
+        restServiceLayer.loginService(username,password,"password","Ghasguidshjadknkds78877jbjb2bujb4b4jb","Android").enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
+                loadingProgressBar.setVisibility(View.GONE);
                // Log.d("LoginActivity","Response Data "+response.body().getReplycode());
-                if (response.body().getReplycode()!=null && response.body().getReplycode().equalsIgnoreCase("1") ){
+                if (response.body().getError()!=null && response.body().getError().equalsIgnoreCase("0") ){
                     loadingProgressBar.setVisibility(View.VISIBLE);
                     MyApplication.AUTH_TOKEN = response.body().getAccess_token();
                     MyApplication.USER_ID = response.body().getId();

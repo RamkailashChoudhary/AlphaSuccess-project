@@ -8,6 +8,15 @@ public class LoginResponse {
     private String token_type;
     private String replycode;
     private String message;
+    private String error;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 
     public String getName() {
         return name;

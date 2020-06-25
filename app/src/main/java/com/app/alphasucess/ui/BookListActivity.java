@@ -2,7 +2,6 @@ package com.app.alphasucess.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -14,30 +13,21 @@ import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
-import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ForgotPasswordActivity extends BaseActivity {
-
+public class BookListActivity extends BaseActivity {
     ProgressBar loadingProgressBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+        setContentView(R.layout.activity_booklist);
         final ImageView backBtnView = findViewById(R.id.backBtnView);
-        loadingProgressBar = findViewById(R.id.loadingProgressBar);
-        final EditText usernameEditText = findViewById(R.id.editText);
         TextView header=findViewById(R.id.middleTitle);
-        header.setText("Forgot Password");
-        usernameEditText.setOnClickListener(view ->{
-            if (usernameEditText.getText().toString().trim().length()>0){
-                forgotApiService(usernameEditText.getText().toString());
-            }else Toast.makeText(ForgotPasswordActivity.this,"Enter Register Number",Toast.LENGTH_LONG).show();
-        });
+//        header.setText("Forgot Password");
+
         backBtnView.setOnClickListener(view -> {
             onBackPressed();
         });
@@ -45,26 +35,23 @@ public class ForgotPasswordActivity extends BaseActivity {
 
 
     private void forgotApiService(String username){
-        loadingProgressBar.setVisibility(View.VISIBLE);
+
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
         restServiceLayer.forgotPassword(username).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
-                loadingProgressBar.setVisibility(View.GONE);
-                if (response.body()!=null&& response.isSuccessful()){
-                    Intent forgotPassword1 = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
-                    startActivity(forgotPassword1);
-                    finish();
-                }else {
-                    Toast.makeText(ForgotPasswordActivity.this, ""+response.body(), Toast.LENGTH_SHORT).show();
-                }
 
+//                loadingProgressBar.setVisibility(View.VISIBLE);
+                Intent forgotPassword1 = new Intent(BookListActivity.this, LoginActivity.class);
+                startActivity(forgotPassword1);
+                finish();
             }
 
             @Override
             public void onFailure(Call<Object> call, Throwable t) {
-                loadingProgressBar.setVisibility(View.GONE);
-                Toast.makeText(ForgotPasswordActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
+
+//                loadingProgressBar.setVisibility(View.GONE);
+                Toast.makeText(BookListActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }
