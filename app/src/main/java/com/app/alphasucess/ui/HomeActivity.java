@@ -30,7 +30,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view1);
         setupDrawerContent(navigationView);
@@ -85,6 +84,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(resourceView);
                 break;
             case R.id.nav_refunds:
+                startActivity(new Intent(HomeActivity.this, BookListActivity.class));
+                break;
             case R.id.nav_logout:
                 AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
                 builder.setTitle(R.string.app_name);
