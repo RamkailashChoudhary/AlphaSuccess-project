@@ -151,7 +151,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     private void playerVideoUrl(String id){
 
         EventBus.getDefault().post(new TopBarClickEvent("-1"));
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,mContext);
         restServiceLayer.singleVideodetails("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<LiveData>>() {
             @Override
             public void onResponse(Call<ResoureData<LiveData>> call, Response<ResoureData<LiveData>> response) {

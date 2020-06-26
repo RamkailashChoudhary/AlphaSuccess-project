@@ -60,7 +60,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
 
     private void testQuestionDataList(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,this);
         restServiceLayer.singleTestQuestions("Bearer "+ MyApplication.AUTH_TOKEN,"1").enqueue(new Callback<ResoureData<SingleTestQuestion>>() {
             @Override
             public void onResponse(Call<ResoureData<SingleTestQuestion>> call, Response<ResoureData<SingleTestQuestion>> response) {
