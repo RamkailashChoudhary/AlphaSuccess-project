@@ -39,6 +39,10 @@ public interface RestServiceLayer
     @FormUrlEncoded
     Call<ResoureData> forgotPassword(@Field("Phone")String uName);
 
+    @POST("/api/App/UpdateProfile")
+    @FormUrlEncoded
+    Call<ResoureData> updateProfile(@Field("Address")String address,@Field("Email")String email,@Field("Name")String name,@Field("StatesID")int StatesID,@Field("Password")String password);
+
     @POST("/api/App/oauth/VerifyPhone")
     @FormUrlEncoded
     Call<VerifyOTP> verifyOtp(@Field("Phone")String uPhone, @Field("OTP")String uOTP);
@@ -49,6 +53,9 @@ public interface RestServiceLayer
 
     @POST("api/App/StatesList")
     Call<StateResponse> stateListData();
+
+    @POST("api/App/UserProfile")
+    Call<JsonObject> getProfileDetails();
 
     @POST
     Call<JsonObject> resourceData(@Url String url);

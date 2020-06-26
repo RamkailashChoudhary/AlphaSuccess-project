@@ -62,7 +62,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:hint="Name"
-                        android:id="@+id/txt_name"
+                        android:id="@+id/edtxt_name"
                         android:textColorHint="#000000"
                         android:textColor="@color/white"
                         android:drawablePadding="5dp"
@@ -81,7 +81,7 @@
                         android:textColorHint="#000000"
                         android:textColor="@color/white"
                         android:drawablePadding="5dp"
-                        android:drawableLeft="@drawable/password"
+                        android:drawableLeft="@drawable/email"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -126,7 +126,8 @@
                         android:textColorHint="#000000"
                         android:textColor="@color/white"
                         android:drawablePadding="5dp"
-                        android:drawableLeft="@drawable/name"
+                        android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:drawableStart="@drawable/ic_location_on_black_24dp"
                         android:layout_height="wrap_content"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +138,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:id="@+id/txt_password"
-                        android:hint="Password"
+                        android:hint="Chnage Password"
                         android:textColor="@color/white"
                         android:inputType="textPassword"
                         android:textColorHint="#000000"
@@ -166,6 +167,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:layout_marginLeft="3dp"
+                    android:id="@+id/txt_referral"
                     android:text="Your Referral Id:416746"/>
                 <RelativeLayout
                     android:layout_width="wrap_content"

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
+import com.app.alphasucess.ui.tabui.signup.UpdateFragment;
 import com.app.alphasucess.utility.AlphaSharedPrefrence;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -62,6 +63,13 @@ public class HomeActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
 
             case R.id.navigation_Profile:
+                UpdateFragment fragment= new UpdateFragment();
+                Bundle bundle= new Bundle();
+                bundle.putString("key","");
+                fragment.setArguments(bundle);
+                fragment.show(getSupportFragmentManager(), "updateprofile");
+                break;
+
             case R.id.nav_Invitefrds:
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);

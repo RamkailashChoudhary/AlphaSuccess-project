@@ -86,7 +86,7 @@ public class SignUpFragment extends Fragment {
                 false);
 
     }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
-});
+    });
          editTextFilledExposedDropdown = view.findViewById(R.id.drop_state);
         return view;
     }
