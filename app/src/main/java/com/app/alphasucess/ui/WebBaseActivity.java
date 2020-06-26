@@ -28,6 +28,7 @@ public class WebBaseActivity extends BaseActivity {
     private WebView webviewData;
     private String dataResponse;
     String responseData;
+    private String urlPath = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,18 +39,25 @@ public class WebBaseActivity extends BaseActivity {
         webviewData = findViewById(R.id.webViewData);
         webviewData.setWebViewClient(new MyWebClient());
         webviewData.getSettings().setJavaScriptEnabled(true);
-        responseData = "<!DOCTYPE html><head> <meta http-equiv=\"Content-Type\" " +
-                "content=\"text/html; charset=utf-8\"> <html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1250\">"+
-                "<meta name=\"spanish press\" content=\"spain, spanish newspaper, news,economy,politics,sports\"><title></title></head><body id=\"body\">"+
-                "<script src=\"http://www.myscript.com/a\"></script>şlkasşldkasşdksaşdkaşskdşk</body></html>";
-//        webviewData.loadUrl("https://www.google.com/");
+        responseData = "<html><head></head><body><h1>Privacy Policy<p></p></h1><p ><p>&nbsp;</p></p><p >Last updated: <span style=\"background:#FFF2CC\">(add date)<p></p></span></p><p ><p>&nbsp;</p></p><p ><span style=\"background:#FFF2CC\">My Company (change this)</span>  (\"us\", \"we\", or \"our\") operates <span style=\"background:#FFF2CC\">http://www.mysite.com (change this)</span> (the  \"Site\"). This page informs you of our policies regarding the  collection, use and disclosure of Personal Information we receive from users of  the Site.<p></p></p><p ><p>&nbsp;</p></p><p >We use your Personal Information only for providing and  improving the Site. By using the Site, you agree to the collection and use of  information in accordance with this policy.<p></p></p><p ><p>&nbsp;</p></p><p ><b>Information  Collection And Use<p></p></b></p><p ><p>&nbsp;</p></p><p >While using our Site, we may ask you to provide us with  certain personally identifiable information that can be used to contact or  identify you. Personally identifiable information may include, but is not  limited to your name (\"Personal Information\").<p></p></p><p ><p>&nbsp;</p></p><p ><b>Log Data<p></p></b></p><p ><p>&nbsp;</p></p><p >Like many site operators, we collect information that your  browser sends whenever you visit our Site (\"Log Data\").<p></p></p><p ><p>&nbsp;</p></p><p >This Log Data may include information such as your  computer's Internet Protocol (\"IP\") address, browser type, browser  version, the pages of our Site that you visit, the time and date of your visit,  the time spent on those pages and other statistics.<p></p></p><p ><p>&nbsp;</p></p><p>                                                                        <span style=\"font-size:11.0pt;line-height:115%;font-family:&quot;Arial&quot;,sans-serif;  mso-fareast-font-family:Arial;mso-ansi-language:EN-US;mso-fareast-language:  EN-US;mso-bidi-language:AR-SA\">In addition, we may use third party services  such as Google Analytics that collect, monitor and analyze this</span><br></p></body></html>";
         final ImageView backBtnView = findViewById(R.id.backBtnView);
-       initLoadResourceData();
         TextView header=findViewById(R.id.middleTitle);
+        if(bundle.getString("View-Name").toString().equalsIgnoreCase("Terms & Conditions")){
+            urlPath = "/api/App/Terms";
+        }else if(bundle.getString("View-Name").toString().equalsIgnoreCase("Privacy Policy")){
+            urlPath = "/api/App/PrivacyPolicy";
+        }else if(bundle.getString("View-Name").toString().equalsIgnoreCase("About Us")){
+            urlPath = "/api/App/AboutUs";
+        }else {
+            urlPath = "/api/App/ContactUsRequest";
+        }
+
+        System.out.println("PRINT API PATH FINAL :"+urlPath);
         header.setText(bundle.getString("View-Name"));
         backBtnView.setOnClickListener(view -> {
             onBackPressed();
         });
+        initLoadResourceData();
     }
 
     private class MyWebClient extends WebViewClient
@@ -77,8 +85,9 @@ public class WebBaseActivity extends BaseActivity {
 
     private void initLoadResourceData(){
 
+        System.out.println("PRINT API PATH :"+urlPath);
         RestServiceLayer restServiceLayer = (RestServiceLayer)NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,this);
-        restServiceLayer.resourceData("/api/App/AboutUs").enqueue(new Callback<JsonObject>() {
+        restServiceLayer.resourceData(urlPath).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 try {
