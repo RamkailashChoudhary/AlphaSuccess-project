@@ -123,7 +123,7 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
     }
 
     private void pdfLikeApi(String url,DownloadData data){
-       RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+       RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,mContext);
        restServiceLayer.bookLikeOrUnLike(url, "Bearer "+MyApplication.AUTH_TOKEN,data.getId()).enqueue(new Callback<ResoureData>() {
             @Override
             public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {

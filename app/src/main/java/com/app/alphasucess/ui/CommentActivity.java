@@ -64,7 +64,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     private void commentDataList() {
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,this);
         restServiceLayer.commentDataList("Bearer "+ MyApplication.AUTH_TOKEN, commentId, "1").enqueue(new Callback<ResoureData<List<CommentData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<CommentData>>> call, Response<ResoureData<List<CommentData>>> response) {
@@ -86,7 +86,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,this);
         restServiceLayer.addCommentData("Bearer "+ MyApplication.AUTH_TOKEN,commentId,""+commentTxtData.getText().toString()).enqueue(new Callback<ResoureData>() {
             @Override
             public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {

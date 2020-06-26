@@ -40,14 +40,14 @@ public class ForgotPasswordActivity extends BaseActivity {
         header.setText("Forgot Password");
         usernameEditText.setOnClickListener(view -> {
             if (usernameEditText.getText().toString().trim().length() > 0) {
-//                forgotApiService(usernameEditText.getText().toString());
+                forgotApiService(usernameEditText.getText().toString());
             } else
                 Toast.makeText(ForgotPasswordActivity.this, "Enter Register Number", Toast.LENGTH_LONG).show();
         });
 
         forgotPasswordBtn.setOnClickListener(view -> {
             if (usernameEditText.getText().toString().trim().length() > 0) {
-//                forgotApiService(usernameEditText.getText().toString());
+                forgotApiService(usernameEditText.getText().toString());
             } else
                 Toast.makeText(ForgotPasswordActivity.this, "Enter Register Number", Toast.LENGTH_LONG).show();
         });
@@ -56,5 +56,27 @@ public class ForgotPasswordActivity extends BaseActivity {
         });
     }
 
+    private void forgotApiService(String username){
 
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,this);
+        restServiceLayer.forgotPassword(username).enqueue(new Callback<ResoureData>() {
+            @Override
+            public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {
+
+//                loadingProgressBar.setVisibility(View.VISIBLE);
+                Toast.makeText(ForgotPasswordActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                Intent forgotPassword1 = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+                startActivity(forgotPassword1);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData> call, Throwable t) {
+
+//                loadingProgressBar.setVisibility(View.GONE);
+                Toast.makeText(ForgotPasswordActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }
+

@@ -50,7 +50,7 @@ public class VerifyOtpActivity extends BaseActivity {
 
     private void forgotApiService(String phoneNumber,String otp){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,this);
         restServiceLayer.verifyOtp(phoneNumber,otp).enqueue(new Callback<VerifyOTP>() {
             @Override
             public void onResponse(Call<VerifyOTP> call, Response<VerifyOTP> response) {

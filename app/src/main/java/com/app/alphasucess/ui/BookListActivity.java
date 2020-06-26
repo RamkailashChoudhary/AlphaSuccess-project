@@ -56,7 +56,7 @@ public class BookListActivity extends BaseActivity {
     }
 
     private void subscriptionDataList(){
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,this);
         restServiceLayer.subscriptionList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<List<SubscriptionData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<SubscriptionData>>> call, Response<ResoureData<List<SubscriptionData>>> response) {

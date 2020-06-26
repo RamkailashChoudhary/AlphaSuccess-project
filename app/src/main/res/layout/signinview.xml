@@ -19,6 +19,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/username"
                 android:hint="User Name"
+                android:drawableTint="#ffffff"
                 android:textColorHint="#ffffff"
                 android:textColor="@color/pure_white"
                 android:drawablePadding="5dp"
@@ -35,6 +36,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
+                android:drawableTint="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/password"

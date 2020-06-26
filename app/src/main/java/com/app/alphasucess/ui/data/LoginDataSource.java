@@ -23,7 +23,7 @@ public class LoginDataSource {
                     new LoggedInUserData(
                             java.util.UUID.randomUUID().toString(),
                             "Jane Doe");
-            RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
+            RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,null);
             restServiceLayer.loginService(username,password,"grant_type","sjfshf76ff8gu8dfdfbf","Android").enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
