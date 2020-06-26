@@ -35,6 +35,7 @@ public class AlphaSharedPrefrence {
     public static final String USER_ID = "userId";
     public static final String ACCESS_TOCKEN = "accessToken";
     public static final String USER_NAME = "userName";
+    public static final String REFRESH_TOKEN = "refreshToken";
 
 
     public static void init(Context context) {
@@ -53,6 +54,16 @@ public class AlphaSharedPrefrence {
     public static void setUserId(String userId){
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(USER_ID,userId);
+        editor.apply();
+    }
+
+    public static String getRefreshToken(){
+        return sharedPref.getString(REFRESH_TOKEN,null);
+    }
+
+    public static void setRefreshToken(String refreshToken){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(REFRESH_TOKEN,refreshToken);
         editor.apply();
     }
 

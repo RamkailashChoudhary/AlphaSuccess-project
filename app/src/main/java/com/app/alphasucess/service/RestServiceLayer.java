@@ -2,6 +2,7 @@ package com.app.alphasucess.service;
 
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
+import com.app.alphasucess.ui.data.model.SubscriptionData;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.adapter.CommentData;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
@@ -29,9 +30,14 @@ public interface RestServiceLayer
     @FormUrlEncoded
     Call<LoginResponse> loginService(@Field("UserName")String uName, @Field("Password")String password, @Field("grant_type")String grant_type,@Field("DeviceID") String deviceID,@Field("DeviceType") String deviceType);
 
-    @POST("/api/App/oauth/ForgotPassword")
+    @POST("/api/App/oauth/login")
     @FormUrlEncoded
-    Call<Object> forgotPassword(@Field("Phone")String uName);
+    Call<LoginResponse> refreshToken(@Field("refresh_token")String refresh_token, @Field("grant_type")String grant_type);
+
+
+    @POST("/api/App/ForgotPassword")
+    @FormUrlEncoded
+    Call<ResoureData> forgotPassword(@Field("Phone")String uName);
 
     @POST("/api/App/oauth/VerifyPhone")
     @FormUrlEncoded
@@ -39,7 +45,7 @@ public interface RestServiceLayer
 
     @POST("/api/App/UserRegister")
     @FormUrlEncoded
-    Call<JsonObject> signUpApi(@Field("Email")String uEmail,@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("Address") String uAddress,@Field("isReffered") boolean isRefer);
+    Call<JsonObject> signUpApi(@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("isReffered") boolean isRefer,@Field("DeviceID")String deviceID,@Field("DeviceType")String deviceType);
 
     @POST("api/App/StatesList")
     Call<StateResponse> stateListData();
@@ -88,4 +94,7 @@ public interface RestServiceLayer
 
     @POST("/api/App/ExamCategory")
     Call<ResoureData<List<ExamData>>> examCategoryList(@Header ("Authorization") String authorization);
+
+    @POST("/api/App/SubscriptionList")
+    Call<ResoureData<List<SubscriptionData>>> subscriptionList(@Header ("Authorization") String authorization);
 }

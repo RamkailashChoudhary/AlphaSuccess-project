@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
+import com.app.alphasucess.TopBarClickEvent;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
@@ -33,6 +35,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ArrayList<ExamCategoryData> examCategoryDataArrayList = new ArrayList<>();
     private ArrayList<LiveClassData> liveCourselist = new ArrayList<>();
     private List<BannerData> bannerDataList = new ArrayList<>();
+    private ProgressBar progressLoader;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        progressLoader = root.findViewById(R.id.progressLoader);
         txt_all_courses = root.findViewById(R.id.txt_all_courses);
         txt_allvideo = root.findViewById(R.id.txt_allvideo);
         txt_allExams = root.findViewById(R.id.txt_allxams);
@@ -72,6 +81,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView_onlineeducation.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         //set data and list adapter
+        liveCourseVideos.clear();
+        bannerDataList.clear();
+        liveCourselist.clear();
+        examCategoryDataArrayList.clear();
         mAdapter = new LivecourseAdapter(getActivity(),liveCourselist);
         livecourseEdu = new BannerViewAdaper(getActivity(),bannerDataList);
         examCategoryAdapter = new ExamCategoryAdapter(getActivity(),examCategoryDataArrayList);
@@ -85,28 +98,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         txt_allvideo.setOnClickListener(this);
         initHomeDataListView();
         return root;
-    }
-
-    private void examListData(View root){
-
-        TextView img_star = root.findViewById(R.id.img_star);
-    }
-
-    private void initHomeExamView(RecyclerView recyclerView){
-
-        ArrayList<ExamData> examDataList = new ArrayList<>();
-        examDataList.add(new ExamData());
-        examDataList.add(new ExamData());
-        examDataList.add(new ExamData());
-        examDataList.add(new ExamData());
-        examDataList.add(new ExamData());
-        examDataList.add(new ExamData());
-        examDataList.add(new ExamData());
-        examDataList.add(new ExamData());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, true));
-        ExamAdapter examAdapter = new ExamAdapter(getActivity(),examDataList);
-        recyclerView.setAdapter(examAdapter);
     }
 
     @Override
@@ -125,15 +116,39 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(TopBarClickEvent event) {
+        /* Do something */
+        if(event.getId().equalsIgnoreCase("-1")){
+            progressLoader.setVisibility(View.VISIBLE);
+        }else {
+            progressLoader.setVisibility(View.INVISIBLE);
+        }
+    };
+
     private void initHomeDataListView(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.homeScreenDataList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<HomeData>>() {
             @Override
             public void onResponse(Call<ResoureData<HomeData>> call, Response<ResoureData<HomeData>> response) {
+                progressLoader.setVisibility(View.INVISIBLE);
                 if(response.body().getReplycode().equalsIgnoreCase("1")) {
+
                     liveCourseVideos.addAll(response.body().getData().getVideos());
-//                    bannerDataList.addAll(response.body().getData().getHomebanners());
+                    bannerDataList.addAll(response.body().getData().getSubscriptionbanners());
                     liveCourselist.addAll(response.body().getData().getLiveclassdata());
                     examCategoryDataArrayList.addAll(response.body().getData().getExamcategory());
                     livecourseVideo.notifyDataSetChanged();
@@ -146,7 +161,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<ResoureData<HomeData>> call, Throwable t) {
-
+                progressLoader.setVisibility(View.INVISIBLE);
             }
         });
     }

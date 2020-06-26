@@ -1,5 +1,6 @@
 package com.app.alphasucess.ui.data;
 
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.LoggedInUserData;
@@ -22,7 +23,7 @@ public class LoginDataSource {
                     new LoggedInUserData(
                             java.util.UUID.randomUUID().toString(),
                             "Jane Doe");
-            RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+            RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
             restServiceLayer.loginService(username,password,"grant_type","sjfshf76ff8gu8dfdfbf","Android").enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

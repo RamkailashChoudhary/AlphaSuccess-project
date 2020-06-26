@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.app.alphasucess.MyApplication;
@@ -34,6 +35,7 @@ public class DownloadFragment  extends Fragment {
     private DownloadViewModel dashboardViewModel;
     private ArrayList<DownloadData> downloadDataList = new ArrayList<>();
     private DownloadDataAdapter downloadDataAdapter;
+    private ProgressBar downloadLoaderView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class DownloadFragment  extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_download, container, false);
         final TextView textView = root.findViewById(R.id.text_download);
+        downloadLoaderView = root.findViewById(R.id.downloadLoaderView);
         final RecyclerView recyclerView = root.findViewById(R.id.downloadRecyclerView);
         initDownloadView(recyclerView);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -64,11 +67,12 @@ public class DownloadFragment  extends Fragment {
     }
 
     private void initPdfDataList(){
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.pdfListData("Bearer "+MyApplication.AUTH_TOKEN,"1","0","0").enqueue(new Callback<ResoureData<List<DownloadData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<DownloadData>>> call, Response<ResoureData<List<DownloadData>>> response) {
-              if (response.body().getReplycode().equals("1")) {
+                downloadLoaderView.setVisibility(View.INVISIBLE);
+                if (response.body().getReplycode().equals("1")) {
                   downloadDataList.addAll(response.body().getData());
                   downloadDataAdapter.notifyDataSetChanged();
               }
@@ -76,7 +80,7 @@ public class DownloadFragment  extends Fragment {
 
             @Override
             public void onFailure(Call<ResoureData<List<DownloadData>>> call, Throwable t) {
-
+                downloadLoaderView.setVisibility(View.INVISIBLE);
             }
         });
     }

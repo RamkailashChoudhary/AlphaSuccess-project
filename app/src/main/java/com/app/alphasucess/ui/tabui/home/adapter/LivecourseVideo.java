@@ -20,6 +20,7 @@ import retrofit2.Response;
 import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.Sample;
+import com.app.alphasucess.TopBarClickEvent;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.VideoPlayerActivity;
@@ -27,6 +28,8 @@ import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveDataAdapter;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 
@@ -97,12 +100,13 @@ public class LivecourseVideo extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private View.OnClickListener videoPlayerScreen = view -> {
         LiveData data = (LiveData) view.getTag();
+        EventBus.getDefault().post(new TopBarClickEvent("-1"));
         playerVideoUrl(data.getId());
     };
 
     private void playerVideoUrl(String id){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.singleVideodetails("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<LiveData>>() {
             @Override
             public void onResponse(Call<ResoureData<LiveData>> call, Response<ResoureData<LiveData>> response) {
@@ -114,13 +118,14 @@ public class LivecourseVideo extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             @Override
             public void onFailure(Call<ResoureData<LiveData>> call, Throwable t) {
-
+                EventBus.getDefault().post(new TopBarClickEvent("-2"));
             }
         });
     }
 
     public void playerView(String url,String title){
 
+        EventBus.getDefault().post(new TopBarClickEvent("-2"));
         Intent intent = new Intent(mContext, VideoPlayerActivity.class);
         intent.putExtra("VIDEO_TITLE",title);
         Sample sample = getSampleObj("Video", Uri.parse(url),null,false,null,null,null,null);

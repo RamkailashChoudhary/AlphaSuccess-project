@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.Sample;
+import com.app.alphasucess.TopBarClickEvent;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.CommentActivity;
@@ -24,6 +25,7 @@ import com.app.alphasucess.ui.tabui.adapter.ExamAdapter;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadDataAdapter;
+import com.app.alphasucess.ui.tabui.home.HomeFragment;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.app.alphasucess.ui.tabui.test.adapters.OnlineTestAdapter;
 import com.squareup.picasso.Picasso;
@@ -33,6 +35,9 @@ import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.greenrobot.eventbus.EventBus;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -145,7 +150,8 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     private void playerVideoUrl(String id){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        EventBus.getDefault().post(new TopBarClickEvent("-1"));
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.singleVideodetails("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<LiveData>>() {
             @Override
             public void onResponse(Call<ResoureData<LiveData>> call, Response<ResoureData<LiveData>> response) {
@@ -157,13 +163,14 @@ public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
             @Override
             public void onFailure(Call<ResoureData<LiveData>> call, Throwable t) {
-
+                EventBus.getDefault().post(new TopBarClickEvent("-2"));
             }
         });
     }
 
     public void playerView(String url,String title){
 
+        EventBus.getDefault().post(new TopBarClickEvent("-2"));
         Intent intent = new Intent(mContext, VideoPlayerActivity.class);
         intent.putExtra("VIDEO_TITLE",title);
         Sample sample = getSampleObj("Video", Uri.parse(url),null,false,null,null,null,null);

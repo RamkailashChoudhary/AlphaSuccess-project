@@ -50,6 +50,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
         RecyclerView recyclerView = root.findViewById(R.id.recyclerViewVideoPlayer);
         swipeRefreshLayout = root.findViewById(R.id.swipeContainerLive);
         progressBarApi = root.findViewById(R.id.progressBarApi);
+        progressBarApi.setVisibility(View.VISIBLE);
         swipeRefreshLayout.setOnRefreshListener(this);
         initLiveDataListView(recyclerView);
         return root;
@@ -77,16 +78,19 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(TopBarClickEvent event) {
         /* Do something */
-        examId = event.getId();
-        liveDataList.clear();
-        progressBarApi.setVisibility(View.VISIBLE);
-        initLiveDataList();
-//        Toast.makeText(getActivity(),"Clicked on live data "+event.getId(),Toast.LENGTH_LONG).show();
+        if(event.getId().equalsIgnoreCase("-1")){
+            progressBarApi.setVisibility(View.VISIBLE);
+        }else {
+            examId = event.getId();
+            liveDataList.clear();
+            progressBarApi.setVisibility(View.VISIBLE);
+            initLiveDataList();
+        }
     };
 
     private void initLiveDataList(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.liveDataList("Bearer "+ MyApplication.AUTH_TOKEN,examId,INDEX+"").enqueue(new Callback<ResoureData<List<LiveData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<LiveData>>> call, Response<ResoureData<List<LiveData>>> response) {
@@ -109,7 +113,7 @@ public class DashboardFragment extends Fragment implements SwipeRefreshLayout.On
 
     private void examCategoryListData(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.examCategoryList("Bearer "+ MyApplication.AUTH_TOKEN).enqueue(new Callback<ResoureData<List<ExamData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<ExamData>>> call, Response<ResoureData<List<ExamData>>> response) {

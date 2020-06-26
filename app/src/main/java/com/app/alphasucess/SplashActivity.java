@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.app.alphasucess.ui.HomeActivity;
+import com.app.alphasucess.ui.VerifyOtpActivity;
 import com.app.alphasucess.ui.VideoPlayerActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.app.alphasucess.utility.AlphaSharedPrefrence;
@@ -92,9 +93,10 @@ public class SplashActivity extends AppCompatActivity {
                     MyApplication.AUTH_TOKEN = AlphaSharedPrefrence.getAccessTocken();
                     MyApplication.USER_ID = AlphaSharedPrefrence.getUserId();
                     MyApplication.USER_NAME = AlphaSharedPrefrence.getUserName();
+                    MyApplication.REFRESH_TOKEN = AlphaSharedPrefrence.getRefreshToken();
                     loginPage = new Intent(SplashActivity.this, HomeActivity.class);
                 }else
-                 loginPage = new Intent(SplashActivity.this, LoginActivity.class);
+                    loginPage = new Intent(SplashActivity.this, LoginActivity.class);
 
                 startActivity(loginPage);
                 finish();
@@ -118,7 +120,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private Sample getSampleObj(String sampleName, Uri uri, String extension, boolean isLive, Sample.DrmInfo drmInfo,String adTagUri,String sphericalStereoMode,
-                              Sample.SubtitleInfo subtitleInfo){
+                                Sample.SubtitleInfo subtitleInfo){
 
         return new Sample.UriSample(
                 sampleName,

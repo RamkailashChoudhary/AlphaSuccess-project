@@ -9,9 +9,17 @@ import java.util.List;
 public class HomeData {
 
     private List<LiveData> videos;
-    private List<BannerData> homebanners;
+    private List<BannerData> subscriptionbanners;
     private List<ExamCategoryData> examcategory;
     private List<LiveClassData> liveclassdata;
+
+    public List<BannerData> getSubscriptionbanners() {
+        return subscriptionbanners;
+    }
+
+    public void setSubscriptionbanners(List<BannerData> subscriptionbanners) {
+        this.subscriptionbanners = subscriptionbanners;
+    }
 
     public List<LiveData> getVideos() {
         return videos;
@@ -21,20 +29,12 @@ public class HomeData {
         this.videos = videos;
     }
 
-    public List<BannerData> getHomebanners() {
-        return homebanners;
-    }
-
     public List<LiveClassData> getLiveclassdata() {
         return liveclassdata;
     }
 
     public void setLiveclassdata(List<LiveClassData> liveclassdata) {
         this.liveclassdata = liveclassdata;
-    }
-
-    public void setHomebanners(List<BannerData> homebanners) {
-        this.homebanners = homebanners;
     }
 
     public List<ExamCategoryData> getExamcategory() {

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
@@ -54,14 +56,13 @@ public class SignUpFragment extends Fragment {
         View view=inflater.inflate(R.layout.sign_up_fragment, container, false);
 
         TextInputEditText txt_name=view.findViewById(R.id.txt_name);
-        TextInputEditText txt_email=view.findViewById(R.id.txt_email);
         TextInputEditText txt_mobile=view.findViewById(R.id.txt_mobile_number);
-        TextInputEditText txt_address=view.findViewById(R.id.txtx_address);
+        //TextInputEditText txt_address=view.findViewById(R.id.txtx_address);
         TextInputEditText txt_password=view.findViewById(R.id.txt_password);
-        TextInputEditText txt_conf_password=view.findViewById(R.id.txt_confirm_password);
         TextInputEditText txt_refer=view.findViewById(R.id.txt_refer);
         Button btn_signup=view.findViewById(R.id.btn_signup);
 
+<<<<<<< HEAD
             btn_signup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -74,15 +75,26 @@ public class SignUpFragment extends Fragment {
                     }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
                 }
             });
+=======
+btn_signup.setOnClickListener(v -> {
+    System.out.println("NAME :"+txt_name.getText().toString());
+    System.out.println("Mobile :"+txt_mobile.getText().toString());
+    System.out.println("password :"+txt_password.getText().toString());
+    System.out.println("NAME :"+txt_password.getText().toString());
+    if (txt_name.getText().toString().length()>0 &&txt_mobile.getText().toString().length()>0
+            &&txt_password.getText().toString().length()>0 ){
+        signupApiService(txt_name.getText().toString(),txt_password.getText().toString(),txt_mobile.getText().toString(),"2",
+                false);
+
+    }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
+});
+>>>>>>> 3e477c2d97d013c4917c9d3a0f506c528acdc1e2
          editTextFilledExposedDropdown =
                 view.findViewById(R.id.drop_state);
 
 
         return view;
     }
-   /* private boolean isValid(){
-
-    }*/
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -93,10 +105,12 @@ public class SignUpFragment extends Fragment {
 
     }
 
-    private void signupApiService(String Email,String Name,String Password,String Phone,String StateID,String Address,boolean isReffered){
+    private void signupApiService(String Name,String Password,String Phone,String StateID,boolean isReffered){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
-        restServiceLayer.signUpApi(Email,Name,Password,Phone,StateID,Address,isReffered).enqueue(new Callback<JsonObject>() {
+         String androidIdd = Settings.Secure.getString(getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
+        restServiceLayer.signUpApi(Name,Password,Phone,StateID,isReffered,androidIdd,"Android").enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
@@ -127,7 +141,7 @@ public class SignUpFragment extends Fragment {
 
     private void stateListData(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.stateListData().enqueue(new Callback<StateResponse>() {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {

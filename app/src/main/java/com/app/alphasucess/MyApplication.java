@@ -38,6 +38,7 @@ public class MyApplication extends Application {
     public static String AUTH_TOKEN = "";
     public static String USER_ID = "";
     public static String USER_NAME = "";
+    public static String REFRESH_TOKEN = "";
 
     protected String userAgent;
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.app.alphasucess.MyApplication;
@@ -38,6 +39,7 @@ public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     private EbookRecyclerViewAdapter ebookRecyclerViewAdapter;
     private SwipeRefreshLayout swipeContainer;
     private int index = 1;
+    private ProgressBar notificationLoaderView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         final RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
         initEbookView(recyclerView);
+        notificationLoaderView = root.findViewById(R.id.notificationLoaderView);
         swipeContainer = (SwipeRefreshLayout) root.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(this);
         return root;
@@ -64,10 +67,11 @@ public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     private void ebookDataList(){
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
         restServiceLayer.ebookListData("Bearer "+ MyApplication.AUTH_TOKEN,""+index).enqueue(new Callback<ResoureData<List<EbookData>>>() {
             @Override
             public void onResponse(Call<ResoureData<List<EbookData>>> call, Response<ResoureData<List<EbookData>>> response) {
+                notificationLoaderView.setVisibility(View.INVISIBLE);
                if(response.body() != null && response.body().getReplycode().equalsIgnoreCase("1")){
 
                    ebookDataList.addAll(response.body().getData());
@@ -77,7 +81,7 @@ public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
             @Override
             public void onFailure(Call<ResoureData<List<EbookData>>> call, Throwable t) {
-
+                notificationLoaderView.setVisibility(View.INVISIBLE);
             }
         });
     }
