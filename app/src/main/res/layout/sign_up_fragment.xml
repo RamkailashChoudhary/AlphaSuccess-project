@@ -12,13 +12,9 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-<<<<<<< HEAD
             android:orientation="vertical"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-=======
             android:background="#40000000"
-            style="@style/TextInputLayoutAppearanceLogin"
->>>>>>> 3e477c2d97d013c4917c9d3a0f506c528acdc1e2
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

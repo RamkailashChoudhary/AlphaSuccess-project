@@ -62,8 +62,7 @@ public class SignUpFragment extends Fragment {
         TextInputEditText txt_refer=view.findViewById(R.id.txt_refer);
         Button btn_signup=view.findViewById(R.id.btn_signup);
 
-<<<<<<< HEAD
-            btn_signup.setOnClickListener(new View.OnClickListener() {
+            /*btn_signup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (txt_name.getText().toString().length()>0 &&txt_email.getText().toString().length()>0
@@ -74,9 +73,9 @@ public class SignUpFragment extends Fragment {
 
                     }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
                 }
-            });
-=======
-btn_signup.setOnClickListener(v -> {
+            });*/
+
+      btn_signup.setOnClickListener(v -> {
     System.out.println("NAME :"+txt_name.getText().toString());
     System.out.println("Mobile :"+txt_mobile.getText().toString());
     System.out.println("password :"+txt_password.getText().toString());
@@ -88,11 +87,7 @@ btn_signup.setOnClickListener(v -> {
 
     }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
 });
->>>>>>> 3e477c2d97d013c4917c9d3a0f506c528acdc1e2
-         editTextFilledExposedDropdown =
-                view.findViewById(R.id.drop_state);
-
-
+         editTextFilledExposedDropdown = view.findViewById(R.id.drop_state);
         return view;
     }
 
