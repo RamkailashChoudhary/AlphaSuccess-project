@@ -62,7 +62,20 @@ public class SignUpFragment extends Fragment {
         TextInputEditText txt_refer=view.findViewById(R.id.txt_refer);
         Button btn_signup=view.findViewById(R.id.btn_signup);
 
-btn_signup.setOnClickListener(v -> {
+            /*btn_signup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (txt_name.getText().toString().length()>0 &&txt_email.getText().toString().length()>0
+                            &&txt_mobile.getText().toString().length()>0 &&txt_address.getText().toString().length()>0
+                            &&txt_password.getText().toString().length()>0 &&txt_conf_password.getText().toString().length()>0 ){
+                        signupApiService(txt_email.getText().toString(),txt_name.getText().toString(),txt_password.getText().toString(),txt_mobile.getText().toString(),"2",
+                                txt_address.getText().toString(),false);
+
+                    }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
+                }
+            });*/
+
+      btn_signup.setOnClickListener(v -> {
     System.out.println("NAME :"+txt_name.getText().toString());
     System.out.println("Mobile :"+txt_mobile.getText().toString());
     System.out.println("password :"+txt_password.getText().toString());
@@ -74,10 +87,7 @@ btn_signup.setOnClickListener(v -> {
 
     }else Toast.makeText(getActivity(),"Fill All Required Info",Toast.LENGTH_LONG).show();
 });
-         editTextFilledExposedDropdown =
-                view.findViewById(R.id.drop_state);
-
-
+         editTextFilledExposedDropdown = view.findViewById(R.id.drop_state);
         return view;
     }
 

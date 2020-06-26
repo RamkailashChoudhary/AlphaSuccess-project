@@ -96,7 +96,7 @@ public class SplashActivity extends AppCompatActivity {
                     MyApplication.REFRESH_TOKEN = AlphaSharedPrefrence.getRefreshToken();
                     loginPage = new Intent(SplashActivity.this, HomeActivity.class);
                 }else
-                 loginPage = new Intent(SplashActivity.this, LoginActivity.class);
+                    loginPage = new Intent(SplashActivity.this, LoginActivity.class);
 
                 startActivity(loginPage);
                 finish();
@@ -120,7 +120,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private Sample getSampleObj(String sampleName, Uri uri, String extension, boolean isLive, Sample.DrmInfo drmInfo,String adTagUri,String sphericalStereoMode,
-                              Sample.SubtitleInfo subtitleInfo){
+                                Sample.SubtitleInfo subtitleInfo){
 
         return new Sample.UriSample(
                 sampleName,

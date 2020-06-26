@@ -47,8 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         hide();
-        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
+        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory()).get(LoginViewModel.class);
 
         signTabViewSelected = findViewById(R.id.signTabViewSelected);
         signUpTabViewSelected = findViewById(R.id.signupTabViewSelected);
@@ -92,4 +91,39 @@ public class LoginActivity extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+
+
+    private void loginApiService(String username,String password){
+
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+        restServiceLayer.loginService(username,password,"password","Ghasguidshjadknkds78877jbjb2bujb4b4jb","Android").enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                loadingProgressBar.setVisibility(View.GONE);
+               // Log.d("LoginActivity","Response Data "+response.body().getReplycode());
+                if (response.body().getError()!=null && response.body().getError().equalsIgnoreCase("0") ){
+                    loadingProgressBar.setVisibility(View.VISIBLE);
+                    MyApplication.AUTH_TOKEN = response.body().getAccess_token();
+                    MyApplication.USER_ID = response.body().getId();
+                    MyApplication.USER_NAME = response.body().getName();
+                    AlphaSharedPrefrence.setUserId(response.body().getId());
+                    AlphaSharedPrefrence.setAccessTocken(response.body().getAccess_token());
+                    AlphaSharedPrefrence.setUserName(response.body().getName());
+                    Intent forgotPassword1 = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(forgotPassword1);
+                    finish();
+                }
+                else
+                    Toast.makeText(LoginActivity.this,"Invalid "+response.body().getMessage(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                loadingProgressBar.setVisibility(View.GONE);
+                Toast.makeText(LoginActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 }

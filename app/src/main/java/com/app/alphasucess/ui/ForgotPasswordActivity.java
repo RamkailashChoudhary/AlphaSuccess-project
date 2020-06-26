@@ -24,33 +24,37 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ForgotPasswordActivity extends BaseActivity {
+
     ProgressBar loadingProgressBar;
     Button forgotPasswordBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         final ImageView backBtnView = findViewById(R.id.backBtnView);
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
         final EditText usernameEditText = findViewById(R.id.editText);
-        TextView header=findViewById(R.id.middleTitle);
+        TextView header = findViewById(R.id.middleTitle);
         forgotPasswordBtn = findViewById(R.id.forgotPasswordBtn);
         header.setText("Forgot Password");
-        usernameEditText.setOnClickListener(view ->{
-            if (usernameEditText.getText().toString().trim().length()>0){
+        usernameEditText.setOnClickListener(view -> {
+            if (usernameEditText.getText().toString().trim().length() > 0) {
                 forgotApiService(usernameEditText.getText().toString());
-            }else Toast.makeText(ForgotPasswordActivity.this,"Enter Register Number",Toast.LENGTH_LONG).show();
+            } else
+                Toast.makeText(ForgotPasswordActivity.this, "Enter Register Number", Toast.LENGTH_LONG).show();
         });
 
         forgotPasswordBtn.setOnClickListener(view -> {
-            if (usernameEditText.getText().toString().trim().length()>0){
+            if (usernameEditText.getText().toString().trim().length() > 0) {
                 forgotApiService(usernameEditText.getText().toString());
-            }else Toast.makeText(ForgotPasswordActivity.this,"Enter Register Number",Toast.LENGTH_LONG).show();
+            } else
+                Toast.makeText(ForgotPasswordActivity.this, "Enter Register Number", Toast.LENGTH_LONG).show();
         });
         backBtnView.setOnClickListener(view -> {
             onBackPressed();
         });
     }
-
 
     private void forgotApiService(String username){
 
@@ -75,3 +79,4 @@ public class ForgotPasswordActivity extends BaseActivity {
         });
     }
 }
+

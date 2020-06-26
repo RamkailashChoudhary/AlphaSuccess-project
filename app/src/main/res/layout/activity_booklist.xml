@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".ui.BookListActivity">
+    tools:context=".ui.CommentActivity">
+
 
     <include
         android:id="@+id/include"
