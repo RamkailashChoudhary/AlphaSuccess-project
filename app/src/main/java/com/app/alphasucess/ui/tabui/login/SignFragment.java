@@ -92,7 +92,7 @@ public class SignFragment extends Fragment {
                     AlphaSharedPrefrence.setRefreshToken(response.body().getRefresh_token());
                     Intent forgotPassword1 = new Intent(getContext(), HomeActivity.class);
                     startActivity(forgotPassword1);
-                    //finish();
+                    getActivity().finish();
                 }
                 else
                     Toast.makeText(getContext(),"Invalid "+response.body().getMessage(),Toast.LENGTH_LONG).show();
