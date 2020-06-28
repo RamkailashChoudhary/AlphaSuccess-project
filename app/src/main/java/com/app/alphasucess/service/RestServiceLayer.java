@@ -11,6 +11,7 @@ import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
 import com.app.alphasucess.ui.tabui.home.adapter.HomeData;
 import com.app.alphasucess.ui.tabui.login.LoginResponse;
+import com.app.alphasucess.ui.tabui.signup.adapters.ProfileDetailData;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
 import com.google.gson.JsonObject;
@@ -49,13 +50,16 @@ public interface RestServiceLayer
 
     @POST("/api/App/UserRegister")
     @FormUrlEncoded
-    Call<JsonObject> signUpApi(@Field("Name")String uName,@Field("Password")String uPass,@Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("isReffered") boolean isRefer,@Field("DeviceID")String deviceID,@Field("DeviceType")String deviceType);
+    Call<JsonObject> signUpApi(@Field("Email")String uEmail,@Field("Name")String uName,@Field("Password")String uPass,
+                               @Field("Phone")String uPhone,@Field("StateID") String uStateId,@Field("Address")String uAddress,
+                               @Field("isReffered") boolean isRefer,@Field("ReferredBy") String uReferredBy,@Field("DeviceID")String deviceID,
+                               @Field("DeviceType")String deviceType);
 
     @POST("api/App/StatesList")
     Call<StateResponse> stateListData();
 
     @POST("api/App/UserProfile")
-    Call<JsonObject> getProfileDetails();
+    Call<ResoureData<ProfileDetailData>> getProfileDetails();
 
     @POST
     Call<JsonObject> resourceData(@Url String url);

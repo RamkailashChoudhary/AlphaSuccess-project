@@ -16,6 +16,7 @@ import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
+import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -57,23 +58,28 @@ public class ForgotPasswordActivity extends BaseActivity {
     }
 
     private void forgotApiService(String username){
-
+        loadingProgressBar.setVisibility(View.VISIBLE);
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,this);
         restServiceLayer.forgotPassword(username).enqueue(new Callback<ResoureData>() {
             @Override
             public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {
+                loadingProgressBar.setVisibility(View.GONE);
+                if (response.isSuccessful()&&response.body().getReplycode().equals("1")){
+                    Toast.makeText(ForgotPasswordActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                    Intent forgotPassword1 = new Intent(ForgotPasswordActivity.this, VerifyOtpActivity.class);
+                    startActivity(forgotPassword1);
+                    finish();
+                }else {
+                    Toast.makeText(ForgotPasswordActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                }
 
-//                loadingProgressBar.setVisibility(View.VISIBLE);
-                Toast.makeText(ForgotPasswordActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
-                Intent forgotPassword1 = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
-                startActivity(forgotPassword1);
-                finish();
+
             }
 
             @Override
             public void onFailure(Call<ResoureData> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
 
-//                loadingProgressBar.setVisibility(View.GONE);
                 Toast.makeText(ForgotPasswordActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });

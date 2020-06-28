@@ -2,6 +2,7 @@ package com.app.alphasucess.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ public class VerifyOtpActivity extends BaseActivity {
 
         setContentView(R.layout.activity_otp_verification);
         final ImageView backBtnView = findViewById(R.id.backBtnView);
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
         final EditText usernameEditText = findViewById(R.id.editText);
         TextView header=findViewById(R.id.middleTitle);
         Button btn=findViewById(R.id.forgotPasswordBtn);
@@ -49,20 +51,26 @@ public class VerifyOtpActivity extends BaseActivity {
 
 
     private void forgotApiService(String phoneNumber,String otp){
-
+        loadingProgressBar.setVisibility(View.VISIBLE);
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,this);
         restServiceLayer.verifyOtp(phoneNumber,otp).enqueue(new Callback<VerifyOTP>() {
             @Override
             public void onResponse(Call<VerifyOTP> call, Response<VerifyOTP> response) {
+                loadingProgressBar.setVisibility(View.GONE);
+                if (response.isSuccessful()&&response.body().getReplycode().equals("1")){
+                    Toast.makeText(VerifyOtpActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                    Intent forgotPassword1 = new Intent(VerifyOtpActivity.this, LoginActivity.class);
+                    startActivity(forgotPassword1);
+                    finish();
+                }else {
+                    Toast.makeText(VerifyOtpActivity.this,""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                }
 
-//                loadingProgressBar.setVisibility(View.VISIBLE);
-                Intent forgotPassword1 = new Intent(VerifyOtpActivity.this, LoginActivity.class);
-                startActivity(forgotPassword1);
-                finish();
             }
 
             @Override
             public void onFailure(Call<VerifyOTP> call, Throwable t) {
+                loadingProgressBar.setVisibility(View.GONE);
 
 //                loadingProgressBar.setVisibility(View.GONE);
                 Toast.makeText(VerifyOtpActivity.this,""+t.getMessage(),Toast.LENGTH_LONG).show();

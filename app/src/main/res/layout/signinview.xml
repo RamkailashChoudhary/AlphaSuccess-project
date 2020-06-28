@@ -23,6 +23,7 @@
                 android:textColorHint="#ffffff"
                 android:textColor="@color/pure_white"
                 android:drawablePadding="5dp"
+                android:singleLine="true"
                 android:drawableLeft="@drawable/name"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -42,6 +43,7 @@
                 android:drawableLeft="@drawable/password"
                 android:drawablePadding="5dp"
                 android:hint="Password"
+                android:singleLine="true"
                 android:textColor="@color/pure_white"
                 android:inputType="textPassword"
                 android:textColorHint="#ffffff" />

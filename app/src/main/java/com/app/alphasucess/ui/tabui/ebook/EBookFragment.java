@@ -43,8 +43,7 @@ public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(EBookViewModel.class);
+        notificationsViewModel = ViewModelProviders.of(this).get(EBookViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         final RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
         initEbookView(recyclerView);
@@ -55,12 +54,10 @@ public class EBookFragment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     private void initEbookView(RecyclerView recyclerView){
-
         ebookRecyclerViewAdapter = new EbookRecyclerViewAdapter(getActivity(),ebookDataList);
         recyclerView.setAdapter(ebookRecyclerViewAdapter);
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
-
        /* AutoFitGridLayoutManager layoutManager = new AutoFitGridLayoutManager(getActivity(), 500);
         recyclerView.setLayoutManager(layoutManager);*/
        ebookDataList();
