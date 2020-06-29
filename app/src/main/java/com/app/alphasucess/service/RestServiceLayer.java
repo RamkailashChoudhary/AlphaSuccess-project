@@ -104,4 +104,8 @@ public interface RestServiceLayer
 
     @POST("/api/App/SubscriptionList")
     Call<ResoureData<List<SubscriptionData>>> subscriptionList(@Header ("Authorization") String authorization);
+
+    @POST("/api/App/SingleSubscription")
+    @FormUrlEncoded
+    Call<ResoureData<SubscriptionData>> singleSubscriptionData(@Header("Authorization")String authorization,@Field("ID")String id);
 }

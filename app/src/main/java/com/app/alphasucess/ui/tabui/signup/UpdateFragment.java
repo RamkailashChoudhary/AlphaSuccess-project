@@ -115,7 +115,7 @@ public class UpdateFragment extends DialogFragment {
     private void updateApiService(String Address,String Email,String Name,int StateID,String Password){
 
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,getContext());
         restServiceLayer.updateProfile(Address,Email,Name,StateID,Password).enqueue(new Callback<ResoureData>() {
             @Override
             public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {
@@ -134,7 +134,7 @@ public class UpdateFragment extends DialogFragment {
 
     private void stateListData(){
 
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,getContext());
         restServiceLayer.stateListData().enqueue(new Callback<StateResponse>() {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
@@ -172,7 +172,7 @@ public class UpdateFragment extends DialogFragment {
     }
 
     private void getProfile(){
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN);
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,getContext());
         restServiceLayer.getProfileDetails().enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

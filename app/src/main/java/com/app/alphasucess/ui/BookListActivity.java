@@ -52,7 +52,15 @@ public class BookListActivity extends BaseActivity {
         recyclerViewSubscription.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewSubscription.setAdapter(subscriptionAdapter);
 
-        subscriptionDataList();
+        Bundle bundle = getIntent().getExtras();
+        if(bundle.getString("SUBSCRIPTION-PLAN-ID") != null){
+            System.out.println("Single");
+            singleSubscriptionData(bundle.getString("SUBSCRIPTION-PLAN-ID"));
+        }else{
+            System.out.println("LIST");
+            subscriptionDataList();
+        }
+
     }
 
     private void subscriptionDataList(){
@@ -66,6 +74,22 @@ public class BookListActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<ResoureData<List<SubscriptionData>>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void singleSubscriptionData(String id){
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,this);
+        restServiceLayer.singleSubscriptionData("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<SubscriptionData>>() {
+            @Override
+            public void onResponse(Call<ResoureData<SubscriptionData>> call, Response<ResoureData<SubscriptionData>> response) {
+                subscriptionDataList.add(response.body().getData());
+                subscriptionAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<ResoureData<SubscriptionData>> call, Throwable t) {
 
             }
         });

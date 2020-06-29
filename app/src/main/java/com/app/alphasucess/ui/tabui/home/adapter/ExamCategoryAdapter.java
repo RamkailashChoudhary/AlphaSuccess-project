@@ -3,16 +3,22 @@ package com.app.alphasucess.ui.tabui.home.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.alphasucess.R;
+import com.app.alphasucess.ui.BookListActivity;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 import com.app.alphasucess.ui.tabui.home.ExamCategoryData;
 import com.squareup.picasso.Picasso;
@@ -49,6 +55,8 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((OriginalViewHolder)holder).txt_type.setText(categories.get(position).getCategoryname());
         Picasso.with(mContext).load("http://demo1.stsm.co.in/"+categories.get(position).getIconurl())
                 .into(((OriginalViewHolder)holder).img_star);
+        ((OriginalViewHolder)holder).examRootBg.setBackgroundColor(Color.parseColor(categories.get(position).getColorcode()));
+        ((OriginalViewHolder)holder).examRootBg.setTag(categories.get(position));
     }
 
 
@@ -63,11 +71,14 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public ImageView img_star;
         public TextView txt_type,txt_viewer;
         public View lyt_parent;
+        public ConstraintLayout examRootBg;
 
         public OriginalViewHolder(View v) {
             super(v);
             img_star = v.findViewById(R.id.img_star);
             txt_type = v.findViewById(R.id.txt_type);
+            examRootBg = v.findViewById(R.id.examRootBg);
+            examRootBg.setOnClickListener(examCardListener);
 //            txt_viewer = v.findViewById(R.id.txt_viewer);
            /* image = (ImageView) v.findViewById(R.id.img_service);
             title = (TextView) v.findViewById(R.id.txt_service_name);
@@ -75,6 +86,14 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
            /* Typeface lato_regular  = ResourcesCompat.getFont(ctx, R.font.lato_regular);
             title.setTypeface(lato_regular);*/
         }
+
+        private View.OnClickListener examCardListener = view -> {
+            ExamCategoryData examCategoryData = (ExamCategoryData) view.getTag();
+            Intent subscriptionListData = new Intent(mContext, BookListActivity.class);
+            System.out.println("EXAM ID :"+examCategoryData.getId());
+            subscriptionListData.putExtra("SUBSCRIPTION-PLAN-ID",examCategoryData.getId()+"");
+            mContext.startActivity(subscriptionListData);
+        };
 
         public void setData(LiveData item){
 
