@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +29,13 @@ import com.app.alphasucess.MyApplication;
 import com.app.alphasucess.R;
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
+import com.app.alphasucess.ui.CommentActivity;
 import com.app.alphasucess.ui.VerifyOtpActivity;
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
+import com.app.alphasucess.ui.tabui.adapter.CommentData;
+import com.app.alphasucess.ui.tabui.ebook.adapters.EbookData;
+import com.app.alphasucess.ui.tabui.signup.adapters.ProfileDetailData;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonObject;
 
@@ -45,10 +50,14 @@ import retrofit2.Response;
 
 public class UpdateFragment extends DialogFragment {
 
-
+    ArrayList<EbookData> ebookDataList = new ArrayList<>();
     private ArrayList<String> states;
+    private ArrayList<Integer> statesIds;
     private int statesId = 0;
     AutoCompleteTextView edtxt_drop_state;
+    private TextView txt_referral,btn_update;
+    ProgressBar loadingProgressBar;
+    private TextInputEditText edtxt_name,edtxt_email,edtxt_mobile,edtxt_address,edtxt_txt_password,edtxt_txt_confirm_password;
     public static UpdateFragment newInstance() {
         return new UpdateFragment();
     }
@@ -61,15 +70,16 @@ public class UpdateFragment extends DialogFragment {
 
         ImageView img_profile=view.findViewById(R.id.img_profile);
         ImageView img_edit=view.findViewById(R.id.imageView2);
-        TextInputEditText edtxt_name=view.findViewById(R.id.edtxt_name);
-        TextInputEditText edtxt_email=view.findViewById(R.id.txt_email);
-        TextInputEditText edtxt_mobile=view.findViewById(R.id.txt_mobile_number);
-        TextInputEditText edtxt_address=view.findViewById(R.id.txtx_address);
-        edtxt_drop_state=view.findViewById(R.id.drop_state);
-        TextInputEditText edtxt_txt_password=view.findViewById(R.id.txt_password);
-        TextInputEditText edtxt_txt_confirm_password=view.findViewById(R.id.txt_confirm_password);
-        TextView txt_referral=view.findViewById(R.id.txt_referral);
-        TextView btn_update=view.findViewById(R.id.btn_update);
+         loadingProgressBar=view.findViewById(R.id.loadingProgressBar);
+         edtxt_name=view.findViewById(R.id.edtxt_name);
+         edtxt_email=view.findViewById(R.id.txt_email);
+         edtxt_mobile=view.findViewById(R.id.txt_mobile_number);
+         edtxt_address=view.findViewById(R.id.txtx_address);
+         edtxt_drop_state=view.findViewById(R.id.drop_state);
+         edtxt_txt_password=view.findViewById(R.id.txt_password);
+         edtxt_txt_confirm_password=view.findViewById(R.id.txt_confirm_password);
+         txt_referral=view.findViewById(R.id.txt_referral);
+         btn_update=view.findViewById(R.id.btn_update);
 
 
         btn_update.setOnClickListener(new View.OnClickListener() {
@@ -108,25 +118,34 @@ public class UpdateFragment extends DialogFragment {
             e.printStackTrace();
         }
         stateListData();
-        getProfile();
+
 
     }
 
     private void updateApiService(String Address,String Email,String Name,int StateID,String Password){
 
+<<<<<<< HEAD
 
+=======
+        loadingProgressBar.setVisibility(View.VISIBLE);
+>>>>>>> 10a86b5c07d1251687dc58f0df4e25fc2526df44
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,getContext());
         restServiceLayer.updateProfile(Address,Email,Name,StateID,Password).enqueue(new Callback<ResoureData>() {
             @Override
             public void onResponse(Call<ResoureData> call, Response<ResoureData> response) {
+                loadingProgressBar.setVisibility(View.GONE);
+                if (response.body().getReplycode().equals("1")){
+                    Toast.makeText(getActivity(),""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getActivity(),""+response.body().getMessage(),Toast.LENGTH_LONG).show();
+                }
 
-//                loadingProgressBar.setVisibility(View.VISIBLE);
+
             }
 
             @Override
             public void onFailure(Call<ResoureData> call, Throwable t) {
-
-//                loadingProgressBar.setVisibility(View.GONE);
+                loadingProgressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(),""+t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
@@ -140,15 +159,15 @@ public class UpdateFragment extends DialogFragment {
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
                 Log.d("StateList","List Data :"+response.body().toString());
                 states=new ArrayList<>();
-                ArrayAdapter<String> adapter =
-                        new ArrayAdapter<>(
-                                getActivity(),
-                                R.layout.dropdown_menu_popup_item,
-                                states);
+                statesIds=new ArrayList<>();
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_menu_popup_item, states);
+                edtxt_drop_state.setAdapter(adapter);
                 for (int i=0;i<response.body().getData().size();i++){
                     states.add(response.body().getData().get(i).getName());
+                    statesIds.add(response.body().getData().get(i).getId());
+
                 }
-                edtxt_drop_state.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 edtxt_drop_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -162,6 +181,7 @@ public class UpdateFragment extends DialogFragment {
 
                     }
                 });
+                getProfile();
             }
 
             @Override
@@ -173,16 +193,33 @@ public class UpdateFragment extends DialogFragment {
 
     private void getProfile(){
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,getContext());
+<<<<<<< HEAD
         restServiceLayer.getProfileDetails().enqueue(new Callback<JsonObject>() {
+=======
+        restServiceLayer.getProfileDetails().enqueue(new Callback<ResoureData<ProfileDetailData>>() {
+>>>>>>> 10a86b5c07d1251687dc58f0df4e25fc2526df44
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
+            public void onResponse(Call<ResoureData<ProfileDetailData>> call, Response<ResoureData<ProfileDetailData>> response) {
 //                loadingProgressBar.setVisibility(View.VISIBLE);
+                if(response.body().getReplycode().equalsIgnoreCase("1")) {
+                    Log.e("",""+response.body().getData());
+                    edtxt_name.setText(response.body().getData().getName());
+                    edtxt_email.setText(response.body().getData().getEmail());
+                    edtxt_address.setText(response.body().getData().getAddress());
+                    edtxt_mobile.setText(response.body().getData().getPhone());
+                    for (int k=0;k<statesIds.size();k++){
+                        if (statesIds.get(k).equals(response.body().getData().getStateid())){
+                            edtxt_drop_state.setText(states.get(k));
+                        }
+                    }
+                    txt_referral.setText("Your Referral Id:"+response.body().getData().getReferralid());
+
+                }
 
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<ResoureData<ProfileDetailData>> call, Throwable t) {
 
 //                loadingProgressBar.setVisibility(View.GONE);
                 Toast.makeText(getActivity(),""+t.getMessage(),Toast.LENGTH_LONG).show();
