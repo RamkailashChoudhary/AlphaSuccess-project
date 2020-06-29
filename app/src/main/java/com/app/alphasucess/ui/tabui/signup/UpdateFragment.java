@@ -124,11 +124,7 @@ public class UpdateFragment extends DialogFragment {
 
     private void updateApiService(String Address,String Email,String Name,int StateID,String Password){
 
-<<<<<<< HEAD
-
-=======
         loadingProgressBar.setVisibility(View.VISIBLE);
->>>>>>> 10a86b5c07d1251687dc58f0df4e25fc2526df44
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,getContext());
         restServiceLayer.updateProfile(Address,Email,Name,StateID,Password).enqueue(new Callback<ResoureData>() {
             @Override
@@ -191,28 +187,24 @@ public class UpdateFragment extends DialogFragment {
         });
     }
 
-    private void getProfile(){
-        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,getContext());
-<<<<<<< HEAD
-        restServiceLayer.getProfileDetails().enqueue(new Callback<JsonObject>() {
-=======
+    private void getProfile() {
+        RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN, getContext());
         restServiceLayer.getProfileDetails().enqueue(new Callback<ResoureData<ProfileDetailData>>() {
->>>>>>> 10a86b5c07d1251687dc58f0df4e25fc2526df44
             @Override
             public void onResponse(Call<ResoureData<ProfileDetailData>> call, Response<ResoureData<ProfileDetailData>> response) {
 //                loadingProgressBar.setVisibility(View.VISIBLE);
-                if(response.body().getReplycode().equalsIgnoreCase("1")) {
-                    Log.e("",""+response.body().getData());
+                if (response.body().getReplycode().equalsIgnoreCase("1")) {
+                    Log.e("", "" + response.body().getData());
                     edtxt_name.setText(response.body().getData().getName());
                     edtxt_email.setText(response.body().getData().getEmail());
                     edtxt_address.setText(response.body().getData().getAddress());
                     edtxt_mobile.setText(response.body().getData().getPhone());
-                    for (int k=0;k<statesIds.size();k++){
-                        if (statesIds.get(k).equals(response.body().getData().getStateid())){
+                    for (int k = 0; k < statesIds.size(); k++) {
+                        if (statesIds.get(k).equals(response.body().getData().getStateid())) {
                             edtxt_drop_state.setText(states.get(k));
                         }
                     }
-                    txt_referral.setText("Your Referral Id:"+response.body().getData().getReferralid());
+                    txt_referral.setText("Your Referral Id:" + response.body().getData().getReferralid());
 
                 }
 
@@ -222,10 +214,8 @@ public class UpdateFragment extends DialogFragment {
             public void onFailure(Call<ResoureData<ProfileDetailData>> call, Throwable t) {
 
 //                loadingProgressBar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(),""+t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "" + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
-
-
 }
