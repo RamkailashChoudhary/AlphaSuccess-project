@@ -34,7 +34,6 @@ public class LeaderboardActivity extends BaseActivity {
     private RecyclerView recyclerViewleaderBoard;
     private TextView titleView;
     private String testId,testResult,testMarks;
-    private JSONObject marksObj;
     private ProgressBar subscriptionDetailListProgress;
     private LeaderBoardAdapter leaderBoardAdapter;
     private ArrayList<LeaderboardData> leaderboardDataList = new ArrayList<>();
@@ -54,12 +53,6 @@ public class LeaderboardActivity extends BaseActivity {
             testId = bundle.getString("TestID");
             testMarks = bundle.getString("Test-Marks");
             testResult = bundle.getString("Test-Result");
-            marksObj = new JSONObject();
-            try {
-                marksObj.put("marks",testResult);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
 
         leaderBoardAdapter = new LeaderBoardAdapter(this,leaderboardDataList);
@@ -75,9 +68,9 @@ public class LeaderboardActivity extends BaseActivity {
     }
 
     private void leaderboardAPI(){
-        System.out.println("Print the Result Data: "+marksObj.toString());
+        System.out.println("Print the Result Data: "+testResult);
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class, MyApplication.REFRESH_TOKEN,this);
-        restServiceLayer.testResultOrLeaderboardData("Bearer "+ MyApplication.AUTH_TOKEN,testId,testMarks,marksObj.toString()).enqueue(new Callback<ResoureData<TestResultData>>() {
+        restServiceLayer.testResultOrLeaderboardData("Bearer "+ MyApplication.AUTH_TOKEN,testId,testMarks,testResult).enqueue(new Callback<ResoureData<TestResultData>>() {
             @Override
             public void onResponse(Call<ResoureData<TestResultData>> call, Response<ResoureData<TestResultData>> response) {
                 subscriptionDetailListProgress.setVisibility(View.INVISIBLE);

@@ -31,6 +31,9 @@ import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
 import com.app.alphasucess.ui.tabui.test.adapters.TestData;
 import com.app.alphasucess.ui.view.CircleProgressBar;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class OnlineTestActivity extends BaseActivity implements OnlineTestListener, View.OnClickListener {
 
     private int QUESTION_INDEX = 0;
@@ -39,6 +42,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
     private RelativeLayout nextBtnView,preBtnView,submitBtnView;
     private ImageView backBtnView;
     private FrameLayout frameLayoutView;
+    private JSONArray testResultData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,9 +130,10 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         }
     }
 
-    private void resultCalculation(){
+    private void resultCalculation()throws Exception{
 
         int RESUT_COUND = 0;
+        testResultData = new JSONArray();
         for (int i=0; i < singleTestQuestion.getQuestions().size(); i++){
 
             int answer = singleTestQuestion.getQuestions().get(i).getAnswerData();
@@ -137,8 +142,15 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
                 if(singleTestQuestion.getQuestions().get(i).getOptions().get(j).getIscorrect().equalsIgnoreCase("true")) {
 
                     if(answer == j){
+                       JSONObject obj = new JSONObject();
+                       obj.put(singleTestQuestion.getQuestions().get(i).getId(),singleTestQuestion.getQuestions().get(i).getOptions().get(j).getId());
+                       testResultData.put(obj);
                         RESUT_COUND++;
                         break;
+                    }else{
+                        JSONObject obj = new JSONObject();
+                        obj.put(singleTestQuestion.getQuestions().get(i).getId(),singleTestQuestion.getQuestions().get(i).getOptions().get(j).getId());
+                        testResultData.put(obj);
                     }
                 }
             }
@@ -166,7 +178,12 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         dialogBuilder.setTitle(R.string.app_name);
         dialogBuilder.setMessage("Do you want to submit your test ?");
         dialogBuilder.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-            resultCalculation();
+
+            try {
+                resultCalculation();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
         dialogBuilder.setNegativeButton(android.R.string.cancel, null);
         MaterialDialog dialog = dialogBuilder.create();
@@ -195,7 +212,7 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         okButtonView.setOnClickListener(view1 -> {
             Intent leaderBoardView = new Intent(OnlineTestActivity.this,LeaderboardActivity.class);
             leaderBoardView.putExtra("TestID",singleTestQuestion.getId());
-            leaderBoardView.putExtra("Test-Result",totalMarks+"");
+            leaderBoardView.putExtra("Test-Result",testResultData.toString());
             leaderBoardView.putExtra("Test-Marks",singleTestQuestion.getTotalmarks()+"");
             startActivity(leaderBoardView);
             dialog.dismiss();
