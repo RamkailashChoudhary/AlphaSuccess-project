@@ -5,6 +5,7 @@ package com.app.alphasucess.ui.tabui.home.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +56,12 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ((OriginalViewHolder)holder).txt_type.setText(categories.get(position).getCategoryname());
         Picasso.with(mContext).load("http://demo1.stsm.co.in/"+categories.get(position).getIconurl())
                 .into(((OriginalViewHolder)holder).img_star);
-        ((OriginalViewHolder)holder).examRootBg.setBackgroundColor(Color.parseColor(categories.get(position).getColorcode()));
+        //((OriginalViewHolder)holder).iconBg.setBackgroundColor(Color.parseColor(categories.get(position).getColorcode()));
         ((OriginalViewHolder)holder).examRootBg.setTag(categories.get(position));
+        GradientDrawable gd = new GradientDrawable();
+        gd.setShape(GradientDrawable.OVAL);
+        gd.setColor(Color.parseColor(categories.get(position).getColorcode()));
+        ((OriginalViewHolder)holder).iconBg.setBackground(gd);
     }
 
 
@@ -69,13 +74,14 @@ public class ExamCategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView img_star;
-        public TextView txt_type,txt_viewer;
+        public TextView txt_type,txt_viewer,iconBg;
         public View lyt_parent;
         public ConstraintLayout examRootBg;
 
         public OriginalViewHolder(View v) {
             super(v);
             img_star = v.findViewById(R.id.img_star);
+            iconBg = v.findViewById(R.id.iconBg);
             txt_type = v.findViewById(R.id.txt_type);
             examRootBg = v.findViewById(R.id.examRootBg);
             examRootBg.setOnClickListener(examCardListener);

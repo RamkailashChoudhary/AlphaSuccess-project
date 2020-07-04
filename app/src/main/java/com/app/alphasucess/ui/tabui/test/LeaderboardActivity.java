@@ -19,6 +19,8 @@ import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.tabui.test.adapters.LeaderBoardAdapter;
 import com.app.alphasucess.ui.tabui.test.adapters.LeaderboardData;
 import com.app.alphasucess.ui.tabui.test.adapters.TestResultData;
+import com.app.alphasucess.ui.view.CircleProgressBar;
+import com.app.alphasucess.utility.AlphaSharedPrefrence;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,12 +34,13 @@ import retrofit2.Response;
 public class LeaderboardActivity extends BaseActivity {
 
     private RecyclerView recyclerViewleaderBoard;
-    private TextView titleView;
+    private TextView titleView,userLodinedName,totalResultTxt;
     private String testId,testResult,testMarks;
     private ProgressBar subscriptionDetailListProgress;
     private LeaderBoardAdapter leaderBoardAdapter;
     private ArrayList<LeaderboardData> leaderboardDataList = new ArrayList<>();
     private ImageView backBtnView;
+    private CircleProgressBar progressBarPercentage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +48,10 @@ public class LeaderboardActivity extends BaseActivity {
         setContentView(R.layout.leaderboard_activity);
         recyclerViewleaderBoard = findViewById(R.id.recyclerViewleaderBoard);
         titleView = findViewById(R.id.middleTitle);
+        userLodinedName = findViewById(R.id.userLodinedName);
+        totalResultTxt = findViewById(R.id.totalResultTxt);
         backBtnView = findViewById(R.id.backBtnView);
+        progressBarPercentage = findViewById(R.id.progressBarPercentage);
         subscriptionDetailListProgress = findViewById(R.id.subscriptionDetailListProgress);
         titleView.setText("Top Ranking");
         Bundle bundle = getIntent().getExtras();
@@ -64,7 +70,9 @@ public class LeaderboardActivity extends BaseActivity {
 
     private void initUIData(){
 
-
+        userLodinedName.setText(""+ AlphaSharedPrefrence.getUserName().toUpperCase());
+    //    totalResultTxt.setText("");
+        progressBarPercentage.setProgress(20);
     }
 
     private void leaderboardAPI(){
@@ -76,6 +84,7 @@ public class LeaderboardActivity extends BaseActivity {
                 subscriptionDetailListProgress.setVisibility(View.INVISIBLE);
                 leaderboardDataList.addAll(response.body().getData().getLeaderboard());
                 leaderBoardAdapter.notifyDataSetChanged();
+                initUIData();
             }
 
             @Override

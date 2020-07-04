@@ -25,7 +25,15 @@
                 android:clipToPadding="false"
                 android:orientation="vertical">
 
-
+                <TextView
+                    android:id="@+id/iconBg"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/rounded_drop_shadow"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
                 <ImageView
                     android:id="@+id/img_star"
                     android:layout_width="56dp"
