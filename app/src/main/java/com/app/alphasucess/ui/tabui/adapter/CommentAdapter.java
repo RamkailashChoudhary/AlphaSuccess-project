@@ -47,7 +47,7 @@ public class CommentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    // Inflates the appropriate layout according to the ViewType.
+    // Inflates the appropriate leader_board_row according to the ViewType.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;

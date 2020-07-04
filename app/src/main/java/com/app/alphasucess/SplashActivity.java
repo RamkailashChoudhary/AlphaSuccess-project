@@ -15,6 +15,7 @@ import com.app.alphasucess.ui.HomeActivity;
 import com.app.alphasucess.ui.VerifyOtpActivity;
 import com.app.alphasucess.ui.VideoPlayerActivity;
 import com.app.alphasucess.ui.tabui.login.LoginActivity;
+import com.app.alphasucess.ui.tabui.test.LeaderboardActivity;
 import com.app.alphasucess.utility.AlphaSharedPrefrence;
 
 /**

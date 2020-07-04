@@ -99,6 +99,9 @@
         <activity
             android:name=".ui.SubjectTopicActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.tabui.test.LeaderboardActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".DemoDownloadService"

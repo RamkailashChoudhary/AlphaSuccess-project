@@ -7,6 +7,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -151,7 +152,13 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         Log.d("Result", "Data RESULT :" + RESUT_COUND+"/"+singleTestQuestion.getQuestions().size());
        // showDialog(percentageResult);
         showResultView(percentageResult,RESUT_COUND+"/"+singleTestQuestion.getQuestions().size());
+
+       perQuestionMarks =  Integer.parseInt(singleTestQuestion.getTotalmarks()) / totalQuestion;
+       totalMarks = perQuestionMarks * RESUT_COUND;
     }
+
+    int perQuestionMarks = 0;
+    int totalMarks = 0;
 
     private void showDialog(){
 
@@ -164,7 +171,6 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
         dialogBuilder.setNegativeButton(android.R.string.cancel, null);
         MaterialDialog dialog = dialogBuilder.create();
         dialog.show();
-       // showResultView();
     }
 
     private void showResultView(float percentage,String overAllResultData){
@@ -187,6 +193,11 @@ public class OnlineTestActivity extends BaseActivity implements OnlineTestListen
             Toast.makeText(this,"NULL FOUND",Toast.LENGTH_LONG).show();
         }
         okButtonView.setOnClickListener(view1 -> {
+            Intent leaderBoardView = new Intent(OnlineTestActivity.this,LeaderboardActivity.class);
+            leaderBoardView.putExtra("TestID",singleTestQuestion.getId());
+            leaderBoardView.putExtra("Test-Result",totalMarks+"");
+            leaderBoardView.putExtra("Test-Marks",singleTestQuestion.getTotalmarks()+"");
+            startActivity(leaderBoardView);
             dialog.dismiss();
         });
     }

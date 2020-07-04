@@ -17,6 +17,7 @@ import com.app.alphasucess.ui.tabui.login.LoginResponse;
 import com.app.alphasucess.ui.tabui.signup.adapters.ProfileDetailData;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.app.alphasucess.ui.tabui.test.adapters.SingleTestQuestion;
+import com.app.alphasucess.ui.tabui.test.adapters.TestResultData;
 import com.google.gson.JsonObject;
 import java.util.List;
 import retrofit2.Call;
@@ -131,4 +132,8 @@ public interface RestServiceLayer
     @POST("/api/App/SubjectTopics")
     @FormUrlEncoded
     Call<ResoureData<List<SubjectTopicData>>> subscriptionSubjectTopicList(@Header("Authorization")String authorization, @Field("ID")String id);
+
+    @POST("/api/App/SubmitResults")
+    @FormUrlEncoded
+    Call<ResoureData<TestResultData>> testResultOrLeaderboardData(@Header("Authorization")String authorization, @Field("TestID")String id, @Field("Marks") String marks, @Field("TestResult") String testResult);
 }

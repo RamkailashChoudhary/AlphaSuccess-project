@@ -19,6 +19,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--<include layout="@layout/content_main" />-->
+    <!--<include leader_board_row="@leader_board_row/content_main" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
