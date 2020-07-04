@@ -1,6 +1,7 @@
 package com.app.alphasucess.ui.tabui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.alphasucess.R;
 import com.app.alphasucess.TopBarClickEvent;
+import com.app.alphasucess.ui.SubscriptionDetailActivity;
 import com.app.alphasucess.ui.data.model.SubscriptionData;
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +36,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView txtprice,txt_engdesc,txthindidesc;
+        private TextView txtprice,txt_engdesc,txthindidesc,textView6;
         private ImageView imageView;
         private RelativeLayout relativeLayout;
         private SubscriptionData item;
@@ -42,13 +44,16 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
         public ViewHolder(View v) {
             super(v);
             txtprice = (TextView) v.findViewById(R.id.txtprice);
+            textView6 = (TextView) v.findViewById(R.id.textView6);
             txt_engdesc = (TextView) v.findViewById(R.id.txt_engdesc);
             txthindidesc = (TextView) v.findViewById(R.id.txthindidesc);
             imageView = (ImageView) v.findViewById(R.id.subscriptionImageView);
+            textView6.setOnClickListener(this);
         }
 
         public void setData(SubscriptionData item) {
             this.item = item;
+            textView6.setTag(item);
             Picasso.with(mContext).load("http://demo1.stsm.co.in/" + item.getHomebannerurl())
                     .into(imageView);
             txtprice.setText(item.getPrice());
@@ -60,12 +65,16 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
                     EventBus.getDefault().post(new TopBarClickEvent(item.getId()));
                 }
             });
-            //imageView.setImageResource(R.drawable.ic_launcher_background);
         }
 
         @Override
         public void onClick(View view) {
-
+           if(view ==  textView6){
+               SubscriptionData data = (SubscriptionData) view.getTag();
+               Intent subscriptionDetail = new Intent(mContext, SubscriptionDetailActivity.class);
+               subscriptionDetail.putExtra("SUBSCRIPTION-PLAN-ID",data.getId());
+               mContext.startActivity(subscriptionDetail);
+            }
         }
     }
 

@@ -38,7 +38,8 @@
         <item name="colorPrimaryDark">#37000000</item>
         <item name="android:background">#37000000</item>
 
-        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1
+        </item>
     </style>
 
     <style name="PlayerTheme" parent="Theme.AppCompat.NoActionBar">
@@ -48,6 +49,7 @@
     <style name="PlayerTheme.Spherical">
         <item name="surface_type">spherical_gl_surface_view</item>
     </style>
+
     <style name="chat_timings">
 
         <item name="android:layout_width">wrap_content</item>
@@ -56,6 +58,7 @@
         <item name="android:textColor">#a6abad</item>
 
     </style>
+
     <style name="chat_text_message_style">
 
         <item name="android:layout_width">wrap_content</item>
@@ -73,8 +76,7 @@
         <item name="windowNoTitle">false</item>
     </style>
 
-    <style name="AppTheme.ExposedDropdownMenu"
-        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="AppTheme.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <!-- color of box ONLY, not dropdown -->
         <item name="boxBackgroundColor">@color/white</item>
         <!-- the box outline color depending on state
@@ -100,6 +102,10 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
 
 </resources>

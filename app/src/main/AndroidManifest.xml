@@ -2,6 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.alphasucess">
 
+    <uses-sdk />
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -11,7 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.tabui.home.ViewAllVideoListActivity"></activity>
+        <activity
+            android:name=".ui.SubscriptionListActivity"
+            android:label="@string/title_activity_subscription_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.tabui.home.ViewAllVideoListActivity" />
         <activity
             android:name=".ui.CommentActivity"
             android:screenOrientation="portrait" />
@@ -69,8 +88,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.BookListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.BookListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.SubscriptionDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.SubjectTopicActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".DemoDownloadService"
@@ -86,20 +114,5 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
-
-    <uses-feature
-        android:name="android.software.leanback"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
-
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-    <uses-sdk />
 
 </manifest>

@@ -2,7 +2,10 @@ package com.app.alphasucess.service;
 
 import com.app.alphasucess.ui.data.model.ResoureData;
 import com.app.alphasucess.ui.data.model.StateResponse;
+import com.app.alphasucess.ui.data.model.SubjectTopicData;
 import com.app.alphasucess.ui.data.model.SubscriptionData;
+import com.app.alphasucess.ui.data.model.SubscriptionDetailData;
+import com.app.alphasucess.ui.data.model.SubscriptionListData;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.adapter.CommentData;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
@@ -109,7 +112,23 @@ public interface RestServiceLayer
     @POST("/api/App/SubscriptionList")
     Call<ResoureData<List<SubscriptionData>>> subscriptionList(@Header ("Authorization") String authorization);
 
+    @POST("api/App/CategorySubscriptions")
+    @FormUrlEncoded
+    Call<ResoureData<List<SubscriptionData>>> subscriptionDataCategory(@Header("Authorization")String authorization,@Field("ID")String id);
+
     @POST("/api/App/SingleSubscription")
     @FormUrlEncoded
     Call<ResoureData<SubscriptionData>> singleSubscriptionData(@Header("Authorization")String authorization,@Field("ID")String id);
+
+    @POST("/api/App/SingleSubscription")
+    @FormUrlEncoded
+    Call<ResoureData<SubscriptionDetailData>> subscriptionDetailData(@Header("Authorization")String authorization,@Field("ID")String id);
+
+    @POST("/api/App/SubscriptionSubjects")
+    @FormUrlEncoded
+    Call<ResoureData<List<SubscriptionListData>>> subscriptionDetailList(@Header("Authorization")String authorization, @Field("ID")String id);
+
+    @POST("/api/App/SubjectTopics")
+    @FormUrlEncoded
+    Call<ResoureData<List<SubjectTopicData>>> subscriptionSubjectTopicList(@Header("Authorization")String authorization, @Field("ID")String id);
 }

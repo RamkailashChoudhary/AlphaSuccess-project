@@ -30,7 +30,7 @@ import retrofit2.Response;
 
 public class BookListActivity extends BaseActivity {
 
-    ProgressBar loadingProgressBar;
+    private ProgressBar loadingProgressBar;
     private SubscriptionAdapter subscriptionAdapter;
     private RecyclerView recyclerViewSubscription;
     private ArrayList<SubscriptionData> subscriptionDataList = new ArrayList<>();
@@ -53,14 +53,13 @@ public class BookListActivity extends BaseActivity {
         recyclerViewSubscription.setAdapter(subscriptionAdapter);
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle.getString("SUBSCRIPTION-PLAN-ID") != null){
+        if(bundle != null && bundle.getString("SUBSCRIPTION-PLAN-ID") != null){
             System.out.println("Single");
             singleSubscriptionData(bundle.getString("SUBSCRIPTION-PLAN-ID"));
         }else{
             System.out.println("LIST");
             subscriptionDataList();
         }
-
     }
 
     private void subscriptionDataList(){
@@ -81,15 +80,15 @@ public class BookListActivity extends BaseActivity {
 
     private void singleSubscriptionData(String id){
         RestServiceLayer restServiceLayer = (RestServiceLayer) NetworkServiceLayer.newInstance(RestServiceLayer.class,MyApplication.REFRESH_TOKEN,this);
-        restServiceLayer.singleSubscriptionData("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<SubscriptionData>>() {
+        restServiceLayer.subscriptionDataCategory("Bearer "+ MyApplication.AUTH_TOKEN,id).enqueue(new Callback<ResoureData<List<SubscriptionData>>>() {
             @Override
-            public void onResponse(Call<ResoureData<SubscriptionData>> call, Response<ResoureData<SubscriptionData>> response) {
-                subscriptionDataList.add(response.body().getData());
+            public void onResponse(Call<ResoureData<List<SubscriptionData>>> call, Response<ResoureData<List<SubscriptionData>>> response) {
+                subscriptionDataList.addAll(response.body().getData());
                 subscriptionAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<ResoureData<SubscriptionData>> call, Throwable t) {
+            public void onFailure(Call<ResoureData<List<SubscriptionData>>> call, Throwable t) {
 
             }
         });
