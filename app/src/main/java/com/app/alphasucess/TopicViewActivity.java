@@ -5,12 +5,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.app.alphasucess.service.NetworkServiceLayer;
 import com.app.alphasucess.service.RestServiceLayer;
 import com.app.alphasucess.ui.data.model.ResoureData;
@@ -18,13 +16,10 @@ import com.app.alphasucess.ui.data.model.TopicModelData;
 import com.app.alphasucess.ui.tabui.dashboard.adapters.LiveData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadData;
 import com.app.alphasucess.ui.tabui.download.adapter.DownloadDataAdapter;
-import com.app.alphasucess.ui.tabui.home.adapter.LivecourseAdapter;
 import com.app.alphasucess.ui.tabui.home.adapter.LivecourseVideo;
 import com.app.alphasucess.ui.tabui.test.adapters.AllTestData;
 import com.app.alphasucess.ui.tabui.test.adapters.OnlineTestAdapter;
-
 import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -94,9 +89,7 @@ public class TopicViewActivity extends BaseActivity{
                 livecourseVideo.notifyDataSetChanged();
 
                 testListData.addAll(response.body().getData().getTests());
-                //testListData.add(0,new AllTestData());
                 onlineTestAdapter.notifyDataSetChanged();
-                System.out.println("PRINT SIZE OF TEST DATA :"+testListData.size());
 
                 pdfListData.addAll(response.body().getData().getPdfs());
                 downloadDataAdapter.notifyDataSetChanged();
@@ -104,7 +97,7 @@ public class TopicViewActivity extends BaseActivity{
 
             @Override
             public void onFailure(Call<ResoureData<TopicModelData>> call, Throwable t) {
-
+                progressLoader.setVisibility(View.INVISIBLE);
             }
         });
     }
