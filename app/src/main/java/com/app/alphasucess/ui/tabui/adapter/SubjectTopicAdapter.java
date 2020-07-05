@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.alphasucess.R;
+import com.app.alphasucess.TopicViewActivity;
 import com.app.alphasucess.ui.SubscriptionDetailActivity;
 import com.app.alphasucess.ui.data.model.SubjectTopicData;
 import com.app.alphasucess.ui.data.model.SubscriptionListData;
@@ -52,21 +54,26 @@ public class SubjectTopicAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public class OriginalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView title;
         public View lyt_parent;
+        public CardView rootViewClick;
 
         public OriginalViewHolder(View v) {
             super(v);
             title = v.findViewById(R.id.subscriptionListTxt);
+            rootViewClick = v.findViewById(R.id.rootViewClick);
+            rootViewClick.setOnClickListener(this);
         }
 
         public void setData(SubjectTopicData item) {
             title.setText(item.getTopicname());
+            rootViewClick.setTag(item);
         }
 
         @Override
         public void onClick(View view) {
-            BannerData item = (BannerData) view.getTag();
-            Intent subscriptionDetail = new Intent(ctx, SubscriptionDetailActivity.class);
-            subscriptionDetail.putExtra("SUBSCRIPTION-PLAN-ID", item.getSubscription_id());
+
+            SubjectTopicData item = (SubjectTopicData) view.getTag();
+            Intent subscriptionDetail = new Intent(ctx, TopicViewActivity.class);
+            subscriptionDetail.putExtra("TOPIC-ID", item.getId());
             ctx.startActivity(subscriptionDetail);
         }
     }

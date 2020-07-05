@@ -14,7 +14,34 @@ public class DownloadData {
     private String amount;
     private String ispaid;
     private String trash;
+    private String blockmessage;
     private boolean likedbyUser;
+    private boolean issubscribed;
+    private boolean openForView;
+
+    public String getBlockmessage() {
+        return blockmessage;
+    }
+
+    public void setBlockmessage(String blockmessage) {
+        this.blockmessage = blockmessage;
+    }
+
+    public boolean isIssubscribed() {
+        return issubscribed;
+    }
+
+    public void setIssubscribed(boolean issubscribed) {
+        this.issubscribed = issubscribed;
+    }
+
+    public boolean isOpenForView() {
+        return openForView;
+    }
+
+    public void setOpenForView(boolean openForView) {
+        this.openForView = openForView;
+    }
 
     public boolean isLikedbyUser() {
         return likedbyUser;

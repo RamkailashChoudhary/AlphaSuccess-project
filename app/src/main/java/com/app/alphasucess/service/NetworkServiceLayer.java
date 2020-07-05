@@ -89,6 +89,8 @@ public class NetworkServiceLayer {
                         continueOrNot = false;
                         System.out.println("REFRESH TOKEN ELSE");
                         AlphaSharedPrefrence.clearData();
+                        MyApplication.REFRESH_TOKEN = "";
+                        MyApplication.AUTH_TOKEN = "";
                         Intent splashView = new Intent(mContext, SplashActivity.class);
                         mContext.startActivity(splashView);
                         ((AppCompatActivity)mContext).finish();

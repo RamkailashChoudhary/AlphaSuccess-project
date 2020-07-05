@@ -13,6 +13,98 @@ public class ExamData {
     private String categoryname;
     private String colorcode;
     private String iconurl;
+    private String examid;
+    private String subjectid;
+    private String subscriptionid;
+    private String blockmessage;
+    private boolean ispaid;
+    private boolean levelcleared;
+    private boolean openForView;
+    private boolean issubscribed;
+    private boolean reviewtest;
+
+    public String getExamid() {
+        return examid;
+    }
+
+    public void setExamid(String examid) {
+        this.examid = examid;
+    }
+
+    public String getSubjectid() {
+        return subjectid;
+    }
+
+    public void setSubjectid(String subjectid) {
+        this.subjectid = subjectid;
+    }
+
+    public String getSubscriptionid() {
+        return subscriptionid;
+    }
+
+    public void setSubscriptionid(String subscriptionid) {
+        this.subscriptionid = subscriptionid;
+    }
+
+    public String getBlockmessage() {
+        return blockmessage;
+    }
+
+    public void setBlockmessage(String blockmessage) {
+        this.blockmessage = blockmessage;
+    }
+
+    public boolean isIspaid() {
+        return ispaid;
+    }
+
+    public void setIspaid(boolean ispaid) {
+        this.ispaid = ispaid;
+    }
+
+    public boolean isLevelcleared() {
+        return levelcleared;
+    }
+
+    public void setLevelcleared(boolean levelcleared) {
+        this.levelcleared = levelcleared;
+    }
+
+    public boolean isOpenForView() {
+        return openForView;
+    }
+
+    public void setOpenForView(boolean openForView) {
+        this.openForView = openForView;
+    }
+
+    public boolean isIssubscribed() {
+        return issubscribed;
+    }
+
+    public void setIssubscribed(boolean issubscribed) {
+        this.issubscribed = issubscribed;
+    }
+
+    public boolean isReviewtest() {
+        return reviewtest;
+    }
+
+    public void setReviewtest(boolean reviewtest) {
+        this.reviewtest = reviewtest;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    private int level;
+
 
     public String getCategoryname() {
         return categoryname;

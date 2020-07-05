@@ -6,6 +6,7 @@ import com.app.alphasucess.ui.data.model.SubjectTopicData;
 import com.app.alphasucess.ui.data.model.SubscriptionData;
 import com.app.alphasucess.ui.data.model.SubscriptionDetailData;
 import com.app.alphasucess.ui.data.model.SubscriptionListData;
+import com.app.alphasucess.ui.data.model.TopicModelData;
 import com.app.alphasucess.ui.data.model.VerifyOTP;
 import com.app.alphasucess.ui.tabui.adapter.CommentData;
 import com.app.alphasucess.ui.tabui.adapter.ExamData;
@@ -136,4 +137,8 @@ public interface RestServiceLayer
     @POST("/api/App/SubmitResults")
     @FormUrlEncoded
     Call<ResoureData<TestResultData>> testResultOrLeaderboardData(@Header("Authorization")String authorization, @Field("TestID")String id, @Field("Marks") String marks, @Field("TestResult") String testResult);
+
+    @POST("/api/App/TopicData")
+    @FormUrlEncoded
+   Call<ResoureData<TopicModelData>> topicDataDetail(@Header("Authorization")String authorization, @Field("ID")String id);
 }

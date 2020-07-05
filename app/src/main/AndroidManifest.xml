@@ -103,6 +103,10 @@
             android:name=".ui.tabui.test.LeaderboardActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".TopicViewActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".DemoDownloadService"
             android:exported="false">
