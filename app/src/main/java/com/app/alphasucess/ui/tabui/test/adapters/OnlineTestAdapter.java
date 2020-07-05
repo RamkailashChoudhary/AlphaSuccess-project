@@ -48,10 +48,7 @@ public class OnlineTestAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0)
-          return TEST_LIST_ROW;
-        else
-          return TEST_LIST_DATA;
+       return TEST_LIST_DATA;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

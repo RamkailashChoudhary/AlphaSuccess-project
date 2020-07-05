@@ -94,7 +94,7 @@ public class TopicViewActivity extends BaseActivity{
                 livecourseVideo.notifyDataSetChanged();
 
                 testListData.addAll(response.body().getData().getTests());
-                testListData.add(0,new AllTestData());
+                //testListData.add(0,new AllTestData());
                 onlineTestAdapter.notifyDataSetChanged();
                 System.out.println("PRINT SIZE OF TEST DATA :"+testListData.size());
 
